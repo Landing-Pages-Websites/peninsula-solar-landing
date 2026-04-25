@@ -4,7 +4,7 @@ import { useEffect, useCallback, useRef } from "react";
 
 const CONFIG = {
   CUSTOMER_ID: "8bbf1dbc-49fb-44b5-8c82-e1235149e809",
-  SITE_ID: "8bbf1dbc-49fb-44b5-8c82-e1235149e809",
+  SITE_ID: "7d905a66-6641-427b-852c-dd6bec7c1e16",
   SOURCE_PROVIDER: "peninsula-solar-lp",
   ENDPOINT: "https://analytics.gomega.ai/submission/submit",
 };
