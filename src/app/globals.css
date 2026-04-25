@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --brand-orange: #f7792e;
+  --brand-blue: #2b7bb9;
+  --brand-dark: #1a2332;
+  --brand-dark-mid: #1e2d40;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #ffffff;
+  color: #333333;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
