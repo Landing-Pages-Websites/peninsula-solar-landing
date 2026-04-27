@@ -179,8 +179,8 @@ export default function PeninsulaSolarLP() {
             <a href="#tundra-racking" className="hover:text-white transition">Tundra Racking</a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="tel:9062350340" className="hidden sm:flex items-center gap-2 text-white/70 hover:text-white text-sm transition">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <a href="tel:9062350340" className="hidden sm:flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold border-2 border-white/30 text-white hover:bg-white hover:text-[#1a2332] transition">
+              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-.82-3.68 2 2 0 012-2.22h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               (906) 235-0340
@@ -230,9 +230,7 @@ export default function PeninsulaSolarLP() {
                 <a href="#get-estimate" className="rounded-lg px-7 py-4 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition shadow-lg">
                   Get My Free Estimate
                 </a>
-                <a href="tel:9062350340" className="text-white/60 hover:text-white text-sm transition">
-                  Or call: <span className="font-semibold text-white">(906) 235-0340</span>
-                </a>
+                <PhoneBtn light />
               </div>
             </div>
             <div id="get-estimate" className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl">
