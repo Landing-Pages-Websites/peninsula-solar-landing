@@ -243,7 +243,7 @@ export default function PeninsulaSolarLP() {
       </section>
 
       {/* ── WHY PENINSULA SOLAR ──────────────────────────────────────────────── */}
-      <section className="py-24 bg-white">
+      <section id="why-peninsula-solar" className="py-24 bg-white scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
@@ -509,7 +509,7 @@ export default function PeninsulaSolarLP() {
       </section>
 
       {/* ── TESTIMONIALS ─────────────────────────────────────────────────────── */}
-      <section className="py-24 bg-white">
+      <section id="testimonials" className="py-24 bg-white scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <SectionLabel>Real Northern Michigan Homeowners</SectionLabel>
@@ -566,7 +566,7 @@ export default function PeninsulaSolarLP() {
       </section>
 
       {/* ── HOW IT WORKS ─────────────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#1a2332]">
+      <section id="our-process" className="py-24 bg-[#1a2332] scroll-mt-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <SectionLabel>Our Process</SectionLabel>
