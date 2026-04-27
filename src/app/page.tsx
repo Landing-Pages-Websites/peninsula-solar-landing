@@ -131,6 +131,25 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="text-[#f7792e] text-xs font-bold uppercase tracking-[0.15em] mb-3">{children}</p>;
 }
 
+// ─── Phone CTA button ─────────────────────────────────────────────────────────
+function PhoneBtn({ light }: { light?: boolean }) {
+  return (
+    <a
+      href="tel:9062350340"
+      className={`inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-bold border-2 transition ${
+        light
+          ? "border-white/30 text-white hover:bg-white hover:text-[#1a2332]"
+          : "border-[#1a2332] text-[#1a2332] hover:bg-[#1a2332] hover:text-white"
+      }`}
+    >
+      <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-.82-3.68 2 2 0 012-2.22h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      (906) 235-0340
+    </a>
+  );
+}
+
 // ─── Check icon ───────────────────────────────────────────────────────────────
 function Check({ dark }: { dark?: boolean }) {
   return (
@@ -282,6 +301,12 @@ export default function PeninsulaSolarLP() {
                   </div>
                 ))}
               </div>
+              <div className="flex flex-wrap gap-4 mt-8">
+                <a href="#get-estimate" className="rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
+                  Get a Free Design
+                </a>
+                <PhoneBtn />
+              </div>
             </div>
           </div>
         </div>
@@ -332,9 +357,12 @@ export default function PeninsulaSolarLP() {
                   </div>
                 ))}
               </div>
-              <a href="#get-estimate" className="inline-block rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
+              <div className="flex flex-wrap gap-4">
+              <a href="#get-estimate" className="rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
                 Get a Free Residential Estimate →
               </a>
+              <PhoneBtn />
+              </div>
             </div>
             <div className="space-y-4">
               <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg">
@@ -401,9 +429,12 @@ export default function PeninsulaSolarLP() {
                   </div>
                 ))}
               </div>
-              <a href="#get-estimate" className="inline-block rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
-                Get a Backup Power Estimate →
-              </a>
+              <div className="flex flex-wrap gap-4">
+                <a href="#get-estimate" className="rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
+                  Get a Backup Power Estimate →
+                </a>
+                <PhoneBtn light />
+              </div>
             </div>
           </div>
         </div>
@@ -439,9 +470,12 @@ export default function PeninsulaSolarLP() {
                   </div>
                 ))}
               </div>
-              <a href="#get-estimate" className="inline-block rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
-                Get an Off-Grid System Quote →
-              </a>
+              <div className="flex flex-wrap gap-4">
+                <a href="#get-estimate" className="rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
+                  Get an Off-Grid System Quote →
+                </a>
+                <PhoneBtn />
+              </div>
             </div>
             <div className="space-y-4">
               <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
@@ -500,9 +534,12 @@ export default function PeninsulaSolarLP() {
                   ))}
                 </div>
               </div>
-              <a href="#get-estimate" className="inline-block rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
-                Ask About Tundra Racking →
-              </a>
+              <div className="flex flex-wrap gap-4">
+                <a href="#get-estimate" className="rounded-lg px-6 py-3 text-base font-bold bg-[#f7792e] text-white hover:bg-[#e66820] transition">
+                  Ask About Tundra Racking →
+                </a>
+                <PhoneBtn />
+              </div>
             </div>
           </div>
         </div>
