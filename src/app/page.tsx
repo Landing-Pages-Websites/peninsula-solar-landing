@@ -151,7 +151,7 @@ export default function PeninsulaSolarLP() {
       <nav className="sticky top-0 z-50 bg-[#1a2332]/97 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
           <a href="https://peninsula-solar.com" target="_blank" rel="noopener noreferrer">
-            <Image src="/images/logo-white.png" alt="Peninsula Solar" width={200} height={63} className="h-9 w-auto" />
+            <Image src="/images/logo-white.png" alt="Peninsula Solar" width={200} height={63} className="h-14 w-auto" />
           </a>
           <div className="hidden md:flex items-center gap-6 text-sm text-white/70">
             <a href="#residential" className="hover:text-white transition">Residential Solar</a>
@@ -636,7 +636,7 @@ export default function PeninsulaSolarLP() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-3 gap-10 mb-10">
             <div>
-              <Image src="/images/logo-white.png" alt="Peninsula Solar" width={180} height={57} className="h-9 w-auto mb-3" />
+              <Image src="/images/logo-white.png" alt="Peninsula Solar" width={180} height={57} className="h-12 w-auto mb-3" />
               <p className="text-white/45 text-sm leading-relaxed max-w-xs">
                 Northern Michigan&apos;s most trusted solar company. 100% in-house crews. Built for life in the North since 2011.
               </p>
