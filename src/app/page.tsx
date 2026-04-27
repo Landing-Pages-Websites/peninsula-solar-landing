@@ -142,7 +142,7 @@ function Check({ dark }: { dark?: boolean }) {
 
 // ─── Main Page ─────────────────────────────────────────────────────────────────
 export default function PeninsulaSolarLP() {
-  useTracking({ siteKey: "sk_moeyep8q_kj6i28c0wm" });
+  useTracking({ siteKey: "sk_moeyep8q_kj6i28c0wm", gtmId: "GTM-WLQXZ22P" });
 
   return (
     <div className="min-h-screen font-sans bg-white text-gray-900">
