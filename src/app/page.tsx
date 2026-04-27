@@ -304,13 +304,29 @@ export default function PeninsulaSolarLP() {
               </p>
               <div className="grid sm:grid-cols-2 gap-4 mb-8">
                 {[
-                  { icon: "⚡", title: "Capture More Solar Power", body: "Store excess solar in your batteries. Use it later instead of buying grid electricity. Avoid low-value utility credits." },
-                  { icon: "🏠", title: "Backup Power for Harsh Winters", body: "Handles snow, ice storms, and rural outages. Instant, automatic backup power. No fuel, no startup delay." },
-                  { icon: "💰", title: "Save Thousands Over Time", body: "Cut your electric bill by up to 100%. Most systems see ROI within 10 years with the 30% federal tax credit." },
-                  { icon: "📊", title: "Real-Time Energy Monitoring", body: "Monitor production and consumption live. Prioritize loads, optimize usage, and track your savings in real time." },
+                  {
+                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+                    title: "Capture More Solar Power",
+                    body: "Store excess solar in your batteries. Use it later instead of buying grid electricity. Avoid low-value utility credits.",
+                  },
+                  {
+                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>,
+                    title: "Backup Power for Harsh Winters",
+                    body: "Handles snow, ice storms, and rural outages. Instant, automatic backup power. No fuel, no startup delay.",
+                  },
+                  {
+                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" strokeLinecap="round"/></svg>,
+                    title: "Save Thousands Over Time",
+                    body: "Cut your electric bill by up to 100%. Most systems see ROI within 10 years with the 30% federal tax credit.",
+                  },
+                  {
+                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4" strokeLinecap="round"/></svg>,
+                    title: "Real-Time Energy Monitoring",
+                    body: "Monitor production and consumption live. Prioritize loads, optimize usage, and track your savings in real time.",
+                  },
                 ].map(card => (
                   <div key={card.title} className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
-                    <div className="text-2xl mb-3">{card.icon}</div>
+                    <div className="w-10 h-10 rounded-lg bg-[#f7792e]/10 flex items-center justify-center text-[#f7792e] mb-3">{card.icon}</div>
                     <h4 className="font-bold text-gray-900 text-sm mb-1">{card.title}</h4>
                     <p className="text-gray-500 text-xs leading-relaxed">{card.body}</p>
                   </div>
@@ -578,10 +594,10 @@ export default function PeninsulaSolarLP() {
       <section className="py-16 bg-white border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-gray-400 text-sm uppercase tracking-widest font-semibold mb-8">Certified & Partnered With</p>
-          <div className="flex flex-wrap items-center justify-center gap-8 grayscale opacity-60">
-            <Image src="/images/badge-tesla.jpg" alt="Tesla Powerwall Certified Installer" width={150} height={50} className="h-10 w-auto object-contain" />
-            <Image src="/images/michigan-saves.png" alt="Michigan Saves Authorized Contractor" width={120} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/images/badge-mi-saves.png" alt="Michigan Saves Badge" width={60} height={60} className="h-12 w-auto object-contain" />
+          <div className="flex flex-wrap items-center justify-center gap-10">
+            <Image src="/images/badge-tesla.jpg" alt="Tesla Powerwall Certified Installer" width={240} height={80} className="h-16 w-auto object-contain" />
+            <Image src="/images/michigan-saves.png" alt="Michigan Saves Authorized Contractor" width={200} height={100} className="h-20 w-auto object-contain" />
+            <Image src="/images/badge-mi-saves.png" alt="Michigan Saves Badge" width={100} height={100} className="h-20 w-auto object-contain" />
           </div>
         </div>
       </section>
@@ -622,8 +638,8 @@ export default function PeninsulaSolarLP() {
               <div className="mt-6 pt-5 border-t border-gray-100">
                 <p className="text-xs text-gray-400 text-center mb-3">Certified by</p>
                 <div className="flex items-center justify-center gap-6 flex-wrap">
-                  <Image src="/images/badge-tesla.jpg" alt="Tesla Powerwall Certified Installer" width={120} height={40} className="h-8 w-auto object-contain" />
-                  <Image src="/images/michigan-saves.png" alt="Michigan Saves Authorized Contractor" width={90} height={45} className="h-9 w-auto object-contain" />
+                  <Image src="/images/badge-tesla.jpg" alt="Tesla Powerwall Certified Installer" width={200} height={67} className="h-14 w-auto object-contain" />
+                  <Image src="/images/michigan-saves.png" alt="Michigan Saves Authorized Contractor" width={160} height={80} className="h-16 w-auto object-contain" />
                 </div>
               </div>
             </div>
