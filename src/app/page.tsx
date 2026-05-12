@@ -216,7 +216,7 @@ export default function PeninsulaSolarLP() {
                 {[
                   "Automatic backup during outages",
                   "Slash your monthly electric bill",
-                  "30% Federal Tax Credit",
+                  "Battery Storage Experts",
                   "100% in-house licensed crews",
                   "Tundra Solar Racking System",
                   "Free custom system design",
@@ -323,7 +323,7 @@ export default function PeninsulaSolarLP() {
                 Electric bills keep climbing every year in Michigan. Solar lets you produce your own power, store it for outages, and stop paying the utility forever. A battery-backed system keeps your home running automatically the moment the grid goes down — no fuel runs, no generator noise, no manual switching.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
-                Most home solar systems pay for themselves within 10 years. With the 30% federal tax credit, Michigan Saves financing, and rising utility rates working in your favor, the economics have never been better. Peninsula Solar provides free, custom-designed solar estimates based on your actual energy usage and property — no guessing, no one-size-fits-all.
+                Most home solar systems pay for themselves within 10 years. With battery storage experts on staff, Michigan Saves financing, and rising utility rates working in your favor, the economics have never been better. Peninsula Solar provides free, custom-designed solar estimates based on your actual energy usage and property — no guessing, no one-size-fits-all.
               </p>
               <div className="grid sm:grid-cols-2 gap-4 mb-8">
                 {[
@@ -340,7 +340,7 @@ export default function PeninsulaSolarLP() {
                   {
                     icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" strokeLinecap="round"/></svg>,
                     title: "Save Thousands Over Time",
-                    body: "Cut your electric bill by up to 100%. Most systems see ROI within 10 years with the 30% federal tax credit.",
+                    body: "Cut your electric bill by up to 100%. Most systems see ROI within 10 years — backed by our battery storage experts.",
                   },
                   {
                     icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4" strokeLinecap="round"/></svg>,
@@ -652,7 +652,7 @@ export default function PeninsulaSolarLP() {
                   "Free, fully engineered custom system design",
                   "No pushy sales tactics — ever",
                   "Michigan Saves financing options available",
-                  "30% federal tax credit guidance included",
+                  "Battery storage experts on every project",
                   "In-house crew handles permits, installation, commissioning",
                 ].map(pt => (
                   <div key={pt} className="flex items-center gap-3 text-gray-700">
