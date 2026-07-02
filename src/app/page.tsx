@@ -21,12 +21,12 @@ function isValidPhone(raw: string): boolean {
 }
 
 // ─── Lead Form ─────────────────────────────────────────────────────────────────
-interface FormState { firstName: string; lastName: string; email: string; phone: string; ownsHome: string; }
-interface FormErrors { firstName?: string; lastName?: string; email?: string; phone?: string; ownsHome?: string; }
+interface FormState { firstName: string; lastName: string; email: string; phone: string; address: string; message: string; }
+interface FormErrors { firstName?: string; lastName?: string; email?: string; phone?: string; address?: string; }
 
 function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
   const { submit } = useMegaLeadForm();
-  const [form, setForm] = useState<FormState>({ firstName: "", lastName: "", email: "", phone: "", ownsHome: "" });
+  const [form, setForm] = useState<FormState>({ firstName: "", lastName: "", email: "", phone: "", address: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
@@ -37,7 +37,7 @@ function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Valid email required";
     if (!form.phone.trim()) e.phone = "Required";
     else if (!isValidPhone(form.phone)) e.phone = "Enter a valid 10-digit phone number";
-    if (!form.ownsHome) e.ownsHome = "Please select one";
+    if (!form.address.trim()) e.address = "Required";
     return e;
   };
 
@@ -53,7 +53,7 @@ function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
     if (Object.keys(errs).length > 0) return;
     setStatus("submitting");
     try {
-      await submit({ firstName: form.firstName, lastName: form.lastName, email: form.email, phone: form.phone, ownsHomeInNorthernMichigan: form.ownsHome });
+      await submit({ firstName: form.firstName, lastName: form.lastName, email: form.email, phone: form.phone, address: form.address, message: form.message });
       setStatus("success");
     } catch { setStatus("error"); }
   };
@@ -103,18 +103,11 @@ function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Do you own your home or property in Northern Michigan? *
-        </label>
-        <div className="grid grid-cols-2 gap-3">
-          {["Yes", "No"].map(opt => (
-            <button key={opt} type="button" onClick={() => setForm(f => ({ ...f, ownsHome: opt }))}
-              className={`py-3 rounded-lg border-2 text-sm font-semibold transition ${form.ownsHome === opt ? "border-[#f7792e] bg-[#f7792e] text-white" : "border-gray-200 bg-white text-gray-700 hover:border-[#f7792e]"}`}>
-              {opt}
-            </button>
-          ))}
-        </div>
-        {errors.ownsHome && <p className="text-red-500 text-xs mt-1">{errors.ownsHome}</p>}
+        <input type="text" placeholder="Property Address / Location *" value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} className={inp("address")} />
+        {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
+      </div>
+      <div>
+        <textarea rows={3} placeholder="What are you interested in? (e.g. backup power, lower bills, off-grid) — optional" value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#f7792e] transition resize-none" />
       </div>
       {status === "error" && <p className="text-red-500 text-sm text-center">Something went wrong. Please try again or call (906) 235-0340.</p>}
       <button type="submit" disabled={status === "submitting"}
