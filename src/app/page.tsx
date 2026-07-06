@@ -21,23 +21,22 @@ function isValidPhone(raw: string): boolean {
 }
 
 // ─── Lead Form ─────────────────────────────────────────────────────────────────
-interface FormState { firstName: string; lastName: string; email: string; phone: string; address: string; message: string; }
-interface FormErrors { firstName?: string; lastName?: string; email?: string; phone?: string; address?: string; }
+interface FormState { name: string; phone: string; email: string; utility: string; offGrid: boolean; message: string; }
+interface FormErrors { name?: string; email?: string; phone?: string; utility?: string; }
 
 function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
   const { submit } = useMegaLeadForm();
-  const [form, setForm] = useState<FormState>({ firstName: "", lastName: "", email: "", phone: "", address: "", message: "" });
+  const [form, setForm] = useState<FormState>({ name: "", phone: "", email: "", utility: "", offGrid: false, message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const validate = (): FormErrors => {
     const e: FormErrors = {};
-    if (!form.firstName.trim()) e.firstName = "Required";
-    if (!form.lastName.trim()) e.lastName = "Required";
+    if (!form.name.trim()) e.name = "Required";
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Valid email required";
     if (!form.phone.trim()) e.phone = "Required";
     else if (!isValidPhone(form.phone)) e.phone = "Enter a valid 10-digit phone number";
-    if (!form.address.trim()) e.address = "Required";
+    if (!form.utility.trim()) e.utility = "Required";
     return e;
   };
 
@@ -53,7 +52,7 @@ function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
     if (Object.keys(errs).length > 0) return;
     setStatus("submitting");
     try {
-      await submit({ firstName: form.firstName, lastName: form.lastName, email: form.email, phone: form.phone, address: form.address, message: form.message });
+      await submit({ name: form.name, phone: form.phone, email: form.email, utility: form.utility, offGrid: form.offGrid, message: form.message });
       setStatus("success");
     } catch { setStatus("error"); }
   };
@@ -84,30 +83,28 @@ function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
           {subtitle && <p className="text-gray-500 text-sm mt-0.5">{subtitle}</p>}
         </div>
       )}
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <input type="text" placeholder="First Name *" value={form.firstName} onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))} className={inp("firstName")} />
-          {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
-        </div>
-        <div>
-          <input type="text" placeholder="Last Name *" value={form.lastName} onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))} className={inp("lastName")} />
-          {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
-        </div>
-      </div>
       <div>
-        <input type="email" placeholder="Email Address *" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} className={inp("email")} />
-        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+        <input type="text" placeholder="Full Name *" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className={inp("name")} />
+        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
       <div>
         <input type="tel" placeholder="Phone Number *" value={form.phone} onChange={handlePhone} className={inp("phone")} maxLength={14} />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
       <div>
-        <input type="text" placeholder="Property Address / Location *" value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} className={inp("address")} />
-        {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
+        <input type="email" placeholder="Email Address *" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} className={inp("email")} />
+        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
       <div>
-        <textarea rows={3} placeholder="What are you interested in? (e.g. backup power, lower bills, off-grid) — optional" value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#f7792e] transition resize-none" />
+        <input type="text" placeholder="Utility Company *" value={form.utility} onChange={e => setForm(f => ({ ...f, utility: e.target.value }))} className={inp("utility")} />
+        {errors.utility && <p className="text-red-500 text-xs mt-1">{errors.utility}</p>}
+      </div>
+      <label className="flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm text-gray-700 cursor-pointer hover:border-[#f7792e]/50 transition">
+        <input type="checkbox" checked={form.offGrid} onChange={e => setForm(f => ({ ...f, offGrid: e.target.checked }))} className="h-4 w-4 rounded border-gray-300 text-[#f7792e] accent-[#f7792e] focus:ring-2 focus:ring-[#f7792e]" />
+        <span>Interested in off-grid / battery backup?</span>
+      </label>
+      <div>
+        <textarea rows={3} placeholder="Message (optional)" value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#f7792e] transition resize-none" />
       </div>
       {status === "error" && <p className="text-red-500 text-sm text-center">Something went wrong. Please try again or call (906) 235-0340.</p>}
       <button type="submit" disabled={status === "submitting"}
