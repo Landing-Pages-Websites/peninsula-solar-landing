@@ -33,10 +33,9 @@ function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
   const validate = (): FormErrors => {
     const e: FormErrors = {};
     if (!form.name.trim()) e.name = "Required";
-    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Valid email required";
+    if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email address";
     if (!form.phone.trim()) e.phone = "Required";
     else if (!isValidPhone(form.phone)) e.phone = "Enter a valid 10-digit phone number";
-    if (!form.utility.trim()) e.utility = "Required";
     return e;
   };
 
@@ -92,11 +91,11 @@ function LeadForm({ title, subtitle }: { title?: string; subtitle?: string }) {
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
       <div>
-        <input type="email" placeholder="Email Address *" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} className={inp("email")} />
+        <input type="email" placeholder="Email Address" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} className={inp("email")} />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
       <div>
-        <input type="text" placeholder="Utility Company *" value={form.utility} onChange={e => setForm(f => ({ ...f, utility: e.target.value }))} className={inp("utility")} />
+        <input type="text" placeholder="Utility Company" value={form.utility} onChange={e => setForm(f => ({ ...f, utility: e.target.value }))} className={inp("utility")} />
         {errors.utility && <p className="text-red-500 text-xs mt-1">{errors.utility}</p>}
       </div>
       <label className="flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm text-gray-700 cursor-pointer hover:border-[#f7792e]/50 transition">
