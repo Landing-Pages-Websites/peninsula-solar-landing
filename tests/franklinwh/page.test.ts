@@ -94,7 +94,8 @@ for (const { variant, own, other } of PAGES) {
 
     it("keeps every testimonial quote and first name", () => {
       for (const review of TESTIMONIALS) {
-        assert.ok(html.includes(`&ldquo;${review.quote}&rdquo;`) || html.includes(`“${review.quote}”`), review.author);
+        const quote = review.quote.replace(/\u00a0/g, " ");
+        assert.ok(html.includes(`&ldquo;${quote}&rdquo;`) || html.includes(`“${quote}”`), review.author);
         assert.ok(html.includes(`>${review.author}</figcaption>`), review.author);
       }
     });

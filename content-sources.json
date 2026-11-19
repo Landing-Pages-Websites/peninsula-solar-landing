@@ -20,9 +20,9 @@
       "verified": true
     },
     {
-      "claim": "For Northern Michigan homes, cabins and camps.",
+      "claim": "Serving Northern Michigan homes, cabins and camps since\u00a02011.",
       "sections": ["hero (audience line)"],
-      "sources": ["Current task content_requests: \"grid-connected homes that lose power, and off-grid cabins and camps\"", "https://peninsula-solar.com/services/off-grid-solar/"],
+      "sources": ["Human send-back: https://admin.gomega.ai/tasks/3d9afce8-8a12-45f2-b220-0f7eb7d004e8 comment 3883a418-44f4-4455-ac1f-e3634d958ed4 (fix 1, exact copy)", "https://peninsula-solar.com/ (\"Since 2011, we've designed and installed hundreds of custom solar and battery systems\")", "build_context.json proof: \"Serving Northern Michigan since 2011\" (https://peninsula-solar.com/)", "Current task content_requests: \"grid-connected homes that lose power, and off-grid cabins and camps\""],
       "verified": true
     },
     {
@@ -110,10 +110,11 @@
       "note": "Verbatim excerpt; the source's double spaces are collapsed."
     },
     {
-      "claim": "Testimonial, Kent: \"Good at communication and follow-through. I am very happy with their performance and the end result!\"",
+      "claim": "Testimonial, Kent: \"They have to be the best in the business in Northern Michigan and the U.P. … I am very happy with their performance and the end\u00a0result!\"",
       "sections": ["customer-proof"],
-      "sources": ["https://peninsula-solar.com/ (Google review shown through Trustindex, September 19, 2025)"],
-      "verified": true
+      "sources": ["https://peninsula-solar.com/ (Google review shown through Trustindex, September 19, 2025)", "Human send-back: https://admin.gomega.ai/tasks/3d9afce8-8a12-45f2-b220-0f7eb7d004e8 comment 3883a418-44f4-4455-ac1f-e3634d958ed4 (fix 2, exact copy)"],
+      "verified": true,
+      "note": "Verbatim first and last sentences of Kent's review; the ellipsis marks the omitted middle sentences."
     },
     {
       "claim": "Testimonial, Keith: \"The team took the time in assisting us in understanding the system and what we needed, performed exceptional installation, and after sales support is second to none.\"",
@@ -134,9 +135,9 @@
       "verified": true
     },
     {
-      "claim": "FAQ: What does LFP mean? Lithium iron phosphate, the battery chemistry used in FranklinWH aPower batteries.",
+      "claim": "FAQ: Will the batteries work through a Northern Michigan\u00a0winter? Yes. FranklinWH batteries have integrated heating and cooling that protects them in extreme temperatures, so they keep performing through Midwest winters and longer\u00a0outages.",
       "sections": ["faq"],
-      "sources": ["https://www.franklinwh.com/support/overview/components-of-franklin-home-power/ (\"Lithium Iron Phosphate (LFP)\")", "https://peninsula-solar.com/ (\"Lithium iron phosphate battery banks\")"],
+      "sources": ["https://peninsula-solar.com/franklinwh/ (section \"Thermal Management for Cold Climates\": \"Franklin includes an integrated heating and cooling system that protects the battery in extreme temperatures and maintains performance. This helps ensure reliable backup power during Midwest winters and extended outages\")", "Human send-back: https://admin.gomega.ai/tasks/3d9afce8-8a12-45f2-b220-0f7eb7d004e8 comment 3883a418-44f4-4455-ac1f-e3634d958ed4 (fix 6, exact copy)"],
       "verified": true
     },
     {
@@ -151,6 +152,32 @@
       "sources": ["Written for this task: https://peninsula-solar.com/privacy-policy/ returned 404 (content_source_ledger.json policy_gap). Lists exactly the six form fields; contact sales@peninsula-solar.com from the task."],
       "verified": true,
       "note": "Customer review of the policy requested in docs/franklinwh/HANDOFF.md."
+    }
+  ],
+  "supersededClaims": [
+    {
+      "claim": "For Northern Michigan homes, cabins and camps.",
+      "sections": ["hero (audience line)"],
+      "sources": ["Current task content_requests: \"grid-connected homes that lose power, and off-grid cabins and camps\"", "https://peninsula-solar.com/services/off-grid-solar/"],
+      "verified": true,
+      "status": "SUPERSEDED 2026-11-19: replaced on both routes by the current claims entry for the same section.",
+      "supersededBy": "Human send-back: https://admin.gomega.ai/tasks/3d9afce8-8a12-45f2-b220-0f7eb7d004e8 comment 3883a418-44f4-4455-ac1f-e3634d958ed4"
+    },
+    {
+      "claim": "Testimonial, Kent: \"Good at communication and follow-through. I am very happy with their performance and the end result!\"",
+      "sections": ["customer-proof"],
+      "sources": ["https://peninsula-solar.com/ (Google review shown through Trustindex, September 19, 2025)"],
+      "verified": true,
+      "status": "SUPERSEDED 2026-11-19: replaced on both routes by the current claims entry for the same section.",
+      "supersededBy": "Human send-back: https://admin.gomega.ai/tasks/3d9afce8-8a12-45f2-b220-0f7eb7d004e8 comment 3883a418-44f4-4455-ac1f-e3634d958ed4"
+    },
+    {
+      "claim": "FAQ: What does LFP mean? Lithium iron phosphate, the battery chemistry used in FranklinWH aPower batteries.",
+      "sections": ["faq"],
+      "sources": ["https://www.franklinwh.com/support/overview/components-of-franklin-home-power/ (\"Lithium Iron Phosphate (LFP)\")", "https://peninsula-solar.com/ (\"Lithium iron phosphate battery banks\")"],
+      "verified": true,
+      "status": "SUPERSEDED 2026-11-19: replaced on both routes by the current claims entry for the same section.",
+      "supersededBy": "Human send-back: https://admin.gomega.ai/tasks/3d9afce8-8a12-45f2-b220-0f7eb7d004e8 comment 3883a418-44f4-4455-ac1f-e3634d958ed4"
     }
   ],
   "withdrawnClaims": [
