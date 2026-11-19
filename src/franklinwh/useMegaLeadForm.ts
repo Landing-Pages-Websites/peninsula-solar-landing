@@ -2,13 +2,14 @@
 
 import { useCallback, useEffect } from "react";
 import { browserAttributionEnv, getSessionId, getVisitorId, resolveAttribution } from "./attribution";
-import { normalizeLeadValues, type LeadFormData } from "./leadFields";
-import { buildLeadPayload, postLead } from "./leadPayload";
+import type { LeadFormData } from "./leadFields";
+import { sendLeadValues } from "./leadPayload";
 
 interface UseMegaLeadFormReturn {
   /**
-   * Resolves with the sent `form_data` only after `postLead` saw a 2xx with `ok: true`. Throws on
-   * invalid input (a programmatic call can bypass the UI gate) and on every failed or unconfirmed request.
+   * Resolves with the sent `form_data` only after `postLead` saw a 2xx with `ok: true`. Throws
+   * LeadValidationError on invalid input before any request (a programmatic call can bypass the
+   * UI gate), LeadRejectedError on a definite rejection and LeadOutcomeUnknownError otherwise.
    */
   submit: (values: unknown) => Promise<LeadFormData>;
 }
@@ -19,8 +20,7 @@ export function useMegaLeadForm(): UseMegaLeadFormReturn {
     resolveAttribution(browserAttributionEnv());
   }, []);
 
-  const submit = useCallback(async (values: unknown): Promise<LeadFormData> => {
-    const formData = normalizeLeadValues(values);
+  const submit = useCallback((values: unknown): Promise<LeadFormData> => {
     const env = browserAttributionEnv();
     const context = {
       url: window.location.href,
@@ -28,8 +28,7 @@ export function useMegaLeadForm(): UseMegaLeadFormReturn {
       sessionId: getSessionId(env),
       visitorId: getVisitorId(env),
     };
-    await postLead(buildLeadPayload(formData, context, resolveAttribution(env)));
-    return formData;
+    return sendLeadValues(values, context, resolveAttribution(env));
   }, []);
 
   return { submit };

@@ -8,10 +8,9 @@ export function CustomerProof({ phone }: { phone: RoutePhone }): ReactElement {
   return (
     <SectionShell id="customer-proof" tone="paper" phone={phone}>
       <div className="grid gap-10 lg:grid-cols-[4fr_8fr] lg:gap-16">
-        <div data-reveal className="lg:sticky lg:top-28 lg:self-start">
-          <h2 className="text-h2 font-semibold">What our customers say</h2>
-          <p className="mt-4 text-body text-muted">From reviews our customers left on Google.</p>
-        </div>
+        <h2 data-reveal className="text-h2 font-semibold lg:sticky lg:top-28 lg:self-start">
+          What our customers say
+        </h2>
         <ul data-reveal className="divide-y divide-hairline border-y border-hairline">
           {TESTIMONIALS.map((review) => (
             <li key={review.author} className="py-8">

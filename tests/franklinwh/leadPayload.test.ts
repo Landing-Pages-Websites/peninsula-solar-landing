@@ -2,14 +2,23 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { emptyAttribution } from "../../src/franklinwh/attribution";
 import { LEAD_ENDPOINT, SITE } from "../../src/franklinwh/config";
-import { LeadSubmitError, buildLeadPayload, isLeadSuccessBody, postLead, type FetchLike } from "../../src/franklinwh/leadPayload";
+import {
+  LeadOutcomeUnknownError,
+  LeadRejectedError,
+  LeadSubmitError,
+  buildLeadPayload,
+  isLeadRejectionBody,
+  isLeadSuccessBody,
+  postLead,
+  type FetchLike,
+} from "../../src/franklinwh/leadPayload";
 
 const FORM_DATA = { name: "Test MEGA QA", phone: "5555550100", email: "", utility: "", offGrid: false, message: "AUTOMATED_QA_TEST" };
 const CONTEXT = { url: "https://call.peninsula-solar.com/franklinwh?gclid=x", referrerUrl: null, sessionId: "sess_1", visitorId: "vis_1" };
 const PAYLOAD = buildLeadPayload(FORM_DATA, CONTEXT, { ...emptyAttribution(), gclid: "x" });
 
 /** Intercepted transport: no request ever leaves the test. */
-function respond(status: number, body: string): { fetch: FetchLike; calls: string[] } {
+function respond(status: number, body: string | null): { fetch: FetchLike; calls: string[] } {
   const calls: string[] = [];
   return {
     calls,
@@ -38,27 +47,54 @@ describe("response contract", () => {
     assert.deepEqual(transport.calls, [LEAD_ENDPOINT]);
   });
 
-  const failures: [string, number, string][] = [
+  // A definite "no": nothing was saved, so the visitor may retry.
+  const rejections: [string, number, string][] = [
     ["ok false", 200, JSON.stringify({ ok: false })],
-    ["ok missing", 200, JSON.stringify({ id: "x" })],
-    ["ok as a string", 200, JSON.stringify({ ok: "true" })],
-    ["null body", 200, "null"],
-    ["invalid JSON", 200, "<html>"],
-    ["empty body", 200, ""],
     ["server error with ok true", 500, JSON.stringify({ ok: true })],
     ["client error", 400, JSON.stringify({ ok: false })],
+    ["server error with unreadable body", 502, "<html>"],
   ];
-  for (const [label, status, body] of failures) {
-    it(`fails on ${label}`, async () => {
-      await assert.rejects(postLead(PAYLOAD, respond(status, body).fetch), LeadSubmitError);
+  for (const [label, status, body] of rejections) {
+    it(`rejects definitely on ${label}`, async () => {
+      await assert.rejects(postLead(PAYLOAD, respond(status, body).fetch), LeadRejectedError);
     });
   }
 
-  it("fails on a network error", async () => {
+  // No confirmation either way: the lead may be saved, so this is never a retryable failure.
+  const unknowns: [string, number, string | null][] = [
+    ["ok missing", 200, JSON.stringify({ id: "x" })],
+    ["ok as a string", 200, JSON.stringify({ ok: "true" })],
+    ["ok as 1", 201, JSON.stringify({ ok: 1 })],
+    ["null body", 200, "null"],
+    ["invalid JSON", 200, "<html>"],
+    ["empty body", 200, ""],
+    ["no-content success", 204, null],
+  ];
+  for (const [label, status, body] of unknowns) {
+    it(`leaves the outcome unknown on ${label}`, async () => {
+      await assert.rejects(postLead(PAYLOAD, respond(status, body).fetch), LeadOutcomeUnknownError);
+    });
+  }
+
+  it("leaves the outcome unknown when the fetch rejects or the body stream is lost", async () => {
     const offline: FetchLike = async () => {
       throw new TypeError("Failed to fetch");
     };
-    await assert.rejects(postLead(PAYLOAD, offline), LeadSubmitError);
+    await assert.rejects(postLead(PAYLOAD, offline), LeadOutcomeUnknownError);
+    const lostBody: FetchLike = async () =>
+      new Response(new ReadableStream({ start: (controller) => controller.error(new TypeError("network reset")) }), { status: 200 });
+    await assert.rejects(postLead(PAYLOAD, lostBody), LeadOutcomeUnknownError);
+  });
+
+  it("keeps both outcomes under one LeadSubmitError base", () => {
+    assert.ok(new LeadRejectedError("x") instanceof LeadSubmitError);
+    assert.ok(new LeadOutcomeUnknownError("x") instanceof LeadSubmitError);
+    assert.equal(new LeadRejectedError("x") instanceof LeadOutcomeUnknownError, false);
+  });
+
+  it("recognizes only a literal false as an explicit rejection", () => {
+    assert.equal(isLeadRejectionBody({ ok: false }), true);
+    for (const body of [null, undefined, {}, { ok: 0 }, { ok: "false" }, { ok: true }]) assert.equal(isLeadRejectionBody(body), false);
   });
 
   it("recognizes only a literal true", () => {

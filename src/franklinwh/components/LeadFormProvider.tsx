@@ -9,13 +9,13 @@ import { useLeadSubmission } from "./useLeadSubmission";
 interface LeadFormContextValue {
   values: LeadValues;
   status: SubmissionStatus;
-  /** The form whose request is pending, failed or accepted; null before the first attempt. */
+  /** The form whose request is pending, failed, unconfirmed or accepted; null before the first attempt. */
   activeFormId: string | null;
   phone: RoutePhone;
   setValue: <K extends FieldKey>(key: K, value: LeadValues[K]) => void;
   /** The draft of record, current even before React re-renders; validate exactly what will be sent. */
   readValues: () => LeadValues;
-  /** Sends the shared draft for this form; a no-op while another send is pending or after success. */
+  /** Sends the shared draft for this form; a no-op while pending, after success and after an unknown outcome. */
   sendLead: (formId: string) => void;
 }
 

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactElement } from "react";
 import { FINAL_FORM_ANCHOR, QUOTE_CTA_LABEL } from "../config";
 import { CARD_SELECTOR, HERO_SELECTOR, OBSTRUCTION_SELECTOR, shouldShowFloating, type Box } from "../floatingVisibility";
 import { buttonClass } from "./buttonStyles";
+import { useLeadForm } from "./LeadFormProvider";
 
 function rect(el: Element | null): Box | null {
   return el ? el.getBoundingClientRect() : null;
@@ -50,7 +51,10 @@ function useFloatingVisibility(laneRef: { current: HTMLElement | null }): boolea
 /** Form-only floating action. It paints only in a real gap and is inert whenever it would cover anything. */
 export function FloatingCta(): ReactElement {
   const laneRef = useRef<HTMLDivElement>(null);
-  const visible = useFloatingVisibility(laneRef);
+  const inGap = useFloatingVisibility(laneRef);
+  const { status } = useLeadForm();
+  // After an unconfirmed request both forms are paused, so the button would lead nowhere useful.
+  const visible = inGap && status !== "unknown";
   return (
     <div
       ref={laneRef}
@@ -59,7 +63,7 @@ export function FloatingCta(): ReactElement {
       aria-hidden={!visible}
       className={`fixed inset-x-0 bottom-0 z-30 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 transition-opacity duration-200 ease-brand sm:inset-x-auto sm:bottom-6 sm:right-6 sm:p-0 ${visible ? "opacity-100" : "pointer-events-none opacity-0"}`}
     >
-      <a href={`#${FINAL_FORM_ANCHOR}`} className={buttonClass("primary", "w-full shadow-float sm:w-auto")}>
+      <a href={`#${FINAL_FORM_ANCHOR}`} className={buttonClass("primary", { extra: "w-full shadow-float sm:w-auto" })}>
         {QUOTE_CTA_LABEL}
       </a>
     </div>
