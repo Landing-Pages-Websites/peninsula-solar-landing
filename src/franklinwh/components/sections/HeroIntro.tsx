@@ -12,7 +12,7 @@ export function HeroIntro({ phone }: { phone: RoutePhone }): ReactElement {
       <p className="max-w-[60ch] text-body text-ink">
         Our licensed electricians install your system, with sales, permitting and warranty handled by the same in&#8209;house team.
       </p>
-      <p className="text-body font-medium text-muted">For Northern Michigan homes, cabins and camps.</p>
+      <p className="text-body font-medium text-muted">Serving Northern Michigan homes, <span className="whitespace-nowrap">cabins and camps</span> since&nbsp;2011.</p>
       <CtaPair phone={phone} formAnchor={HERO_FORM_ANCHOR} align="start" />
       <p className="flex items-center gap-2 text-label text-muted">
         <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 shrink-0 fill-none stroke-navy stroke-2">

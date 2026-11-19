@@ -62,7 +62,7 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     author: "Tim",
   },
   {
-    quote: "Good at communication and follow-through. I am very happy with their performance and the end result!",
+    quote: "They have to be the best in the business in Northern Michigan and the U.P. … I am very happy with their performance and the end\u00a0result!",
     author: "Kent",
   },
   {
@@ -86,7 +86,7 @@ export const FAQS: readonly FaqItem[] = [
     answer: "We coordinate final inspections with local authorities and, for grid-connected systems, your utility before activating the system.",
   },
   {
-    question: "What does LFP mean?",
-    answer: "LFP stands for lithium iron phosphate, the battery chemistry used in FranklinWH aPower batteries.",
+    question: "Will the batteries work through a Northern Michigan\u00a0winter?",
+    answer: "Yes. FranklinWH batteries have integrated heating and cooling that protects them in extreme temperatures, so they keep performing through Midwest winters and longer\u00a0outages.",
   },
 ];

@@ -27,7 +27,7 @@ export function ProductFamily({ phone }: { phone: RoutePhone }): ReactElement {
           <figcaption className="mt-4 text-small text-paper/80">aPower 2 battery, left, with the aGate controller, right.</figcaption>
         </figure>
         <div data-reveal>
-          <h2 className="text-h2 font-semibold text-paper">Meet the FranklinWH system</h2>
+          <h2 className="text-h2 font-semibold text-paper">The FranklinWH lineup</h2>
           <dl className="mt-8 divide-y divide-paper/20 border-y border-paper/20">
             {PRODUCT_MODELS.map((model) => (
               <div key={model.name} className={MODEL_ROW}>

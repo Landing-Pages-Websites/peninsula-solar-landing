@@ -15,6 +15,36 @@ Both campaign routes render the same `FranklinPage` component and differ only in
 (page, layout and globals.css are the only relocations) so the new route group has its own root layout,
 CSS, font and tracking and nothing leaks into `/`.
 
+## Human QA send-back copy edits (2026-11-19, task 3d9afce8)
+
+**Authority.** Human send-back: https://admin.gomega.ai/tasks/3d9afce8-8a12-45f2-b220-0f7eb7d004e8 comment
+3883a418-44f4-4455-ac1f-e3634d958ed4 (from QA review task 2300d301-a88a-4a4e-9633-88f4f7a4dc5e). It
+prescribes exact copy for six items on both routes and says to change nothing else. Earlier copy in the
+original research page plan is historical where this list replaces it.
+
+| # | Section | Before | After (exact, both routes) |
+| --- | --- | --- | --- |
+| 1 | `#hero` audience line | For Northern Michigan homes, cabins and camps. | Serving Northern Michigan homes, cabins and camps since 2011. ("cabins and camps" nowrap; NBSP in "since 2011") |
+| 2 | `#customer-proof` Kent quote | Good at communication and follow-through. I am very happy with their performance and the end result! | They have to be the best in the business in Northern Michigan and the U.P. … I am very happy with their performance and the end result! (NBSP in "end result") |
+| 3 | `#product-family` h2 | Meet the FranklinWH system | The FranklinWH lineup |
+| 4 | `#customer-proof` h2 | What our customers say | Customer reviews |
+| 5 | `#final-quote` form title | Let’s plan your backup power | Let’s plan your backup power ("your backup power" nowrap) |
+| 6 | `#faq` third item | What does LFP mean? | Will the batteries work through a Northern Michigan winter? / Yes. FranklinWH batteries have integrated heating and cooling that protects them in extreme temperatures, so they keep performing through Midwest winters and longer outages. (NBSP in "Michigan winter" and "longer outages") |
+
+Sources: the 2011 claim is from https://peninsula-solar.com/ ("Since 2011, we've designed and installed
+hundreds of custom solar and battery systems"); Kent's two sentences are the first and last of his
+September 19, 2025 Google review on https://peninsula-solar.com/; the FAQ restates
+https://peninsula-solar.com/franklinwh/ "Thermal Management for Cold Climates". Superseded claims are kept
+in `content-sources.json` `supersededClaims`.
+
+TEST EVIDENCE: FAQ: "Will the batteries work through a Northern Michigan winter?" from https://peninsula-solar.com/franklinwh/.
+
+Tests: `tests/franklinwh/sendbackCopy.test.ts` pins the six strings (NBSPs and nowrap groups included) in
+their sections on both routes and checks that the replaced copy is gone. `page.test.ts` now folds the NBSP in
+an expected testimonial quote the same way `renderPage` folds the HTML. No layout, form, tracking, phone or
+image code changed; no layout fix was needed for fix 3 (the shorter product-family heading narrows the
+1024px column difference rather than widening it).
+
 ## Client photo withdrawal (2026-11-19): governs the active build
 
 **Authority.** Atlas comment `a32ba639-6d55-47a2-a595-160fb4c32e5c` (2026-11-19T19:46:45.590Z), relaying an
@@ -249,7 +279,9 @@ and event transports are intercepted; no live lead or conversion request is ever
 
 - FAQ: "What will my project proposal include?" from https://peninsula-solar.com/our-process/
 - FAQ: "Which checks happen before activation?" from https://peninsula-solar.com/our-process/
-- FAQ: "What does LFP mean?" from https://peninsula-solar.com/ and
+- FAQ: "Will the batteries work through a Northern Michigan winter?" from https://peninsula-solar.com/franklinwh/
+  (section "Thermal Management for Cold Climates"). Human send-back fix 6, 2026-11-19.
+- Superseded 2026-11-19 (no longer rendered): FAQ: "What does LFP mean?" from https://peninsula-solar.com/ and
   https://www.franklinwh.com/support/overview/components-of-franklin-home-power/
 
 ## Names, places and policy

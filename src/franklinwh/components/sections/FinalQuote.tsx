@@ -12,7 +12,7 @@ export function FinalQuote(): ReactElement {
           formId={FINAL_FORM_ID}
           messageRows={4}
           className="rounded-panel border border-hairline bg-surface p-6 shadow-card sm:p-10"
-          heading={<h2 className="text-h2 font-semibold">Let&rsquo;s plan your backup power</h2>}
+          heading={<h2 className="text-h2 font-semibold">Let&rsquo;s plan <span className="whitespace-nowrap">your backup power</span></h2>}
           intro={<p className="text-body text-muted">Tell us a little about your property, and we&rsquo;ll follow up to plan your FranklinWH system.</p>}
         />
       </div>
