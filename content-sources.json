@@ -1,0 +1,168 @@
+{
+  "scope": "Claim-level source map for /franklinwh and /franklinwh-lower-peninsula (shared copy in src/franklinwh/content.ts and the section components) and /privacy. It does not cover the protected legacy root /, whose content is unchanged and was not authored by this task.",
+  "task": "6175fe7a-5e4e-4c78-82bf-eb0528afedab",
+  "researchLedgers": "website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809: content_inventory.json, claim_verification.json, proof.json, faq_source_ledger.json, content_source_ledger.json",
+  "claims": [
+    {
+      "claim": "FranklinWH home battery backup",
+      "sections": ["hero (H1)"],
+      "sources": ["Current task content_requests and landing_page_focus (sources/build_task.json)", "https://peninsula-solar.com/franklinwh/"],
+      "verified": true
+    },
+    {
+      "claim": "Our licensed electricians install your system, with sales, permitting and warranty handled by the same in-house team.",
+      "sections": ["hero (subheadline)"],
+      "sources": [
+        "Current task content_requests: \"fully in-house (sales, permitting, install, warranty), licensed electricians\"",
+        "https://peninsula-solar.com/ (\"designed and installed by our own certified team — not subcontracted out\"; \"executed in-house by our trained and licensed team\")",
+        "https://peninsula-solar.com/company/ (\"handled in-house by our trained and licensed team. No subcontractors\")"
+      ],
+      "verified": true
+    },
+    {
+      "claim": "For Northern Michigan homes, cabins and camps.",
+      "sections": ["hero (audience line)"],
+      "sources": ["Current task content_requests: \"grid-connected homes that lose power, and off-grid cabins and camps\"", "https://peninsula-solar.com/services/off-grid-solar/"],
+      "verified": true
+    },
+    {
+      "claim": "FranklinWH certified installer in Michigan",
+      "sections": ["hero (trust line, text only, no badge)"],
+      "sources": ["https://peninsula-solar.com/franklinwh/ (\"We are a proud FRANKLINWH certified installer in Michigan\")"],
+      "verified": true,
+      "note": "Named installer differentiator. No tier, license number or certification mark is shown."
+    },
+    {
+      "claim": "A modern alternative to a standby generator",
+      "sections": ["backup-benefits (heading)"],
+      "sources": ["Current task content_requests: \"FranklinWH as a modern alternative to a standby generator\""],
+      "verified": true
+    },
+    {
+      "claim": "Charge from a generator: with a compatible generator and the optional aGate Generator Module, your system can replenish battery reserve during longer outages.",
+      "sections": ["backup-benefits"],
+      "sources": ["https://www.franklinwh.com/products/agate/ (\"The Generator Module is an optional aGate component that can integrate with both portable and standby generators\")", "Current task content_requests: \"you can charge the battery from a generator\""],
+      "verified": true
+    },
+    {
+      "claim": "Prepare before severe weather: enable Storm Hedge in the FranklinWH App to charge batteries when supported National Weather Service alerts reach your location.",
+      "sections": ["backup-benefits"],
+      "sources": ["https://www.franklinwh.com/support/overview/storm-hedge/ (\"Storm Hedge mode will be activated when the National Weather Service (NWS) issues one of the following weather notifications for your area\")"],
+      "verified": true
+    },
+    {
+      "claim": "Choose which circuits stay on: the optional Smart Circuits Module lets you control selected circuits and preserve reserve for the essentials.",
+      "sections": ["backup-benefits"],
+      "sources": ["https://www.franklinwh.com/products/agate/ (Smart Circuits Module)", "Current task content_requests: \"choose which circuits stay on during an outage\""],
+      "verified": true
+    },
+    {
+      "claim": "aGate: the controller coordinating energy from solar, grid, batteries and compatible generators.",
+      "sections": ["product-family"],
+      "sources": ["https://www.franklinwh.com/products/agate/ (coordination of \"solar, batteries, generators, and EVs\" and grid transitions)"],
+      "verified": true
+    },
+    {
+      "claim": "aPower S: 15 kWh of storage with an integrated solar inverter for direct panel connection.",
+      "sections": ["product-family"],
+      "sources": ["https://www.franklinwh.com/products/apower-s-home-battery/ (\"A single aPower S offers an industry leading 15 kWh of storage capacity\"; integrated design \"allows direct solar connection\")"],
+      "verified": true
+    },
+    {
+      "claim": "aPower 2: 15 kWh of AC-coupled storage for an existing solar system or a new build.",
+      "sections": ["product-family"],
+      "sources": ["https://www.franklinwh.com/products/apower2-home-battery/ (15 kWh; integrates with an existing solar system)", "https://peninsula-solar.com/franklinwh/ (\"Each aPower stores 15kWh of energy\")"],
+      "verified": true
+    },
+    {
+      "claim": "aPower X: FranklinWH's 13.6 kWh AC-coupled battery platform.",
+      "sections": ["product-family"],
+      "sources": ["https://www.franklinwh.com/support/overview/components-of-franklin-home-power/ (aPower X; \"a 13.6 kWh battery storage system utilizing LFP battery chemistry and is AC-coupled\")"],
+      "verified": true
+    },
+    {
+      "claim": "aPower 2 battery, left, with the aGate controller, right. (caption and render)",
+      "sections": ["product-family"],
+      "sources": ["FranklinWH US Brand Assets, 02 Product Rendering/aPower 2 + aGate-1.png (marketing.franklinwh.com brand portal)"],
+      "verified": true
+    },
+    {
+      "claim": "A FranklinWH project near Marquette: our aPower S installation pairs battery backup with rooftop solar. (three project photos and captions)",
+      "sections": ["marquette-project"],
+      "sources": ["Current task content_requests: \"The three attached photos are from Peninsula Solar's own aPower S install near Marquette - use them.\"", "Task attachments Arnold_IMG_6898.jpg, Arnold_IMG_9068.jpg, Arnold_IMG_0800.jpg (hashes in docs/franklinwh/image-ledger.json)"],
+      "verified": true,
+      "note": "Captions describe only what each photo shows."
+    },
+    {
+      "claim": "Hero photograph: FranklinWH aPower S installation",
+      "sections": ["hero"],
+      "sources": ["FranklinWH US Brand Assets, 08 Installation Photos/aPower S/aPower S (1).jpg (marketing.franklinwh.com brand portal)"],
+      "verified": true,
+      "note": "Manufacturer photo. The copy and alt text never present it as a Peninsula Solar job."
+    },
+    {
+      "claim": "One team from first call to warranty: design around your loads; permits and installation by our licensed team; in-house warranty support.",
+      "sections": ["in-house-process"],
+      "sources": [
+        "https://peninsula-solar.com/our-process/ (\"Peninsula Solar handles all necessary paperwork, permits, and utility interconnection applications\")",
+        "Current task content_requests: \"fully in-house (sales, permitting, install, warranty), licensed electricians\""
+      ],
+      "verified": true
+    },
+    {
+      "claim": "Testimonial, Tim: \"They were professional, extremely knowledgeable, and quick to respond to any question I had. The quality of their work is excellent.\"",
+      "sections": ["customer-proof"],
+      "sources": ["https://peninsula-solar.com/ (Google review shown through Trustindex, November 22, 2025)"],
+      "verified": true,
+      "note": "Verbatim excerpt; the source's double spaces are collapsed."
+    },
+    {
+      "claim": "Testimonial, Kent: \"Good at communication and follow-through. I am very happy with their performance and the end result!\"",
+      "sections": ["customer-proof"],
+      "sources": ["https://peninsula-solar.com/ (Google review shown through Trustindex, September 19, 2025)"],
+      "verified": true
+    },
+    {
+      "claim": "Testimonial, Keith: \"The team took the time in assisting us in understanding the system and what we needed, performed exceptional installation, and after sales support is second to none.\"",
+      "sections": ["customer-proof"],
+      "sources": ["https://peninsula-solar.com/ (Google review shown through Trustindex, February 8, 2025)"],
+      "verified": true
+    },
+    {
+      "claim": "FAQ: What will my project proposal include? Equipment specifications, a system design, estimated energy production and warranty information.",
+      "sections": ["faq"],
+      "sources": ["https://peninsula-solar.com/our-process/ (\"We provide a detailed proposal including estimated energy production, equipment specifications, system design, and warranty information.\")"],
+      "verified": true
+    },
+    {
+      "claim": "FAQ: Which checks happen before activation? Final inspections with local authorities and, for grid-connected systems, the utility.",
+      "sections": ["faq"],
+      "sources": ["https://peninsula-solar.com/our-process/ (\"We coordinate final inspections with local authorities and your utility company. Once approved, we activate your system\")"],
+      "verified": true
+    },
+    {
+      "claim": "FAQ: What does LFP mean? Lithium iron phosphate, the battery chemistry used in FranklinWH aPower batteries.",
+      "sections": ["faq"],
+      "sources": ["https://www.franklinwh.com/support/overview/components-of-franklin-home-power/ (\"Lithium Iron Phosphate (LFP)\")", "https://peninsula-solar.com/ (\"Lithium iron phosphate battery banks\")"],
+      "verified": true
+    },
+    {
+      "claim": "Office names and phones: Marquette office (906) 235-0340; Traverse City office (231) 590-7305",
+      "sections": ["header", "hero", "every section CTA pair", "form note", "alerts", "success", "footer"],
+      "sources": ["Current task page_differences and phone_routing_number (sources/build_task.json)"],
+      "verified": true
+    },
+    {
+      "claim": "Privacy policy at /privacy",
+      "sections": ["/privacy", "under both submits", "footer"],
+      "sources": ["Written for this task: https://peninsula-solar.com/privacy-policy/ returned 404 (content_source_ledger.json policy_gap). Lists exactly the six form fields; contact sales@peninsula-solar.com from the task."],
+      "verified": true,
+      "note": "Customer review of the policy requested in docs/franklinwh/HANDOFF.md."
+    }
+  ],
+  "excluded": [
+    "Savings, tax-credit, financing and ROI content (CCP compliance.implications)",
+    "Aggregate star rating: not established in research (rating null)",
+    "Warranty durations and runtime figures: stale or model-inconsistent in inherited sources"
+  ]
+}

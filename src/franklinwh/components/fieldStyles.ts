@@ -1,3 +1,6 @@
+/** The boxed form alert (rejected or unconfirmed request): black border and warm fill, never color-only. */
+export const ALERT_CLASS = "rounded-control border-2 border-ink bg-sand px-4 py-3 text-label text-ink";
+
 /** Shared input look: 2px border, 48px tap height, navy focus ring, error border kept non-color-only by the message. */
 export function inputClass(hasError: boolean): string {
   // Error: the token error color (black) plus a warm fill, so the state reads at a glance without relying on color alone.

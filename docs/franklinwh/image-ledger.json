@@ -1,5 +1,5 @@
 {
- "note": "Delivered-pixel gate inputs. Rendered bounds are planned from the CSS at 1440 (1136px content) and 390 (350px content); the parent measures currentSrc and decoded delivered pixels on the deployed preview.",
+ "note": "Round 2. \"planned_*\" entries are calculations from the CSS and srcset, not measurements. \"controller_receipt_r1\" entries are the controller's native measurements of the round-1 production build. No delivered-byte measurement was made in this session (no local browser); native proof of round 2 is DEFERRED to the controller. Gate: max(cssW/fileW, cssH/fileH) x max(2, DPR) <= 1. Policy: each srcset starts at a file holding 2x the largest desktop slot.",
  "target_density": 2,
  "images": {
   "apower-s-installation": {
@@ -14,12 +14,6 @@
     3024
    ],
    "variants": {
-    "apower-s-installation-800.webp": {
-     "w": 800,
-     "h": 600,
-     "bytes": 74276,
-     "sha256": "26086f2f5068e339e44dc31acf6c080ef0552403cd9ae4fd95678980f8232b12"
-    },
     "apower-s-installation-1300.webp": {
      "w": 1300,
      "h": 975,
@@ -35,62 +29,186 @@
    },
    "section": "hero",
    "fit": "cover 16:10 crop, object-position 50% 62%",
-   "desktop_css": [
-    630,
-    394
-   ],
-   "mobile_css": [
-    350,
-    219
-   ],
-   "desktop_gate_2x": {
-    "needs_px": [
-     1260,
-     788
-    ],
-    "srcset_pick": [
-     1300,
-     975
-    ],
-    "ratio": 0.969,
-    "pass": true
+   "retired_variants": {
+    "apower-s-installation-800.webp": "Removed in round 2. At DPR 1 the browser chose this 1x file for the desktop slot (controller receipt below); no srcset now offers it."
    },
-   "desktop_gate_3x": {
-    "needs_px": [
-     1890,
-     1182
-    ],
-    "srcset_pick": [
-     1800,
-     1350
-    ],
-    "ratio": 1.05,
-    "pass": false
+   "srcset_widths": [
+    1300,
+    1800
+   ],
+   "planned_r2": {
+    "1440@1x": {
+     "css": [
+      630,
+      393.75
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 2,
+     "ratio": 0.969,
+     "pass": true
+    },
+    "1440@2x": {
+     "css": [
+      630,
+      393.75
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 2,
+     "ratio": 0.969,
+     "pass": true
+    },
+    "1440@3x": {
+     "css": [
+      630,
+      393.75
+     ],
+     "expected_pick": [
+      1800,
+      1350
+     ],
+     "target": 3,
+     "ratio": 1.05,
+     "pass": false
+    },
+    "1024@1x": {
+     "css": [
+      527.9,
+      329.9
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 2,
+     "ratio": 0.812,
+     "pass": true
+    },
+    "1024@2x": {
+     "css": [
+      527.9,
+      329.9
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 2,
+     "ratio": 0.812,
+     "pass": true
+    },
+    "1024@3x": {
+     "css": [
+      527.9,
+      329.9
+     ],
+     "expected_pick": [
+      1800,
+      1350
+     ],
+     "target": 3,
+     "ratio": 0.88,
+     "pass": true
+    },
+    "390@1x": {
+     "css": [
+      335,
+      209.4
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 2,
+     "ratio": 0.515,
+     "pass": true
+    },
+    "390@2x": {
+     "css": [
+      335,
+      209.4
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 2,
+     "ratio": 0.515,
+     "pass": true
+    },
+    "390@3x": {
+     "css": [
+      335,
+      209.4
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 3,
+     "ratio": 0.773,
+     "pass": true
+    },
+    "320@1x": {
+     "css": [
+      265,
+      165.6
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 2,
+     "ratio": 0.408,
+     "pass": true
+    },
+    "320@2x": {
+     "css": [
+      265,
+      165.6
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 2,
+     "ratio": 0.408,
+     "pass": true
+    },
+    "320@3x": {
+     "css": [
+      265,
+      165.6
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "target": 3,
+     "ratio": 0.612,
+     "pass": true
+    }
    },
-   "mobile_gate_2x": {
-    "needs_px": [
-     700,
-     438
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     630,
+     393.75
     ],
-    "srcset_pick": [
+    "delivered": [
      800,
      600
     ],
-    "ratio": 0.875,
-    "pass": true
+    "ratio": 1.575,
+    "pass": false
    },
-   "mobile_gate_3x": {
-    "needs_px": [
-     1050,
-     657
-    ],
-    "srcset_pick": [
-     1300,
-     975
-    ],
-    "ratio": 0.808,
-    "pass": true
-   }
+   "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
   },
   "agate": {
    "source": "manufacturer-assets/agate-product-original.png",
@@ -104,12 +222,6 @@
     2618
    ],
    "variants": {
-    "agate-700.webp": {
-     "w": 700,
-     "h": 608,
-     "bytes": 46126,
-     "sha256": "11cdb1c9441c18e0ceef48162cd08c92f81d5cc6759bca717e2fe175a2599c6b"
-    },
     "agate-1200.webp": {
      "w": 1200,
      "h": 1042,
@@ -119,62 +231,185 @@
    },
    "section": "backup-benefits",
    "fit": "contain (transparent render)",
-   "desktop_css": [
-    440,
-    382
-   ],
-   "mobile_css": [
-    286,
-    248
-   ],
-   "desktop_gate_2x": {
-    "needs_px": [
-     880,
-     764
-    ],
-    "srcset_pick": [
-     1200,
-     1042
-    ],
-    "ratio": 0.733,
-    "pass": true
+   "retired_variants": {
+    "agate-700.webp": "Removed in round 2. At DPR 1 the browser chose this 1x file for the desktop slot (controller receipt below); no srcset now offers it."
    },
-   "desktop_gate_3x": {
-    "needs_px": [
-     1320,
-     1146
-    ],
-    "srcset_pick": [
-     1200,
-     1042
-    ],
-    "ratio": 1.1,
-    "pass": false
+   "srcset_widths": [
+    1200
+   ],
+   "planned_r2": {
+    "1440@1x": {
+     "css": [
+      440,
+      382.2
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 2,
+     "ratio": 0.734,
+     "pass": true
+    },
+    "1440@2x": {
+     "css": [
+      440,
+      382.2
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 2,
+     "ratio": 0.734,
+     "pass": true
+    },
+    "1440@3x": {
+     "css": [
+      440,
+      382.2
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 3,
+     "ratio": 1.1,
+     "pass": false
+    },
+    "1024@1x": {
+     "css": [
+      344.5,
+      299.2
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 2,
+     "ratio": 0.574,
+     "pass": true
+    },
+    "1024@2x": {
+     "css": [
+      344.5,
+      299.2
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 2,
+     "ratio": 0.574,
+     "pass": true
+    },
+    "1024@3x": {
+     "css": [
+      344.5,
+      299.2
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 3,
+     "ratio": 0.861,
+     "pass": true
+    },
+    "390@1x": {
+     "css": [
+      271,
+      235.3
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 2,
+     "ratio": 0.452,
+     "pass": true
+    },
+    "390@2x": {
+     "css": [
+      271,
+      235.3
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 2,
+     "ratio": 0.452,
+     "pass": true
+    },
+    "390@3x": {
+     "css": [
+      271,
+      235.3
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 3,
+     "ratio": 0.677,
+     "pass": true
+    },
+    "320@1x": {
+     "css": [
+      201,
+      174.5
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 2,
+     "ratio": 0.335,
+     "pass": true
+    },
+    "320@2x": {
+     "css": [
+      201,
+      174.5
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 2,
+     "ratio": 0.335,
+     "pass": true
+    },
+    "320@3x": {
+     "css": [
+      201,
+      174.5
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "target": 3,
+     "ratio": 0.503,
+     "pass": true
+    }
    },
-   "mobile_gate_2x": {
-    "needs_px": [
-     572,
-     496
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     440,
+     382.15625
     ],
-    "srcset_pick": [
+    "delivered": [
      700,
      608
     ],
-    "ratio": 0.817,
-    "pass": true
+    "ratio": 1.257,
+    "pass": false
    },
-   "mobile_gate_3x": {
-    "needs_px": [
-     858,
-     744
-    ],
-    "srcset_pick": [
-     1200,
-     1042
-    ],
-    "ratio": 0.715,
-    "pass": true
-   }
+   "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
   },
   "apower-2-and-agate": {
    "source": "manufacturer-assets/apower-2-and-agate-original.png",
@@ -188,12 +423,6 @@
     3115
    ],
    "variants": {
-    "apower-2-and-agate-800.webp": {
-     "w": 800,
-     "h": 604,
-     "bytes": 28072,
-     "sha256": "441f53379221f2e851072173833bfe78a51e4ec3e9cb76e06b8d89872281f4fd"
-    },
     "apower-2-and-agate-1300.webp": {
      "w": 1300,
      "h": 982,
@@ -203,62 +432,211 @@
    },
    "section": "product-family",
    "fit": "contain (transparent render)",
-   "desktop_css": [
-    625,
-    472
-   ],
-   "mobile_css": [
-    350,
-    264
-   ],
-   "desktop_gate_2x": {
-    "needs_px": [
-     1250,
-     944
-    ],
-    "srcset_pick": [
-     1300,
-     982
-    ],
-    "ratio": 0.962,
-    "pass": true
+   "retired_variants": {
+    "apower-2-and-agate-800.webp": "Removed in round 2. At DPR 1 the browser chose this 1x file for the desktop slot (controller receipt below); no srcset now offers it."
    },
-   "desktop_gate_3x": {
-    "needs_px": [
-     1875,
-     1416
-    ],
-    "srcset_pick": [
-     1300,
-     982
-    ],
-    "ratio": 1.442,
-    "pass": false
+   "srcset_widths": [
+    1300
+   ],
+   "planned_r2": {
+    "1440@1x": {
+     "css": [
+      625.3,
+      472.1
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.962,
+     "pass": true
+    },
+    "1440@2x": {
+     "css": [
+      625.3,
+      472.1
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.962,
+     "pass": true
+    },
+    "1440@3x": {
+     "css": [
+      625.3,
+      472.1
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 3,
+     "ratio": 1.443,
+     "pass": false
+    },
+    "1024@1x": {
+     "css": [
+      527.9,
+      398.8
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.812,
+     "pass": true
+    },
+    "1024@2x": {
+     "css": [
+      527.9,
+      398.8
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.812,
+     "pass": true
+    },
+    "1024@3x": {
+     "css": [
+      527.9,
+      398.8
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 3,
+     "ratio": 1.218,
+     "pass": false
+    },
+    "390@1x": {
+     "css": [
+      335,
+      253.1
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.515,
+     "pass": true
+    },
+    "390@2x": {
+     "css": [
+      335,
+      253.1
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.515,
+     "pass": true
+    },
+    "390@3x": {
+     "css": [
+      335,
+      253.1
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 3,
+     "ratio": 0.773,
+     "pass": true
+    },
+    "320@1x": {
+     "css": [
+      265,
+      200.2
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.408,
+     "pass": true
+    },
+    "320@2x": {
+     "css": [
+      265,
+      200.2
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.408,
+     "pass": true
+    },
+    "320@3x": {
+     "css": [
+      265,
+      200.2
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 3,
+     "ratio": 0.612,
+     "pass": true
+    },
+    "1264@1x": {
+     "css": [
+      639,
+      482.7
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.983,
+     "pass": true
+    },
+    "1264@2x": {
+     "css": [
+      639,
+      482.7
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "target": 2,
+     "ratio": 0.983,
+     "pass": true
+    }
    },
-   "mobile_gate_2x": {
-    "needs_px": [
-     700,
-     528
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     625.328125,
+     472.109375
     ],
-    "srcset_pick": [
+    "delivered": [
      800,
      604
     ],
-    "ratio": 0.875,
-    "pass": true
+    "ratio": 1.563,
+    "pass": false
    },
-   "mobile_gate_3x": {
-    "needs_px": [
-     1050,
-     792
-    ],
-    "srcset_pick": [
-     1300,
-     982
-    ],
-    "ratio": 0.808,
-    "pass": true
-   }
+   "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
   },
   "marquette-franklinwh-equipment": {
    "source": "client-assets/Arnold_IMG_6898.jpg",
@@ -347,6 +725,20 @@
      900
     ],
     "ratio": 0.877,
+    "pass": true
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     430.828125,
+     323.109375
+    ],
+    "delivered": [
+     900,
+     675
+    ],
+    "ratio": 0.957,
     "pass": true
    }
   },
@@ -438,6 +830,20 @@
     ],
     "ratio": 0.877,
     "pass": true
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     430.828125,
+     323.109375
+    ],
+    "delivered": [
+     900,
+     675
+    ],
+    "ratio": 0.957,
+    "pass": true
    }
   },
   "marquette-racking-detail": {
@@ -528,6 +934,20 @@
     ],
     "ratio": 0.876,
     "pass": true
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     242.34375,
+     323.125
+    ],
+    "delivered": [
+     600,
+     800
+    ],
+    "ratio": 0.808,
+    "pass": true
    }
   },
   "peninsula-solar-logo": {
@@ -551,6 +971,20 @@
    },
    "usage": {
     "peninsula-solar-logo-480.png": "header, 202-236 CSS px wide (2x = 472)"
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     235.78125,
+     28
+    ],
+    "delivered": [
+     480,
+     57
+    ],
+    "ratio": 0.982,
+    "pass": true
    }
   },
   "peninsula-solar-logo-white": {
@@ -574,6 +1008,20 @@
    },
    "usage": {
     "peninsula-solar-logo-white-480.png": "footer on charcoal, 235 CSS px wide (2x = 470)"
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     235.78125,
+     28
+    ],
+    "delivered": [
+     480,
+     57
+    ],
+    "ratio": 0.982,
+    "pass": true
    }
   },
   "franklinwh-logo": {
@@ -604,7 +1052,25 @@
    "usage": {
     "franklinwh-logo-480.png": "header lockup >=640px, 184-212 CSS px wide (2x = 424)",
     "franklinwh-logo-720.png": "hero mark <640px, 184 CSS px wide (3x = 552)"
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     211.75,
+     15
+    ],
+    "delivered": [
+     480,
+     34
+    ],
+    "ratio": 0.882,
+    "pass": true
    }
   }
- }
+ },
+ "known_gaps": [
+  "Planned 3x desktop fails: 1440@3x for all three manufacturer images and 1024@3x for the aPower 2 render. No variant holds 3x of those slots. These are not native gate widths or DPRs in this round; covering them would need new variants made from the 4032/3940/4123px originals.",
+  "Tablet single-column widths 641-1023px at DPR 1 (outside the native gate widths): the hero slot can reach ~960px, above what the 1800px file covers at 2x."
+ ]
 }

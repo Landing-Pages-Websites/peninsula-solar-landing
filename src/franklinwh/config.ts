@@ -20,6 +20,8 @@ export const TRACKING_API = "https://events-api.gomega.ai";
 
 export const PRIVACY_PATH = "/privacy";
 export const QUOTE_CTA_LABEL = "Request a free quote";
+/** The section-pair anchor label below 640px only; the form submit always keeps the full label. */
+export const QUOTE_CTA_SHORT_LABEL = "Free quote";
 export const HERO_FORM_ANCHOR = "hero-form";
 export const FINAL_FORM_ANCHOR = "form";
 export const HERO_FORM_ID = "hero-lead-form";

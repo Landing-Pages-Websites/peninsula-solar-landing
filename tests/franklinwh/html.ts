@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { FranklinPage } from "../../src/franklinwh/components/FranklinPage";
@@ -48,4 +49,13 @@ export function elements(html: string, name: string): string[] {
 
 export function stripTags(html: string): string {
   return html.replace(/<[^>]+>/g, "").trim();
+}
+
+/** A source file under src/franklinwh, for contract assertions on authored class lists. */
+export function readSource(path: string): string {
+  return readFileSync(new URL(`../../src/franklinwh/${path}`, import.meta.url), "utf8");
+}
+
+export function classes(tag: string): string[] {
+  return (attr(tag, "class") ?? "").split(/\s+/).filter(Boolean);
 }

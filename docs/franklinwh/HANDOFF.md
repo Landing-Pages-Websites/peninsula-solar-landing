@@ -27,11 +27,32 @@ CSS, font and tracking and nothing leaks into `/`.
 - `leadFields.ts`: the six keys `{name, phone, email, utility, offGrid, message}`. Only name and phone are
   required, `offGrid` is a boolean that defaults to false, and message is capped at 1,000 characters
   (not 200). Wrongly typed programmatic input fails closed.
-- `leadPayload.ts`: success requires an HTTP 2xx and a parsed body with `ok === true`. A missing, false
-  or null `ok`, invalid JSON, a non-2xx response or a network failure never counts as success.
-- `submission.ts` + `components/useLeadSubmission.ts`: one synchronous lock for both forms. A duplicate
-  click or a sibling form in the same tick never sends twice. The lock is kept after success (one lead
-  per page view) and released after a failure so the visitor can retry.
+- `leadPayload.ts` classifies every response into exactly one of three outcomes:
+  - **Accepted**: HTTP 2xx AND a parsed body with `ok === true`. Nothing else is success.
+  - **Rejected** (`LeadRejectedError`): a non-2xx response, or a body with a literal `ok: false`.
+    The API definitely did not take the lead.
+  - **Unknown** (`LeadOutcomeUnknownError`): the fetch rejected or the response was lost, the body is
+    invalid JSON or `null`, or a 2xx body never says `ok: true` or `ok: false` (missing, `"true"`, `1`,
+    204). The lead may have been saved.
+  `sendLeadValues` validates first; a `LeadValidationError` means nothing was sent.
+- `submission.ts` (`createLeadController`, `runSubmission`, `gateSend`, `isSendLocked`) +
+  `components/useLeadSubmission.ts`: one controller and one synchronous lock for both forms, taken
+  before any state update, so a double click or the sibling form in the same tick never sends twice.
+  - Accepted: success panel in both cards, conversion events once, lock kept for the page view. A
+    throwing tracker or accepted-callback cannot undo success or release the lock.
+  - Rejected or invalid input: the existing retry alert (`FormErrorAlert`, route phone, draft kept),
+    lock released, one deliberate retry can succeed.
+  - Unknown: no success and no conversion events. The lock is kept and both forms stay visible
+    with the draft, but their fields are disabled and the submit buttons read "Request paused".
+    `FormUnknownAlert` sits at the top of each form (`role="alert"` only in the sending form). It says
+    delivery could not be confirmed, that the form is paused to avoid sending it twice, and offers
+    the route phone. It never says the lead was not sent and never invites a resend. The floating
+    quote button stops appearing. Click, Enter, the sibling form and the native
+    submit backstop all go through `gateSend`, and the controller lock refuses even a stale handler.
+  - **Boundary, stated honestly:** the unknown lock lives in memory for this page view only. No
+    storage, hidden field, idempotency header or extra endpoint is used. A reload starts a fresh page
+    view with an empty form. A reload does not prove the earlier request failed or was reconciled.
+    The alert therefore steers the visitor to the phone.
 - `conversionEvents.ts`: after confirmed success only, one
   `MegaTag.trackEvent('form_submit', { elementId: <form id>, formData: <all six keys> })` and one
   `dataLayer.push({ event: 'form_submission', form_id, form_provider: 'peninsula-solar-lp' })`.
@@ -41,6 +62,48 @@ CSS, font and tracking and nothing leaks into `/`.
   only a backstop. Error messages are linked with `aria-describedby`/`aria-invalid`, and the first
   invalid field gets focus. A failed send shows `role="alert"` with the route phone and keeps the draft.
   Form ids are `hero-lead-form` and `final-lead-form`; the card anchors are `#hero-form` and `#form`.
+
+## Round 2 corrections (native post-deploy findings)
+
+- **Header (320/360/390):** `hidden` lost to the `inline-flex` that `buttonClass` always emitted, so the
+  "hidden" header quote link painted and squeezed the logo. `buttonClass` now takes
+  `{ surface, size, extra }`; display, gap, padding and type size live only in BASE or SIZES, and a test
+  rejects any rendered or source class list with two unprefixed utilities for one property. The header
+  quote link sits in a `hidden lg:block` wrapper. Every mark is `shrink-0 w-auto` with a fixed height
+  (installer mark 22px tall below 640px). Budget at 320 (clientWidth 305, column 265): installer mark
+  185px + 16px gap + 48px phone = 249px. The header quote appears at lg, not md: at 768 with a scrollbar
+  (column 713px), both marks + phone + quote need ~718px. The hero quote action is on the first screen
+  below lg.
+- **CTA pairs:** one row at every width (`flex-nowrap`, 8px gap), quote `flex-1`, phone at content width.
+  Below 640px the anchor reads `Free quote` and the phone shows its icon + full number (accessible name
+  `Call (906) 235-0340` / `Call (231) 590-7305`), at 14px semibold with 48px height. From 640px the full
+  labels and sizes return. Budget at 320 from Inter's advance widths: 92.9 + 8 + 156.5 = 257px of 265px
+  (the same 257px at 360, of 305). The form submit label is unchanged. The floating CTA stays form-only. This
+  supersedes the round-1 design-review suggestion to make pair buttons full width.
+- **Product family at 1024:** model rows stack (name over role) from lg and pair again from xl; the
+  column gap is 40px until xl. Simulated with Inter metrics (the model reproduces the controller's
+  125px within 2px): 1024 -> ~103px, worst case across 1024-1279 is 103px, and 1440/1728 stay ~35px.
+- **Form pairs:** each field shell spans two rows of the form grid (`grid-rows-subgrid`), so paired
+  fields share a label row and a control row. Labels sit on their inputs (`self-end`), and inputs align even when
+  `Utility Company (optional)` wraps. Keys, validators, order, `fields.ts` and `attribution.ts` unchanged.
+- **Image density:** each srcset now starts at a file holding 2x the image's largest desktop slot (hero
+  1300/1800, aGate 1200, aPower 2 + aGate 1300). `sizes` still states the true slot. The three 1x files the
+  browser picked at DPR 1 (`apower-s-installation-800`, `agate-700`, `apower-2-and-agate-800`) are no longer
+  referenced and were removed. `image-ledger.json` separates planned calculations (`planned_r2`) from
+  the controller's round-1 receipts and lists known gaps (3x desktop; 641-1023px tablets at DPR 1).
+- **Copy:** removed "From reviews our customers left on Google." and the footer marketing sentence.
+  The footer keeps the installer mark, the route office phone, the privacy link and the copyright.
+- **Provenance:** root `task-spec.json` (scope limited to the two routes and `/privacy`, with the legacy
+  preservation boundary) and `content-sources.json` (a source for every claim, testimonial and FAQ, plus
+  the installer differentiator). `tests/franklinwh/provenance.test.ts` keeps them in sync with the code.
+
+## Source preservation (round 2)
+
+All 47 entries of `task-evidence/6175fe7a-peninsula-intake/legacy-source-before-sha256.json` re-hashed
+from this branch: 47/47 identical, with only the three approved moves (`src/app/{page.tsx,layout.tsx,
+globals.css}` -> `src/app/(legacy)/`), and the old paths absent. `package.json` and `package-lock.json`
+are byte-identical to `origin/main`. Round 2 touches only `src/franklinwh/**`, `tests/franklinwh/**`,
+`docs/franklinwh/**`, three removed files under `public/franklinwh/`, and the two new root JSON files.
 
 ## Tests
 
@@ -81,8 +144,15 @@ and event transports are intercepted; no live lead or conversion request is ever
 
 ## Known lint results (baseline vs new)
 
+This is not a repo-wide lint pass. Protected root debt remains and is reported, not fixed.
+
+- Round 2, same unchanged script: the full-repo output is identical to the controller's round-1 log
+  (12 errors, 3 warnings). The new-route projection again shows only the 2 errors and 2 warnings below.
+  Scoped ESLint (eslint-config-next core-web-vitals + typescript, run from a temporary config outside
+  the repo because the protected root has no flat config) is clean on `src/franklinwh`,
+  `src/app/(franklinwh)` and `tests/franklinwh`.
 - Baseline (`task-evidence/.../legacy-lint-before.log`): 17 errors, 5 warnings, all in the protected root.
-- Full repo after: 12 errors, 3 warnings (the 2 new-route warnings are the projection's FAVICON/OffGrid notes below). Every remaining form, phone and required-field error is the
+- Full repo after round 1: 12 errors, 3 warnings (the 2 new-route warnings are the projection's FAVICON/OffGrid notes below). Every remaining form, phone and required-field error is the
   same protected `src/app/(legacy)/page.tsx` debt as before. The relocation removes the lint's view of
   `src/app/layout.tsx`, so `MEGATAG: Cannot read layout.tsx` replaces the two baseline MegaTag errors.
   The floating-CTA, section-CTA and duplicate-image errors disappear only because the lint reads fixed
@@ -100,14 +170,18 @@ and event transports are intercepted; no live lead or conversion request is ever
 
 ## Deferred to the parent (no local browser in this session)
 
+Round 2: no browser, headless or otherwise, was launched, and no server was started. Every 320-1728
+geometry statement above is a source contract or a font-metric calculation, not a native measurement.
+The header and pair fit, product-family gaps, form row alignment, unknown/rejected alert rendering and
+delivered image bytes all remain for the controller's deployed browser on both routes.
+
 Visual gate DEFERRED to post-deploy (no local browser). Not run here, and not claimed:
 `browser-wide-screen-gaps.js` (1024/1440/1728), `browser-line-breaks.js` and
 `browser-hero-and-photos.js` (390/1024/1440/1728), `browser-copy-repetition.js`,
 `browser-ccp-donts.js`, `browser-cta-targets.js`, 320/360 overflow and paired-action checks, the
 failed-response alert, floating CTA overlap and availability, forward anchor arrival, and decoded
-delivered pixels for every image (`docs/franklinwh/image-ledger.json` has the planned slots and
-srcset picks: every image passes at 2x on desktop and at 2x/3x on mobile; on a rare 3x desktop display
-the hero and the two manufacturer renders fall 5-44% short, which is above the required density of 2).
+delivered pixels for every image (`docs/franklinwh/image-ledger.json`: round 1's planned ledger passed
+while the served bytes failed at DPR 1, so the ledger now labels plans and receipts separately).
 
 ## CCP note for the parent
 
@@ -118,6 +192,34 @@ flagged here rather than posted on the task (the contract bars this session from
 
 ## Review verdicts
 
+### Round 2
+
+- simplify (4 parallel reviewers). Applied: one shared `ALERT_CLASS`; a `bodyOk` helper behind both
+  body predicates; error classes set `name` once in the base; shared `readSource`/`classes` test helpers;
+  one page render per contract test; the controller test harness split under 30 lines; the 2x-floor
+  density test now covers all six photos. Skipped:
+  - `<picture>`/media-specific delivery to keep 800px hero bytes on phones. Phones at DPR <= 2 now get the
+    1300px hero (174 KB instead of 74 KB). The controller asked for a simple min-delivery policy, and a
+    `<picture>` wrapper changes flex layout that could not be verified here.
+  - Inflated `sizes`: forbidden.
+  - Container queries for product family: a 448px list breakpoint would also stack the rows at 1440.
+  - Inlining `gateSend`: the tests drive the real click/Enter path through it.
+- code-review: `VERDICT: PASS` (136/136 tests, tsc clean, `fields.ts`/`attribution.ts` identical, only
+  allowed paths touched). Applied its low finding: the product image's `sizes` now states the true
+  639px slot at 1200-1279px (40px gap), and the ledger and test use that slot.
+- design-review: `VERDICT: DEFERRED (visual gate deferred to post-deploy, no local browser)`. Applied:
+  "Request paused" on disabled submits; the unknown alert at the top of both forms; shorter alert copy;
+  the floating CTA hidden after an unknown outcome; the pair phone kept at 8px padding until 640px so the
+  orange quote is at least as wide as the phone. Skipped:
+  - 15px pair text: 270px > 265px at 320.
+  - Hiding section-pair quote links after an unknown outcome: they land on the paused form, whose alert
+    explains the pause and gives the phone. Making every section a client component is out of
+    proportion for this round.
+  - Per-review "Google review" labels: these would reintroduce the removed source narration.
+  Watch mobile LCP and 320/360 pair widths at the visual gate.
+
+### Round 1
+
 - simplify: 4 parallel reviewers (reuse, simplification, efficiency, altitude). Applied: dropped the dead
   `ok` re-check and `isLocked` plumbing, centralized field rules, one global `Window` declaration,
   shared CONTAINER/QUOTE_CTA_LABEL/controlProps, lazy floating-CTA measurement, no backdrop blur,
@@ -127,7 +229,7 @@ flagged here rather than posted on the task (the contract bars this session from
 - code-review: `VERDICT: PASS`. Applied finding 1 (validate the same draft that is sent). Finding 2
   (pure #000/#FFF) is the brand's `color_roles`; see above.
 - design-review: `VERDICT: DEFERRED (visual gate deferred to post-deploy, no local browser)`. Applied:
-  continuous process connector, warm fill on error fields, full-width CTA buttons below 640px, and a
+  continuous process connector, warm fill on error fields, full-width CTA buttons below 640px (reverted in round 2, see above), and a
   pending spinner. Not applied because the task spec fixes them: outcome-led H1 (the spec gives the exact
   H1), fewer section CTA pairs (every content section must end with the pair), FAQ topics (exactly the
   three ledger FAQs), checkbox wording (exact client label), the error color (token `#000000`), the

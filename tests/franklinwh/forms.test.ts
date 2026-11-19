@@ -1,12 +1,13 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { LeadFormFields } from "../../src/franklinwh/components/LeadFormFields";
-import { UPPER_PENINSULA } from "../../src/franklinwh/config";
+import { FormErrorAlert } from "../../src/franklinwh/components/FormErrorAlert";
+import { FormUnknownAlert } from "../../src/franklinwh/components/FormUnknownAlert";
+import { LOWER_PENINSULA, UPPER_PENINSULA } from "../../src/franklinwh/config";
 import { EMPTY_VALUES } from "../../src/franklinwh/leadFields";
-import { attr, elements, hasAttr, renderPage, stripTags, tags } from "./html";
+import { attr, elements, hasAttr, readSource, renderPage, stripTags, tags } from "./html";
 
 const forms = elements(renderPage(UPPER_PENINSULA), "form");
 const LABELS: Record<string, string> = {
@@ -77,7 +78,7 @@ describe("both lead forms", () => {
 
 describe("submit mechanics in source", () => {
   const source = ["LeadForm.tsx", "LeadFormProvider.tsx", "LeadFormFields.tsx", "formKeyboardHandlers.ts", "useLeadSubmission.ts"]
-    .map((file) => readFileSync(new URL(`../../src/franklinwh/components/${file}`, import.meta.url), "utf8"))
+    .map((file) => readSource(`components/${file}`))
     .join("\n");
 
   it("never dispatches a native submit", () => {
@@ -89,5 +90,37 @@ describe("submit mechanics in source", () => {
     assert.match(source, /onKeyDown=\{handleKeyDown\}/);
     assert.match(source, /isComposing/);
     assert.match(source, /new Set\(\["TEXTAREA", "SELECT", "BUTTON", "A"\]\)/);
+  });
+});
+
+describe("request outcome alerts", () => {
+  for (const variant of [UPPER_PENINSULA, LOWER_PENINSULA]) {
+    it(`${variant.path}: an unknown outcome offers the route phone, never a resend, and only the sending form announces it`, () => {
+      const announced = renderToStaticMarkup(createElement(FormUnknownAlert, { phone: variant.phone, announce: true }));
+      const quiet = renderToStaticMarkup(createElement(FormUnknownAlert, { phone: variant.phone, announce: false }));
+      assert.match(announced, /^<p role="alert"/);
+      assert.equal(quiet.includes("role="), false);
+      const text = stripTags(announced).replace(/&#x27;|&apos;/g, "'");
+      assert.match(text, /couldn't confirm/);
+      assert.equal(/try again|resend|send it again|wasn't sent|was not sent|not received/i.test(text), false);
+      assert.ok(announced.includes(`href="${variant.phone.href}"`) && text.includes(variant.phone.display));
+    });
+
+    it(`${variant.path}: a definite rejection still invites a retry with the route phone`, () => {
+      const markup = renderToStaticMarkup(createElement(FormErrorAlert, { phone: variant.phone }));
+      assert.match(markup, /role="alert"/);
+      assert.match(stripTags(markup), /try again/);
+      assert.ok(markup.includes(`href="${variant.phone.href}"`));
+    });
+  }
+
+  it("renders the unknown alert in both forms and disables every send control while locked", () => {
+    const source = readSource("components/LeadForm.tsx");
+    assert.match(source, /status === "unknown" && <FormUnknownAlert phone=\{phone\} announce=\{active\} \/>\}\s*<LeadFormFields/);
+    assert.match(source, /status === "unknown" \? "Request paused" : QUOTE_CTA_LABEL/);
+    assert.match(source, /status === "error" && active && <FormErrorAlert/);
+    assert.match(source, /disabled=\{locked\} messageRows/);
+    assert.match(source, /<button type="button" onClick=\{handleClick\} disabled=\{locked\}/);
+    assert.match(source, /gateSend\(status, \(\) => validateAll\(readValues\(\)\), \(\) => sendLead\(formId\)\)/);
   });
 });

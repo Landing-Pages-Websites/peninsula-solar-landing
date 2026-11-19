@@ -6,17 +6,12 @@ import { PhoneNumber } from "./PhoneNumber";
 
 const LINK_CLASS = "font-semibold text-paper underline underline-offset-2 hover:decoration-orange hover:decoration-2 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-paper";
 
-/** Legal-only footer: installer identity, the route's own phone and the privacy policy. */
+/** Legal-only footer: installer identity, the route's own phone, the privacy policy and copyright. */
 export function SiteFooter({ phone }: { phone?: RoutePhone }): ReactElement {
   return (
     <footer className="bg-charcoal text-paper">
       <div className={`${CONTAINER} flex flex-col gap-8 py-12 lg:flex-row lg:items-end lg:justify-between`}>
-        <div className="flex flex-col gap-4">
-          <img src="/franklinwh/peninsula-solar-logo-white-480.png" width={480} height={57} alt="Peninsula Solar" className="h-7 w-auto self-start" />
-          <p className="max-w-[46ch] text-label text-paper/80">
-            Peninsula Solar designs and installs solar and energy storage systems for Northern Michigan.
-          </p>
-        </div>
+        <img src="/franklinwh/peninsula-solar-logo-white-480.png" width={480} height={57} alt="Peninsula Solar" className="h-7 w-auto self-start lg:self-end" />
         <div className="flex flex-col gap-2 text-label text-paper/80 lg:items-end">
           {phone && (
             <p>

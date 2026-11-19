@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { LOWER_PENINSULA, UPPER_PENINSULA } from "../../src/franklinwh/config";
+import { TESTIMONIALS } from "../../src/franklinwh/content";
 import { anchors, attr, elements, renderPage, sectionHtml, stripTags, tags, visibleText } from "./html";
 
 const PAGES = [
@@ -39,7 +40,7 @@ for (const { variant, own, other } of PAGES) {
     it("sends CTAs forward: hero and header to the hero form, later sections to the final form", () => {
       const header = html.slice(0, html.indexOf("<main"));
       const quoteLinks = (chunk: string): (string | null)[] =>
-        anchors(chunk).filter((a) => a.text === "Request a free quote").map((a) => attr(a.tag, "href"));
+        anchors(chunk).filter((a) => a.text.includes("Request a free quote")).map((a) => attr(a.tag, "href"));
       assert.deepEqual(quoteLinks(header), ["#hero-form"]);
       assert.deepEqual(quoteLinks(sectionHtml(html, "hero")), ["#hero-form"]);
       for (const id of SECTION_ORDER.slice(1, -1)) assert.deepEqual(quoteLinks(sectionHtml(html, id)), ["#form"], id);
@@ -61,6 +62,22 @@ for (const { variant, own, other } of PAGES) {
     it("links the privacy policy under both forms and in the footer", () => {
       const privacy = anchors(html).filter((a) => attr(a.tag, "href") === "/privacy" && a.text === "Privacy Policy");
       assert.equal(privacy.length, 3);
+    });
+
+    it("narrates no sources and keeps the footer to identity, phone and legal links", () => {
+      const text = visibleText(html);
+      assert.equal(/google|trustindex|from reviews/i.test(text), false);
+      const [footer] = elements(html, "footer");
+      assert.equal(footer.includes("designs and installs"), false);
+      assert.deepEqual(anchors(footer).map((a) => attr(a.tag, "href")), [own[1], "/privacy"]);
+      assert.ok(footer.includes('alt="Peninsula Solar"'));
+    });
+
+    it("keeps every testimonial quote and first name", () => {
+      for (const review of TESTIMONIALS) {
+        assert.ok(html.includes(`&ldquo;${review.quote}&rdquo;`) || html.includes(`“${review.quote}”`), review.author);
+        assert.ok(html.includes(`>${review.author}</figcaption>`), review.author);
+      }
     });
 
     it("makes no financial, savings or runtime promises", () => {

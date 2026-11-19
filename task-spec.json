@@ -1,0 +1,101 @@
+{
+  "taskId": "6175fe7a-5e4e-4c78-82bf-eb0528afedab",
+  "customerId": "8bbf1dbc-49fb-44b5-8c82-e1235149e809",
+  "brandName": "Peninsula Solar",
+  "scope": {
+    "coverage": "ONLY the two additive FranklinWH routes below and the new shared /privacy page. This spec does not describe or cover the original root page.",
+    "routes": ["/franklinwh", "/franklinwh-lower-peninsula", "/privacy"],
+    "notCovered": {
+      "route": "/",
+      "status": "Protected legacy campaign page, unchanged and not rebuilt by this task. Its page, layout and globals.css were moved byte-identically to src/app/(legacy)/; every other protected file is untouched. Its own form, phone and tracking are outside this spec.",
+      "preservationManifest": "task-evidence/6175fe7a-peninsula-intake/legacy-source-before-sha256.json (47 entries)",
+      "permittedMoves": {
+        "src/app/page.tsx": "src/app/(legacy)/page.tsx",
+        "src/app/layout.tsx": "src/app/(legacy)/layout.tsx",
+        "src/app/globals.css": "src/app/(legacy)/globals.css"
+      },
+      "receipt": "docs/franklinwh/source-preservation.json"
+    },
+    "focus": "FranklinWH home battery backup (aGate, aPower S, aPower 2, aPower X) designed and installed by Peninsula Solar as a modern alternative to a standby generator, for grid-connected Northern Michigan homes that lose power and off-grid cabins and camps.",
+    "trafficSource": "Google Ads (one campaign per route)",
+    "pageDifferences": "The routes share one page component and differ only in phone number and office mention."
+  },
+  "site": {
+    "origin": "https://call.peninsula-solar.com",
+    "siteId": "7d905a66-6641-427b-852c-dd6bec7c1e16",
+    "siteKey": "sk_moeyep8q_kj6i28c0wm",
+    "registration": "Existing call.peninsula-solar.com registration reused; no new site registered."
+  },
+  "tracking": {
+    "gtm": "GTM-WLQXZ22P",
+    "gtmLoader": "MegaTag (MEGA_TAG_CONFIG in src/app/(franklinwh)/layout.tsx); no manual GTM tag",
+    "metaPixel": null,
+    "optimizerScript": "https://cdn.gomega.ai/scripts/optimizer.min.js",
+    "apiEndpoint": "https://optimizer.gomega.ai",
+    "trackingApiEndpoint": "https://events-api.gomega.ai",
+    "callTracking": "Universal CTM https://572388.tctm.co/t.js, body, afterInteractive. CTM numbers, receiving numbers and DNI are Instrumentation-owned, not configured here.",
+    "favicons": ["/franklinwh/favicon.png", "/franklinwh/apple-touch-icon.png"]
+  },
+  "routeVariants": {
+    "/franklinwh": {
+      "page": "A (Upper Peninsula)",
+      "phone_routing_number": "(906) 235-0340",
+      "tel": "tel:+19062350340",
+      "officeMention": "Marquette office"
+    },
+    "/franklinwh-lower-peninsula": {
+      "page": "B (northern Lower Peninsula)",
+      "phone_routing_number": "(231) 590-7305",
+      "tel": "tel:+12315907305",
+      "officeMention": "Traverse City office"
+    },
+    "/privacy": { "phone_routing_number": null, "note": "Shared by both routes, so it shows no phone." }
+  },
+  "phoneRule": "Every authored number and tel: link on a route is that route's own number only, including alerts, success state and footer.",
+  "form": {
+    "type": "custom",
+    "instances": [
+      { "formId": "hero-lead-form", "anchor": "#hero-form", "section": "hero" },
+      { "formId": "final-lead-form", "anchor": "#form", "section": "final-quote" }
+    ],
+    "fields": [
+      { "key": "name", "label": "Full Name", "type": "text", "required": true },
+      { "key": "phone", "label": "Phone Number", "type": "tel", "required": true, "validation": "lp-starter src/lib/fields.ts @ e8e8d9b5c8cd4be6d65818a914c33edecdbeed69, byte-identical copy" },
+      { "key": "email", "label": "Email", "type": "email", "required": false },
+      { "key": "utility", "label": "Utility Company", "type": "text", "required": false },
+      { "key": "offGrid", "label": "Interested in off-grid / battery backup?", "type": "checkbox", "required": false, "default": false },
+      { "key": "message", "label": "Message", "type": "textarea", "required": false }
+    ],
+    "smsConsent": false,
+    "qualification": null,
+    "endpoint": "https://analytics.gomega.ai/submission/submit",
+    "sourceProvider": "peninsula-solar-lp",
+    "notificationEmail": "sales@peninsula-solar.com",
+    "submit": "type=\"button\", validate first, direct send; no type=\"submit\" and no requestSubmit(). Enter is stopped at keydown; onSubmit is only a backstop.",
+    "responseSemantics": {
+      "accepted": "HTTP 2xx AND parsed body ok === true. Then exactly one MegaTag.trackEvent('form_submit', { elementId, formData }) and one dataLayer form_submission. The page-view lock stays held.",
+      "rejected": "Non-2xx, or a body with ok === false. Retry-capable alert with the route phone; draft kept; lock released.",
+      "unknown": "Fetch rejected, response lost, invalid JSON, null body, or a 2xx without an explicit ok. Delivery could not be confirmed: draft kept, both forms disabled for this page view, alert offers the route phone and does not invite a resend. No success, no conversion events.",
+      "invalid": "Fails validation before any request; nothing is sent and the fields stay fixable."
+    },
+    "successEvents": ["MegaTag form_submit", "dataLayer form_submission"]
+  },
+  "cta": {
+    "primary": "Request a free quote",
+    "primaryBelow640": "Free quote (section-pair anchors only; the form submit always reads Request a free quote)",
+    "secondary": "Call <route phone> (number only below 640px, phone icon kept)",
+    "floating": "Form only, never a phone"
+  },
+  "brand": {
+    "colors": { "primary": "#D38A3D", "secondary": "#3C3C3C", "accent": "#0F213D", "text": "#000000", "background": "#FFFFFF", "surface": "#F5F7F5", "muted": "#58595B", "border": "#7E7E7E" },
+    "colorSource": "FranklinWH Visual Identity (pp. 11, 16) via marketing.franklinwh.com; black text on the orange fill",
+    "typeface": "Inter (FranklinWH corporate typeface, Visual Identity p. 16), loaded with next/font/google",
+    "logos": ["Peninsula Solar installer mark", "FranklinWH official color mark"]
+  },
+  "sections_in_dom_order": ["hero", "backup-benefits", "product-family", "marquette-project", "in-house-process", "customer-proof", "faq", "final-quote"],
+  "privacy": "No customer policy existed (/privacy-policy returned 404), so a business-specific policy was written at /privacy listing exactly the six form fields; no SMS section.",
+  "ccp": {
+    "creative.doNotUse": "Google call forwarding numbers replacing on-site phone numbers: the page source authors only the two real route numbers.",
+    "compliance.implications": "No savings, tax-credit, financing or ROI claims anywhere on the routes."
+  }
+}
