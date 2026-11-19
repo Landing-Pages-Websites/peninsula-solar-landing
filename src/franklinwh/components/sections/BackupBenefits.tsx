@@ -13,12 +13,12 @@ export function BackupBenefits({ phone }: { phone: RoutePhone }): ReactElement {
         <figure className="order-2 flex items-center justify-center rounded-panel bg-surface px-8 py-10 lg:order-1 lg:px-12">
           <ResponsiveImage
             image={IMAGES.aGate}
-            sizes="(min-width: 1200px) 440px, (min-width: 1024px) 38vw, calc(100vw - 104px)"
+            sizes="(min-width: 1200px) 440px, (min-width: 1024px) 38vw, (min-width: 544px) 440px, calc(100vw - 104px)"
             className="h-auto w-full max-w-[440px]"
           />
         </figure>
         <div data-reveal className="order-1 flex flex-col justify-center lg:order-2">
-          <h2 className="text-h2 font-semibold">A modern alternative to a standby generator</h2>
+          <h2 className="text-h2 font-semibold">A modern alternative to a&nbsp;standby generator</h2>
           <ul className="mt-8 divide-y divide-hairline border-y border-hairline">
             {BACKUP_BENEFITS.map((benefit) => (
               <li key={benefit.title} className="py-6">

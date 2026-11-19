@@ -63,6 +63,61 @@ CSS, font and tracking and nothing leaks into `/`.
   invalid field gets focus. A failed send shows `role="alert"` with the route phone and keeps the draft.
   Form ids are `hero-lead-form` and `final-lead-form`; the card anchors are `#hero-form` and `#form`.
 
+## Unknown alert whitespace fix (after round 3)
+
+The controller's native r2 UNKNOWN captures (`task-evidence/6175fe7a-peninsula-intake/unknown-*-r2.{json,png}`)
+showed `(906) 235-0340and` / `(231) 590-7305and` in the alert's `innerText`. The JSX space after the
+`PhoneNumber` link was dropped by the compiler. `FormUnknownAlert.tsx` now has an explicit `{" "}` after the
+link. Wording, phone link, role gating and every form mechanic are unchanged. `tests/franklinwh/forms.test.ts`
+asserts that the static markup text contains `0340 and` / `7305 and` and never `0340and` / `7305and` on both
+routes. Tests 173/173, tsc and scoped ESLint clean, 47/47 protected hashes, package files untouched.
+No browser was used. Native capture of the corrected alert is DEFERRED to the controller. This fix makes no
+visual claim. simplify: one redundant assertion removed. code-review: `VERDICT: PASS`. design-review: visual
+DEFERRED (copy spacing only, no local browser).
+
+## Round 3 corrections (native r2 image receipts)
+
+The controller's r2 matrix (`task-evidence/6175fe7a-peninsula-intake/{a,b}-{320..1728}-r2-images.json`, decoded
+`currentSrc`, DPR 1, target 2) failed at narrow and tablet widths. At DPR 1 a browser picks the smallest srcset file
+at least as wide as the slot, so the round-2 policy (every srcset starts at 2x the *desktop* slot) still served 1x files
+wherever the single-column slot is wider than the desktop slot. Failures: racking 600px file at 360/390 (1.017/1.117);
+at 768 the hero and aPower 2 1300px files (1.097), both landscapes 900px (1.584) and racking 1000px (1.426).
+1024/1440/1728 passed and are unchanged.
+
+- **Band policy** (`src/franklinwh/images.ts`): each image declares its largest CSS slot per viewport band
+  (`VIEWPORT_BANDS` 320-479, 480-639, 640-767, 768-1023, 1024+, taken at the band's widest viewport with no scrollbar).
+  `deliveryBands` gives each band a srcset of only the real files >= 2x that slot. Neighbouring bands with the same
+  list merge, and a missing file throws at render. `ResponsiveImage` renders the wider bands as
+  `<source media="(min-width: N px)">` in a `<picture class="contents">`, so the `<img>` stays the flex/grid item
+  with its classes, `width`/`height` and object-fit. aGate needs one band, so it stays a plain `<img>`. Every `<source>`
+  repeats the true `sizes`.
+- **Floors (DPR 1 pick per band):** hero and aPower 2: 900 / 1300 / 1500 / 2000 / 1300 (desktop). Landscapes:
+  900 / 1200 / 1500 / 2000 / 900. Racking: 900 / 1200 / 1500 (640-1023) / 600. aGate: 1200 everywhere.
+  New variants come from the retained originals with no upscale or crop change: hero 900/1500/2000 from
+  4032x3024, aPower 2 900/1500/2000 from the existing 4123x3115 crop (top-left, verified against the 1300 file),
+  landscapes 1500 and 2000 (the full 2000x1500 originals), racking 900 and 1500 (the full 1500x2000 original).
+  WebP q80, effort 6.
+- **Portrait slot constraint:** below lg the racking figure is `max-lg:mx-auto max-lg:w-full max-lg:max-w-[750px]`,
+  the widest slot the 1500px original covers at 2x. It binds from 790px (no scrollbar), and its `sizes` says
+  `(min-width: 790px) 750px`. Crop, caption, order and the lg flex share are unchanged. The two landscapes are not capped.
+- **sizes:** aGate now states its 440px cap from 544px (it said `calc(100vw - 104px)`). All other `sizes` are
+  unchanged. A test holds every `sizes` between the modelled slot and 12% above it at every viewport.
+- **Tests** (`tests/franklinwh/imageDelivery.test.ts`, 33 cases): a CSS slot model per image, checked against the r2
+  receipts at 768/1024/1440. It sweeps every integer viewport 320-1728 and each band edge - 0.01px (479.99, 639.99,
+  767.99, 1023.99) on both routes. At each width it takes the `<source>`/`<img>` that applies and checks that the
+  smallest file in it holds 2x the slot by width and height. Each file's dimensions are read from its WebP header,
+  so a descriptor cannot claim a width the file does not have. The declared band slots are checked against the
+  model, and an unreferenced variant fails the run. Putting the round-2 single-srcset delivery back fails 10 of
+  these (for example racking at 341px from the 600px file). Two contracts in `layoutContract.test.ts` cover the
+  racking cap and the heading binding.
+- **Heading at 320:** `A modern alternative to a&nbsp;standby generator` binds `a standby`. The words and type
+  are unchanged.
+- **Not done here:** no change to the hero layout for the advisory photo-before-form note. Forms, events, copy,
+  phones and tracking are untouched.
+- **Limits:** 2x is guaranteed at DPR 1-2. 3x is best effort: Chromium's geometric-mean pick can land under 3x, and the
+  768-1023 slots exceed what the 2000px originals hold at 3x. Tablet DPR 1 bytes rise (hero 349 KB, array 499 KB, racking
+  407 KB). Full per-band tables, receipts and limits are in `image-ledger.json`.
+
 ## Round 2 corrections (native post-deploy findings)
 
 - **Header (320/360/390):** `hidden` lost to the `inline-flex` that `buttonClass` always emitted, so the
@@ -86,7 +141,7 @@ CSS, font and tracking and nothing leaks into `/`.
 - **Form pairs:** each field shell spans two rows of the form grid (`grid-rows-subgrid`), so paired
   fields share a label row and a control row. Labels sit on their inputs (`self-end`), and inputs align even when
   `Utility Company (optional)` wraps. Keys, validators, order, `fields.ts` and `attribution.ts` unchanged.
-- **Image density:** each srcset now starts at a file holding 2x the image's largest desktop slot (hero
+- **Image density (superseded in round 3, see above):** each srcset now starts at a file holding 2x the image's largest desktop slot (hero
   1300/1800, aGate 1200, aPower 2 + aGate 1300). `sizes` still states the true slot. The three 1x files the
   browser picked at DPR 1 (`apower-s-installation-800`, `agate-700`, `apower-2-and-agate-800`) are no longer
   referenced and were removed. `image-ledger.json` separates planned calculations (`planned_r2`) from
@@ -97,7 +152,13 @@ CSS, font and tracking and nothing leaks into `/`.
   preservation boundary) and `content-sources.json` (a source for every claim, testimonial and FAQ, plus
   the installer differentiator). `tests/franklinwh/provenance.test.ts` keeps them in sync with the code.
 
-## Source preservation (round 2)
+## Source preservation (rounds 2 and 3)
+
+Round 3: re-hashed again, 47/47 identical, the three approved moves only, old paths absent. `package.json` and
+`package-lock.json` are byte-identical to `origin/main`. Round 3 touches only `src/franklinwh/{images.ts,
+components/ResponsiveImage.tsx, components/sections/{MarquetteProject,BackupBenefits}.tsx}`, `tests/franklinwh/**`,
+`docs/franklinwh/**` and 12 added WebP variants under `public/franklinwh/` (no file removed or rewritten).
+
 
 All 47 entries of `task-evidence/6175fe7a-peninsula-intake/legacy-source-before-sha256.json` re-hashed
 from this branch: 47/47 identical, with only the three approved moves (`src/app/{page.tsx,layout.tsx,
@@ -146,6 +207,11 @@ and event transports are intercepted; no live lead or conversion request is ever
 
 This is not a repo-wide lint pass. Protected root debt remains and is reported, not fixed.
 
+- Round 3, same unchanged script (`skills/landing-page-architect/scripts/lint-landing-page.js`): 12 errors and
+  3 warnings, and the numbered findings are identical line for line to the controller's
+  `controller-lint-r2.log`. These are inherited/fixed-path debt. The lint is NOT clean. Scoped ESLint (same temporary
+  config) is clean on `src/franklinwh`, `src/app/(franklinwh)` and `tests/franklinwh`.
+
 - Round 2, same unchanged script: the full-repo output is identical to the controller's round-1 log
   (12 errors, 3 warnings). The new-route projection again shows only the 2 errors and 2 warnings below.
   Scoped ESLint (eslint-config-next core-web-vitals + typescript, run from a temporary config outside
@@ -170,6 +236,11 @@ This is not a repo-wide lint pass. Protected root debt remains and is reported, 
 
 ## Deferred to the parent (no local browser in this session)
 
+Round 3: no browser was launched and no server was started (`next build` only). The per-band picks, the
+`<picture class="contents">` wrapper's layout neutrality, the 750px racking frame and the 320 heading
+line are source contracts and calculations awaiting the controller's native capture on both routes at
+320/360/390/768/1024/1440/1728 (and ideally 640/641/1023). Decoded `currentSrc` dimensions are the proof.
+
 Round 2: no browser, headless or otherwise, was launched, and no server was started. Every 320-1728
 geometry statement above is a source contract or a font-metric calculation, not a native measurement.
 The header and pair fit, product-family gaps, form row alignment, unknown/rejected alert rendering and
@@ -191,6 +262,29 @@ real route numbers. Whether runtime DNI swaps them is controller/Instrumentation
 flagged here rather than posted on the task (the contract bars this session from task comments).
 
 ## Review verdicts
+
+### Round 3
+
+- simplify (4 parallel reviewers: reuse, simplification, efficiency, altitude). Applied: `DeliveryBand` carries
+  `widths` and one `srcSet(image, widths)` builds every srcset string, so tests no longer parse srcsets back;
+  WebP header sizes are cached and the smallest file is picked once per set (the suite runs in ~0.8 s, not ~2 s);
+  failure messages are built only on failure; the test model takes the aspect from the image except the hero's
+  16:10 crop; racking slots reuse `FULL_COLUMN`; `layoutContract` imports `TARGET_DENSITY`. Skipped: deleting the
+  round-2 desktop-density block (kept as a pin on the round-2 desktop receipts and the prior 136 regressions); one
+  shared table generating `sizes`, `slots` and the test model (a wider refactor, and the test model is meant to be
+  independent); memoizing `deliveryBands` (static render); splitting out the `a standby` binding (in scope).
+- code-review: `VERDICT: PASS` (171/171 tests, tsc clean). It checked band selection against Chromium's DPR 1 pick,
+  the `display: contents` wrapper, the 64rem lg edge, the slot model against the CSS, the WebP header offsets, and every new
+  file as a no-upscale downscale of its original (aPower 2 matches the existing top-left 4123x3115 crop). Low findings
+  not applied: the overlapping desktop test (kept, above) and band merging mutating a fresh local object (never shared).
+- design-review: `VERDICT: DEFERRED (visual gate deferred to post-deploy, no local browser)`. It found no layout-shift
+  or aspect risk (all variants within 0.0003 of the source aspect), on-brand files with no upscale, and desktop unchanged.
+  Not applied, for the controller's native judgement:
+  - A tighter portrait cap (~480-520px) or a left-aligned 750px frame on 640-1023 tablets. The 750px figure is
+    ~1000px tall there. The controller specified the centered 750px cap as the narrowly permitted constraint, so this
+    round does not change layout further. Please judge 768/1023 on real pixels.
+  - Cropping the worker's legs at the top of the racking photo: crop changes are out of scope.
+  - Tablet weight at 768-1023: ~1.4 MB of photos at DPR 1, below-fold ones lazy. Watch hero LCP at 768/1023.
 
 ### Round 2
 
