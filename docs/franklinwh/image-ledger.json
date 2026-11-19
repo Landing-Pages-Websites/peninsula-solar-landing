@@ -1,0 +1,610 @@
+{
+ "note": "Delivered-pixel gate inputs. Rendered bounds are planned from the CSS at 1440 (1136px content) and 390 (350px content); the parent measures currentSrc and decoded delivered pixels on the deployed preview.",
+ "target_density": 2,
+ "images": {
+  "apower-s-installation": {
+   "source": "manufacturer-assets/apower-s-installation-original.jpg",
+   "source_sha256": "8e0426e68e6f19187eac894de74c84fd427ef065d70c411f677d2c6b107e8275",
+   "source_dims": [
+    4032,
+    3024
+   ],
+   "crop_dims": [
+    4032,
+    3024
+   ],
+   "variants": {
+    "apower-s-installation-800.webp": {
+     "w": 800,
+     "h": 600,
+     "bytes": 74276,
+     "sha256": "26086f2f5068e339e44dc31acf6c080ef0552403cd9ae4fd95678980f8232b12"
+    },
+    "apower-s-installation-1300.webp": {
+     "w": 1300,
+     "h": 975,
+     "bytes": 173584,
+     "sha256": "921e56f590a4904f1c02fe1f6b68fb37a33aa2b8ce491c545b6954bb5fcebfa7"
+    },
+    "apower-s-installation-1800.webp": {
+     "w": 1800,
+     "h": 1350,
+     "bytes": 292836,
+     "sha256": "1635321170e1801d0214fc2cf5eaf1ecf4d0ec708737fec21a22763c7725b733"
+    }
+   },
+   "section": "hero",
+   "fit": "cover 16:10 crop, object-position 50% 62%",
+   "desktop_css": [
+    630,
+    394
+   ],
+   "mobile_css": [
+    350,
+    219
+   ],
+   "desktop_gate_2x": {
+    "needs_px": [
+     1260,
+     788
+    ],
+    "srcset_pick": [
+     1300,
+     975
+    ],
+    "ratio": 0.969,
+    "pass": true
+   },
+   "desktop_gate_3x": {
+    "needs_px": [
+     1890,
+     1182
+    ],
+    "srcset_pick": [
+     1800,
+     1350
+    ],
+    "ratio": 1.05,
+    "pass": false
+   },
+   "mobile_gate_2x": {
+    "needs_px": [
+     700,
+     438
+    ],
+    "srcset_pick": [
+     800,
+     600
+    ],
+    "ratio": 0.875,
+    "pass": true
+   },
+   "mobile_gate_3x": {
+    "needs_px": [
+     1050,
+     657
+    ],
+    "srcset_pick": [
+     1300,
+     975
+    ],
+    "ratio": 0.808,
+    "pass": true
+   }
+  },
+  "agate": {
+   "source": "manufacturer-assets/agate-product-original.png",
+   "source_sha256": "c65c498989d96f991cb49fb3b685ffb9beeb134831c19ed1d00790481d41fd91",
+   "source_dims": [
+    3940,
+    2618
+   ],
+   "crop_dims": [
+    3014,
+    2618
+   ],
+   "variants": {
+    "agate-700.webp": {
+     "w": 700,
+     "h": 608,
+     "bytes": 46126,
+     "sha256": "11cdb1c9441c18e0ceef48162cd08c92f81d5cc6759bca717e2fe175a2599c6b"
+    },
+    "agate-1200.webp": {
+     "w": 1200,
+     "h": 1042,
+     "bytes": 159924,
+     "sha256": "07b995fa42976d593ff72a6560f183a4ee4331e5f56fffc76dbd82b6d690c150"
+    }
+   },
+   "section": "backup-benefits",
+   "fit": "contain (transparent render)",
+   "desktop_css": [
+    440,
+    382
+   ],
+   "mobile_css": [
+    286,
+    248
+   ],
+   "desktop_gate_2x": {
+    "needs_px": [
+     880,
+     764
+    ],
+    "srcset_pick": [
+     1200,
+     1042
+    ],
+    "ratio": 0.733,
+    "pass": true
+   },
+   "desktop_gate_3x": {
+    "needs_px": [
+     1320,
+     1146
+    ],
+    "srcset_pick": [
+     1200,
+     1042
+    ],
+    "ratio": 1.1,
+    "pass": false
+   },
+   "mobile_gate_2x": {
+    "needs_px": [
+     572,
+     496
+    ],
+    "srcset_pick": [
+     700,
+     608
+    ],
+    "ratio": 0.817,
+    "pass": true
+   },
+   "mobile_gate_3x": {
+    "needs_px": [
+     858,
+     744
+    ],
+    "srcset_pick": [
+     1200,
+     1042
+    ],
+    "ratio": 0.715,
+    "pass": true
+   }
+  },
+  "apower-2-and-agate": {
+   "source": "manufacturer-assets/apower-2-and-agate-original.png",
+   "source_sha256": "700e37f34f7845a6f6f36283d45bdae5b20f295d2ddb56e19b65de4d0b754466",
+   "source_dims": [
+    4123,
+    3175
+   ],
+   "crop_dims": [
+    4123,
+    3115
+   ],
+   "variants": {
+    "apower-2-and-agate-800.webp": {
+     "w": 800,
+     "h": 604,
+     "bytes": 28072,
+     "sha256": "441f53379221f2e851072173833bfe78a51e4ec3e9cb76e06b8d89872281f4fd"
+    },
+    "apower-2-and-agate-1300.webp": {
+     "w": 1300,
+     "h": 982,
+     "bytes": 70894,
+     "sha256": "195aa8ea1d1abe0b2263a84b1a059d045821f81566cac7a9b6aab6c2376e360d"
+    }
+   },
+   "section": "product-family",
+   "fit": "contain (transparent render)",
+   "desktop_css": [
+    625,
+    472
+   ],
+   "mobile_css": [
+    350,
+    264
+   ],
+   "desktop_gate_2x": {
+    "needs_px": [
+     1250,
+     944
+    ],
+    "srcset_pick": [
+     1300,
+     982
+    ],
+    "ratio": 0.962,
+    "pass": true
+   },
+   "desktop_gate_3x": {
+    "needs_px": [
+     1875,
+     1416
+    ],
+    "srcset_pick": [
+     1300,
+     982
+    ],
+    "ratio": 1.442,
+    "pass": false
+   },
+   "mobile_gate_2x": {
+    "needs_px": [
+     700,
+     528
+    ],
+    "srcset_pick": [
+     800,
+     604
+    ],
+    "ratio": 0.875,
+    "pass": true
+   },
+   "mobile_gate_3x": {
+    "needs_px": [
+     1050,
+     792
+    ],
+    "srcset_pick": [
+     1300,
+     982
+    ],
+    "ratio": 0.808,
+    "pass": true
+   }
+  },
+  "marquette-franklinwh-equipment": {
+   "source": "client-assets/Arnold_IMG_6898.jpg",
+   "source_sha256": "9ecaa18b58cc6865bf307055a66e323275672d10cfd9474258ec79065215e75e",
+   "source_dims": [
+    2000,
+    1500
+   ],
+   "crop_dims": [
+    2000,
+    1500
+   ],
+   "variants": {
+    "marquette-franklinwh-equipment-900.webp": {
+     "w": 900,
+     "h": 675,
+     "bytes": 45646,
+     "sha256": "4fb937f296419b86649eadd63a9255eb25975157ac65c13cc186512b4ec1e6ab"
+    },
+    "marquette-franklinwh-equipment-1200.webp": {
+     "w": 1200,
+     "h": 900,
+     "bytes": 71732,
+     "sha256": "b6672f7974f3f09ccb73ea7f3bb05cc188aeafdb354f0a3379090cc7357f1561"
+    },
+    "marquette-franklinwh-equipment-1400.webp": {
+     "w": 1400,
+     "h": 1050,
+     "bytes": 89584,
+     "sha256": "8198ccfe10fa19b1fcb018c2e9b80933c8f79ea0d300f56a0ecbcfaeb4d634b2"
+    }
+   },
+   "section": "marquette-project",
+   "fit": "uncropped 4:3",
+   "desktop_css": [
+    432,
+    324
+   ],
+   "mobile_css": [
+    350,
+    263
+   ],
+   "desktop_gate_2x": {
+    "needs_px": [
+     864,
+     648
+    ],
+    "srcset_pick": [
+     900,
+     675
+    ],
+    "ratio": 0.96,
+    "pass": true
+   },
+   "desktop_gate_3x": {
+    "needs_px": [
+     1296,
+     972
+    ],
+    "srcset_pick": [
+     1400,
+     1050
+    ],
+    "ratio": 0.926,
+    "pass": true
+   },
+   "mobile_gate_2x": {
+    "needs_px": [
+     700,
+     526
+    ],
+    "srcset_pick": [
+     900,
+     675
+    ],
+    "ratio": 0.779,
+    "pass": true
+   },
+   "mobile_gate_3x": {
+    "needs_px": [
+     1050,
+     789
+    ],
+    "srcset_pick": [
+     1200,
+     900
+    ],
+    "ratio": 0.877,
+    "pass": true
+   }
+  },
+  "marquette-rooftop-array": {
+   "source": "client-assets/Arnold_IMG_9068.jpg",
+   "source_sha256": "d7e6df7147bf0a4aca9d40f9803099b35ce931d02ba4a96940f8c0fb3f006000",
+   "source_dims": [
+    2000,
+    1500
+   ],
+   "crop_dims": [
+    2000,
+    1500
+   ],
+   "variants": {
+    "marquette-rooftop-array-900.webp": {
+     "w": 900,
+     "h": 675,
+     "bytes": 130638,
+     "sha256": "7e505048b665524bb433c53f2d4d6ff665d5f444f1899771210e115afa14ec03"
+    },
+    "marquette-rooftop-array-1200.webp": {
+     "w": 1200,
+     "h": 900,
+     "bytes": 216130,
+     "sha256": "657002a31565b6d363018e4a3f120ea2e0039bb5998fead48f3c1eeea0cec572"
+    },
+    "marquette-rooftop-array-1400.webp": {
+     "w": 1400,
+     "h": 1050,
+     "bytes": 280388,
+     "sha256": "81450bd8e37b45afce2ddedaf21656b22722bbbc9f52c66937a924222407b619"
+    }
+   },
+   "section": "marquette-project",
+   "fit": "uncropped 4:3",
+   "desktop_css": [
+    432,
+    324
+   ],
+   "mobile_css": [
+    350,
+    263
+   ],
+   "desktop_gate_2x": {
+    "needs_px": [
+     864,
+     648
+    ],
+    "srcset_pick": [
+     900,
+     675
+    ],
+    "ratio": 0.96,
+    "pass": true
+   },
+   "desktop_gate_3x": {
+    "needs_px": [
+     1296,
+     972
+    ],
+    "srcset_pick": [
+     1400,
+     1050
+    ],
+    "ratio": 0.926,
+    "pass": true
+   },
+   "mobile_gate_2x": {
+    "needs_px": [
+     700,
+     526
+    ],
+    "srcset_pick": [
+     900,
+     675
+    ],
+    "ratio": 0.779,
+    "pass": true
+   },
+   "mobile_gate_3x": {
+    "needs_px": [
+     1050,
+     789
+    ],
+    "srcset_pick": [
+     1200,
+     900
+    ],
+    "ratio": 0.877,
+    "pass": true
+   }
+  },
+  "marquette-racking-detail": {
+   "source": "client-assets/Arnold_IMG_0800.jpg",
+   "source_sha256": "04c9713a7340380359b1e1241b2671a72aac577eae0f498f2ef4a81f12035451",
+   "source_dims": [
+    1500,
+    2000
+   ],
+   "crop_dims": [
+    1500,
+    2000
+   ],
+   "variants": {
+    "marquette-racking-detail-600.webp": {
+     "w": 600,
+     "h": 800,
+     "bytes": 75302,
+     "sha256": "9f008e255db85eb40688e4599845691785c007800d128bc8de3c53657b8ac27d"
+    },
+    "marquette-racking-detail-1000.webp": {
+     "w": 1000,
+     "h": 1333,
+     "bytes": 193558,
+     "sha256": "b5718b6925ee8b8ab462aa4ee257d58e14627f8ecbaeaed1ed14ae66e80923fb"
+    },
+    "marquette-racking-detail-1200.webp": {
+     "w": 1200,
+     "h": 1600,
+     "bytes": 266794,
+     "sha256": "ea9609aebb1dfc707923422d24294fc8478abf4f9ae9a084d32c1d15e15b2e60"
+    }
+   },
+   "section": "marquette-project",
+   "fit": "uncropped 3:4",
+   "desktop_css": [
+    243,
+    324
+   ],
+   "mobile_css": [
+    350,
+    467
+   ],
+   "desktop_gate_2x": {
+    "needs_px": [
+     486,
+     648
+    ],
+    "srcset_pick": [
+     600,
+     800
+    ],
+    "ratio": 0.81,
+    "pass": true
+   },
+   "desktop_gate_3x": {
+    "needs_px": [
+     729,
+     972
+    ],
+    "srcset_pick": [
+     1000,
+     1333
+    ],
+    "ratio": 0.729,
+    "pass": true
+   },
+   "mobile_gate_2x": {
+    "needs_px": [
+     700,
+     934
+    ],
+    "srcset_pick": [
+     1000,
+     1333
+    ],
+    "ratio": 0.701,
+    "pass": true
+   },
+   "mobile_gate_3x": {
+    "needs_px": [
+     1050,
+     1401
+    ],
+    "srcset_pick": [
+     1200,
+     1600
+    ],
+    "ratio": 0.876,
+    "pass": true
+   }
+  },
+  "peninsula-solar-logo": {
+   "source": "website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809/sources/peninsula-solar-logo.png",
+   "source_sha256": "cc902fc3c26c54da51904e517cfe63bc3d37bb2cfef7f9c41f47ac3a365a6929",
+   "source_dims": [
+    2048,
+    316
+   ],
+   "crop_dims": [
+    2025,
+    240
+   ],
+   "variants": {
+    "peninsula-solar-logo-480.png": {
+     "w": 480,
+     "h": 57,
+     "bytes": 19451,
+     "sha256": "c1a381635892a6207f047f679116c8df3d18d62b2e6e17a267527a9ebf525e04"
+    }
+   },
+   "usage": {
+    "peninsula-solar-logo-480.png": "header, 202-236 CSS px wide (2x = 472)"
+   }
+  },
+  "peninsula-solar-logo-white": {
+   "source": "public/images/logo-white.png",
+   "source_sha256": "288fd1187736ada143bf999362c559b2c07ac716195d3ed2d341dea41805a7f6",
+   "source_dims": [
+    1024,
+    323
+   ],
+   "crop_dims": [
+    914,
+    109
+   ],
+   "variants": {
+    "peninsula-solar-logo-white-480.png": {
+     "w": 480,
+     "h": 57,
+     "bytes": 21078,
+     "sha256": "e9db94ae15bb7227bd67f6ae6c1bdda8b4f38cfc97e1b336e26505c109d72baf"
+    }
+   },
+   "usage": {
+    "peninsula-solar-logo-white-480.png": "footer on charcoal, 235 CSS px wide (2x = 470)"
+   }
+  },
+  "franklinwh-logo": {
+   "source": "website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809/manufacturer-assets/franklinwh-logo-color-2000.png",
+   "source_sha256": "be5971e8d4dbf6d92f783bb60914709e4d0203c6248d2a135d02aac7e056b50b",
+   "source_dims": [
+    2194,
+    155
+   ],
+   "crop_dims": [
+    2194,
+    155
+   ],
+   "variants": {
+    "franklinwh-logo-480.png": {
+     "w": 480,
+     "h": 34,
+     "bytes": 12640,
+     "sha256": "50c1743d44799710a4acdadca04073ba0855f9f0d22c0227342ee47a44a44a50"
+    },
+    "franklinwh-logo-720.png": {
+     "w": 720,
+     "h": 51,
+     "bytes": 18475,
+     "sha256": "fe62dec8f5074f53eda14fad3664850e5e24d4362a81a7b9b43133835c1c1434"
+    }
+   },
+   "usage": {
+    "franklinwh-logo-480.png": "header lockup >=640px, 184-212 CSS px wide (2x = 424)",
+    "franklinwh-logo-720.png": "hero mark <640px, 184 CSS px wide (3x = 552)"
+   }
+  }
+ }
+}

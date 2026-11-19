@@ -1,0 +1,339 @@
+{
+ "manifest": "task-evidence/6175fe7a-peninsula-intake/legacy-source-before-sha256.json",
+ "permitted_moves": {
+  "src/app/page.tsx": "src/app/(legacy)/page.tsx",
+  "src/app/layout.tsx": "src/app/(legacy)/layout.tsx",
+  "src/app/globals.css": "src/app/(legacy)/globals.css"
+ },
+ "files": [
+  {
+   "before": ".gitignore",
+   "after": ".gitignore",
+   "before_sha256": "1eac383056b984d308c8c98999133f3c638c2ff0c236807a8f71ca000a90d8c2",
+   "after_sha256": "1eac383056b984d308c8c98999133f3c638c2ff0c236807a8f71ca000a90d8c2",
+   "identical": true
+  },
+  {
+   "before": "next-env.d.ts",
+   "after": "next-env.d.ts",
+   "before_sha256": "7b550dda9686c16f36a17bf9051d5dbf31e98555b30d114ac49fc49a1e712651",
+   "after_sha256": "7b550dda9686c16f36a17bf9051d5dbf31e98555b30d114ac49fc49a1e712651",
+   "identical": true
+  },
+  {
+   "before": "next.config.ts",
+   "after": "next.config.ts",
+   "before_sha256": "6dc645e186b4c4f040b2f26bf7003e5d11ebe6ad799a0864cd62eed00ffa7288",
+   "after_sha256": "6dc645e186b4c4f040b2f26bf7003e5d11ebe6ad799a0864cd62eed00ffa7288",
+   "identical": true
+  },
+  {
+   "before": "package-lock.json",
+   "after": "package-lock.json",
+   "before_sha256": "afb8e46ba4144e38c877238090008bd9941657d1ece1e4c47b53a078e08a622b",
+   "after_sha256": "afb8e46ba4144e38c877238090008bd9941657d1ece1e4c47b53a078e08a622b",
+   "identical": true
+  },
+  {
+   "before": "package.json",
+   "after": "package.json",
+   "before_sha256": "23919bf8aee32e3d6942bf054403296619ae61807859220981e23f02ec60857a",
+   "after_sha256": "23919bf8aee32e3d6942bf054403296619ae61807859220981e23f02ec60857a",
+   "identical": true
+  },
+  {
+   "before": "postcss.config.mjs",
+   "after": "postcss.config.mjs",
+   "before_sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
+   "after_sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
+   "identical": true
+  },
+  {
+   "before": "public/apple-touch-icon.png",
+   "after": "public/apple-touch-icon.png",
+   "before_sha256": "2fed62feef23c7de1653779a28b49de7db57b2374943edff021dca614fb9b6d7",
+   "after_sha256": "2fed62feef23c7de1653779a28b49de7db57b2374943edff021dca614fb9b6d7",
+   "identical": true
+  },
+  {
+   "before": "public/favicon.png",
+   "after": "public/favicon.png",
+   "before_sha256": "ef4f6ad70744388ea0339d677c520e58637e7ed14227fc8f9cc3a85b32303ff0",
+   "after_sha256": "ef4f6ad70744388ea0339d677c520e58637e7ed14227fc8f9cc3a85b32303ff0",
+   "identical": true
+  },
+  {
+   "before": "public/images/about-team.jpg",
+   "after": "public/images/about-team.jpg",
+   "before_sha256": "a00bb0cc278835bc783def0a7411160bd969cb61c3a72fdf5851278261881382",
+   "after_sha256": "a00bb0cc278835bc783def0a7411160bd969cb61c3a72fdf5851278261881382",
+   "identical": true
+  },
+  {
+   "before": "public/images/badge-mi-saves.png",
+   "after": "public/images/badge-mi-saves.png",
+   "before_sha256": "6e69306a70a86d2ce72c940dd050444ded03613316a0182904eaf3c9ff693133",
+   "after_sha256": "6e69306a70a86d2ce72c940dd050444ded03613316a0182904eaf3c9ff693133",
+   "identical": true
+  },
+  {
+   "before": "public/images/badge-tesla.jpg",
+   "after": "public/images/badge-tesla.jpg",
+   "before_sha256": "aabec8e175ef35ad24a1366d108275a02318594de46a84d26ee7c50e0a01c85e",
+   "after_sha256": "aabec8e175ef35ad24a1366d108275a02318594de46a84d26ee7c50e0a01c85e",
+   "identical": true
+  },
+  {
+   "before": "public/images/crew-install.jpg",
+   "after": "public/images/crew-install.jpg",
+   "before_sha256": "bc41a68dcf46b6f190970290b6cf8dc437efd7c1e081d79d992ca4186954669a",
+   "after_sha256": "bc41a68dcf46b6f190970290b6cf8dc437efd7c1e081d79d992ca4186954669a",
+   "identical": true
+  },
+  {
+   "before": "public/images/design.jpg",
+   "after": "public/images/design.jpg",
+   "before_sha256": "7bed607eb2afcb68d5039488a38370b33210e3ae10d66e794dbb69de74d34c2f",
+   "after_sha256": "7bed607eb2afcb68d5039488a38370b33210e3ae10d66e794dbb69de74d34c2f",
+   "identical": true
+  },
+  {
+   "before": "public/images/electrical-panel.jpg",
+   "after": "public/images/electrical-panel.jpg",
+   "before_sha256": "368dc1eec91b8a20ed45f054b88a47c796acfdcf3945b397dc15291d71aba0af",
+   "after_sha256": "368dc1eec91b8a20ed45f054b88a47c796acfdcf3945b397dc15291d71aba0af",
+   "identical": true
+  },
+  {
+   "before": "public/images/electrical.jpg",
+   "after": "public/images/electrical.jpg",
+   "before_sha256": "368dc1eec91b8a20ed45f054b88a47c796acfdcf3945b397dc15291d71aba0af",
+   "after_sha256": "368dc1eec91b8a20ed45f054b88a47c796acfdcf3945b397dc15291d71aba0af",
+   "identical": true
+  },
+  {
+   "before": "public/images/enphase-logo.jpg",
+   "after": "public/images/enphase-logo.jpg",
+   "before_sha256": "8ccb2c4cef5bbed1a9ab05c6d06fc696afbe41520616694993c61d0c0d44ee54",
+   "after_sha256": "8ccb2c4cef5bbed1a9ab05c6d06fc696afbe41520616694993c61d0c0d44ee54",
+   "identical": true
+  },
+  {
+   "before": "public/images/forestville-aerial.jpg",
+   "after": "public/images/forestville-aerial.jpg",
+   "before_sha256": "0f5f95affd1a0858eb6591daf6173087cf9fcda18fa5849ec424800cbee30e5b",
+   "after_sha256": "0f5f95affd1a0858eb6591daf6173087cf9fcda18fa5849ec424800cbee30e5b",
+   "identical": true
+  },
+  {
+   "before": "public/images/franklinwh-logo.jpg",
+   "after": "public/images/franklinwh-logo.jpg",
+   "before_sha256": "e0c9b2d949ee89cdccf46f05b3f9ee98181a13cbbc4ee426334e080443830cf9",
+   "after_sha256": "e0c9b2d949ee89cdccf46f05b3f9ee98181a13cbbc4ee426334e080443830cf9",
+   "identical": true
+  },
+  {
+   "before": "public/images/hero-bg.jpg",
+   "after": "public/images/hero-bg.jpg",
+   "before_sha256": "bc41a68dcf46b6f190970290b6cf8dc437efd7c1e081d79d992ca4186954669a",
+   "after_sha256": "bc41a68dcf46b6f190970290b6cf8dc437efd7c1e081d79d992ca4186954669a",
+   "identical": true
+  },
+  {
+   "before": "public/images/install-1.jpg",
+   "after": "public/images/install-1.jpg",
+   "before_sha256": "0ddd9a242b54e598e08ad4878475fc47710c0ea486b7436da36f7498d9b727db",
+   "after_sha256": "0ddd9a242b54e598e08ad4878475fc47710c0ea486b7436da36f7498d9b727db",
+   "identical": true
+  },
+  {
+   "before": "public/images/install-2.jpg",
+   "after": "public/images/install-2.jpg",
+   "before_sha256": "57f66169552854d9a3671a2091f9aad6800498436ad7cf80467b1ec03f4e4713",
+   "after_sha256": "57f66169552854d9a3671a2091f9aad6800498436ad7cf80467b1ec03f4e4713",
+   "identical": true
+  },
+  {
+   "before": "public/images/install-3.png",
+   "after": "public/images/install-3.png",
+   "before_sha256": "22ab4dd64c9227cfe1f91b2535b1ad929a1a28d3664732d1c7c0d6d6cc6a2e8f",
+   "after_sha256": "22ab4dd64c9227cfe1f91b2535b1ad929a1a28d3664732d1c7c0d6d6cc6a2e8f",
+   "identical": true
+  },
+  {
+   "before": "public/images/install-4.jpg",
+   "after": "public/images/install-4.jpg",
+   "before_sha256": "715e4c917c6feff7a1e5a6603302f28709a14af37c3ed9fb63b32641d75c744f",
+   "after_sha256": "715e4c917c6feff7a1e5a6603302f28709a14af37c3ed9fb63b32641d75c744f",
+   "identical": true
+  },
+  {
+   "before": "public/images/install-5.jpg",
+   "after": "public/images/install-5.jpg",
+   "before_sha256": "b7d9b36819ce59da53031e3e16757649dfa3aea28f59be77af1d0736e9af9fac",
+   "after_sha256": "b7d9b36819ce59da53031e3e16757649dfa3aea28f59be77af1d0736e9af9fac",
+   "identical": true
+  },
+  {
+   "before": "public/images/install-6.jpg",
+   "after": "public/images/install-6.jpg",
+   "before_sha256": "fdf80a3f9e21c71e4e89ac9d972231cd12a928679a16259f9b9af2b7b9b9c4a3",
+   "after_sha256": "fdf80a3f9e21c71e4e89ac9d972231cd12a928679a16259f9b9af2b7b9b9c4a3",
+   "identical": true
+  },
+  {
+   "before": "public/images/install-portrait.jpg",
+   "after": "public/images/install-portrait.jpg",
+   "before_sha256": "a38aaa09f6414df31415fbeb27b8b13188cfbbddddbc6e6b9c78f3b94f87a4b2",
+   "after_sha256": "a38aaa09f6414df31415fbeb27b8b13188cfbbddddbc6e6b9c78f3b94f87a4b2",
+   "identical": true
+  },
+  {
+   "before": "public/images/local.webp",
+   "after": "public/images/local.webp",
+   "before_sha256": "712f344f32e4ea6713897bb9735534067ed3007c69aca99364c61249d2d15489",
+   "after_sha256": "712f344f32e4ea6713897bb9735534067ed3007c69aca99364c61249d2d15489",
+   "identical": true
+  },
+  {
+   "before": "public/images/logo-black.png",
+   "after": "public/images/logo-black.png",
+   "before_sha256": "ae4793292e15a5e6c8b0fa8a7e8de1f987132edc61077ffa11120d3c5c58f465",
+   "after_sha256": "ae4793292e15a5e6c8b0fa8a7e8de1f987132edc61077ffa11120d3c5c58f465",
+   "identical": true
+  },
+  {
+   "before": "public/images/logo-white.png",
+   "after": "public/images/logo-white.png",
+   "before_sha256": "288fd1187736ada143bf999362c559b2c07ac716195d3ed2d341dea41805a7f6",
+   "after_sha256": "288fd1187736ada143bf999362c559b2c07ac716195d3ed2d341dea41805a7f6",
+   "identical": true
+  },
+  {
+   "before": "public/images/michigan-saves.png",
+   "after": "public/images/michigan-saves.png",
+   "before_sha256": "b2d3e1946c11566bb2c6fc798c7eb2eefd1995c3d8cc4a2e11bbaeb89bef679c",
+   "after_sha256": "b2d3e1946c11566bb2c6fc798c7eb2eefd1995c3d8cc4a2e11bbaeb89bef679c",
+   "identical": true
+  },
+  {
+   "before": "public/images/misc3.jpg",
+   "after": "public/images/misc3.jpg",
+   "before_sha256": "a38aaa09f6414df31415fbeb27b8b13188cfbbddddbc6e6b9c78f3b94f87a4b2",
+   "after_sha256": "a38aaa09f6414df31415fbeb27b8b13188cfbbddddbc6e6b9c78f3b94f87a4b2",
+   "identical": true
+  },
+  {
+   "before": "public/images/misc5.webp",
+   "after": "public/images/misc5.webp",
+   "before_sha256": "04dafc571abae9c787e121a6aade2c79cbc72c21771e4b9b2723bf6a353801f4",
+   "after_sha256": "04dafc571abae9c787e121a6aade2c79cbc72c21771e4b9b2723bf6a353801f4",
+   "identical": true
+  },
+  {
+   "before": "public/images/offgrid-1.jpg",
+   "after": "public/images/offgrid-1.jpg",
+   "before_sha256": "0770a6fb46fb5ccef94313c52b0a4d7f8ba5ba387d760d2bcb341eb47c0cf34a",
+   "after_sha256": "0770a6fb46fb5ccef94313c52b0a4d7f8ba5ba387d760d2bcb341eb47c0cf34a",
+   "identical": true
+  },
+  {
+   "before": "public/images/residential-roof.jpg",
+   "after": "public/images/residential-roof.jpg",
+   "before_sha256": "74fdf7cbfc89dfcb821cda4507855d2815dea8bdc53fe0baba3f4bb793ac6fed",
+   "after_sha256": "74fdf7cbfc89dfcb821cda4507855d2815dea8bdc53fe0baba3f4bb793ac6fed",
+   "identical": true
+  },
+  {
+   "before": "public/images/sol-ark-logo.jpg",
+   "after": "public/images/sol-ark-logo.jpg",
+   "before_sha256": "f83942d5d406b39cdb684ec79d573acdf44d2a23df713254830983c160c96e40",
+   "after_sha256": "f83942d5d406b39cdb684ec79d573acdf44d2a23df713254830983c160c96e40",
+   "identical": true
+  },
+  {
+   "before": "public/images/tesla-cert.jpg",
+   "after": "public/images/tesla-cert.jpg",
+   "before_sha256": "aabec8e175ef35ad24a1366d108275a02318594de46a84d26ee7c50e0a01c85e",
+   "after_sha256": "aabec8e175ef35ad24a1366d108275a02318594de46a84d26ee7c50e0a01c85e",
+   "identical": true
+  },
+  {
+   "before": "public/images/tundra-racking-1.jpg",
+   "after": "public/images/tundra-racking-1.jpg",
+   "before_sha256": "ef9c741912d9fb8fd726ab665f283dd2227fe9daf77ffeb5fb504c2e99d7de69",
+   "after_sha256": "ef9c741912d9fb8fd726ab665f283dd2227fe9daf77ffeb5fb504c2e99d7de69",
+   "identical": true
+  },
+  {
+   "before": "public/images/tundra-racking-2.jpg",
+   "after": "public/images/tundra-racking-2.jpg",
+   "before_sha256": "c04671ef710032ce309a6dc9ed8f78c72bfa592392805c65026eb37db0ae17cf",
+   "after_sha256": "c04671ef710032ce309a6dc9ed8f78c72bfa592392805c65026eb37db0ae17cf",
+   "identical": true
+  },
+  {
+   "before": "public/images/van.png",
+   "after": "public/images/van.png",
+   "before_sha256": "ea3f7f06650c01230e9149fbe057104ee60af9dbde71df5f982681df4de941ab",
+   "after_sha256": "ea3f7f06650c01230e9149fbe057104ee60af9dbde71df5f982681df4de941ab",
+   "identical": true
+  },
+  {
+   "before": "public/og-image.png",
+   "after": "public/og-image.png",
+   "before_sha256": "2fed62feef23c7de1653779a28b49de7db57b2374943edff021dca614fb9b6d7",
+   "after_sha256": "2fed62feef23c7de1653779a28b49de7db57b2374943edff021dca614fb9b6d7",
+   "identical": true
+  },
+  {
+   "before": "public/robots.txt",
+   "after": "public/robots.txt",
+   "before_sha256": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1",
+   "after_sha256": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1",
+   "identical": true
+  },
+  {
+   "before": "src/app/globals.css",
+   "after": "src/app/(legacy)/globals.css",
+   "before_sha256": "7d095f7c67d6e1b2c8e60f54251fd6df833fd23789d61a052f11c4c8458110ae",
+   "after_sha256": "7d095f7c67d6e1b2c8e60f54251fd6df833fd23789d61a052f11c4c8458110ae",
+   "identical": true
+  },
+  {
+   "before": "src/app/layout.tsx",
+   "after": "src/app/(legacy)/layout.tsx",
+   "before_sha256": "2580a0958955f2d9b3730d5bc897abc76a2c01b7a3d565d7ab52c3e8e0bc38d2",
+   "after_sha256": "2580a0958955f2d9b3730d5bc897abc76a2c01b7a3d565d7ab52c3e8e0bc38d2",
+   "identical": true
+  },
+  {
+   "before": "src/app/page.tsx",
+   "after": "src/app/(legacy)/page.tsx",
+   "before_sha256": "d72ba0f3febf52b405597a743181c738f5c7f6a9f7e2407466517f0009470ea8",
+   "after_sha256": "d72ba0f3febf52b405597a743181c738f5c7f6a9f7e2407466517f0009470ea8",
+   "identical": true
+  },
+  {
+   "before": "src/hooks/useMegaLeadForm.ts",
+   "after": "src/hooks/useMegaLeadForm.ts",
+   "before_sha256": "afb2abbb8a199e56293c00b6ba4c4c58cfdb515f69ea30d22fb2b66ac3a365c3",
+   "after_sha256": "afb2abbb8a199e56293c00b6ba4c4c58cfdb515f69ea30d22fb2b66ac3a365c3",
+   "identical": true
+  },
+  {
+   "before": "src/hooks/useTracking.ts",
+   "after": "src/hooks/useTracking.ts",
+   "before_sha256": "572bd28ca2d7a549a2522348c44943828ed18514155c0b636675a896d489cd01",
+   "after_sha256": "572bd28ca2d7a549a2522348c44943828ed18514155c0b636675a896d489cd01",
+   "identical": true
+  },
+  {
+   "before": "tsconfig.json",
+   "after": "tsconfig.json",
+   "before_sha256": "55134881a23efd2a1f9266d2d0752731ff9c40d0e867136cd8863ea679560a09",
+   "after_sha256": "55134881a23efd2a1f9266d2d0752731ff9c40d0e867136cd8863ea679560a09",
+   "identical": true
+  }
+ ]
+}
