@@ -92,6 +92,9 @@ and event transports are intercepted; no live lead or conversion request is ever
   instead) and a heuristic "dark background" note on the checkbox, which has no placeholder. The errors: (1) No `src/app/icon.png`: a root icon would change the protected `/`, so
   the favicon is route-local via metadata (`/franklinwh/favicon.png`). (2) "Inter is the only font":
   FranklinWH's brand manual (p.16) mandates Inter.
+- The brand `color_roles` set text `#000000` and background `#FFFFFF` (FranklinWH primary palette), which
+  overrides the workspace "no pure black/white" default. Softer surfaces (`#F5F7F5`, `#FAF6EF`, charcoal
+  and navy bands) carry the off-white rhythm instead.
 - The design tokens' disabled state (`#58595B` on `#CCCCCC`) is 4.37:1. The pending button shows text,
   so it uses `#000000` on `#CCCCCC` to meet 4.5:1.
 
@@ -112,3 +115,21 @@ The universal CTM script stays installed per the controller contract. CCP `creat
 "Google call forwarding numbers replacing on-site phone numbers". The page source authors only the two
 real route numbers. Whether runtime DNI swaps them is controller/Instrumentation-owned, so this is
 flagged here rather than posted on the task (the contract bars this session from task comments).
+
+## Review verdicts
+
+- simplify: 4 parallel reviewers (reuse, simplification, efficiency, altitude). Applied: dropped the dead
+  `ok` re-check and `isLocked` plumbing, centralized field rules, one global `Window` declaration,
+  shared CONTAINER/QUOTE_CTA_LABEL/controlProps, lazy floating-CTA measurement, no backdrop blur,
+  smaller logo and photo variants. Skipped: context split/memoization (small page), phone context instead
+  of props (sections stay server components), building the MegaTag literals from config (the LP lint
+  reads them literally from layout.tsx).
+- code-review: `VERDICT: PASS`. Applied finding 1 (validate the same draft that is sent). Finding 2
+  (pure #000/#FFF) is the brand's `color_roles`; see above.
+- design-review: `VERDICT: DEFERRED (visual gate deferred to post-deploy, no local browser)`. Applied:
+  continuous process connector, warm fill on error fields, full-width CTA buttons below 640px, and a
+  pending spinner. Not applied because the task spec fixes them: outcome-led H1 (the spec gives the exact
+  H1), fewer section CTA pairs (every content section must end with the pair), FAQ topics (exactly the
+  three ledger FAQs), checkbox wording (exact client label), the error color (token `#000000`), the
+  1.5 body line-height token, the hero `min-h` (LP lint), and the manufacturer hero photo (the blueprint
+  assigns it; the copy and alt never call it a Peninsula Solar job).

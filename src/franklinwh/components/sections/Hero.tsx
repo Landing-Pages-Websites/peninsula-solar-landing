@@ -6,7 +6,7 @@ import { LeadFormCard } from "../LeadFormCard";
 import { ResponsiveImage } from "../ResponsiveImage";
 import { HeroIntro } from "./HeroIntro";
 
-/** Photo-led split: messaging and a real installation on the left, the quote form on the right. */
+/** Photo-led split: messaging and FranklinWH's own aPower S installation photo on the left, the quote form on the right. */
 export function Hero({ phone }: { phone: RoutePhone }): ReactElement {
   return (
     <section id="hero" className="bg-surface lg:min-h-[85vh]">

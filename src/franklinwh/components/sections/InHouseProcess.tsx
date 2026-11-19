@@ -15,7 +15,7 @@ export function InHouseProcess({ phone }: { phone: RoutePhone }): ReactElement {
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-navy bg-paper text-label font-semibold text-navy">
                 {index + 1}
               </span>
-              {index < PROCESS_STEPS.length - 1 && <span className="hidden h-0.5 flex-1 bg-navy/25 lg:block" />}
+              {index < PROCESS_STEPS.length - 1 && <span className="hidden h-0.5 flex-1 bg-navy/25 lg:-mr-4 lg:block" />}
             </div>
             <h3 className="mt-5 text-h3 font-semibold">{step.title}</h3>
             <p className="mt-2 max-w-[38ch] text-body text-muted">{step.body}</p>

@@ -16,10 +16,10 @@ export function CtaPair({ phone, formAnchor, surface = "light", align = "center"
   const justify = align === "center" ? "justify-center" : "justify-start";
   return (
     <div className={`flex flex-wrap items-center gap-3 ${justify}`}>
-      <a href={`#${formAnchor}`} data-cta className={buttonClass("primary", "", surface)}>
+      <a href={`#${formAnchor}`} data-cta className={buttonClass("primary", "w-full sm:w-auto", surface)}>
         {QUOTE_CTA_LABEL}
       </a>
-      <a href={phone.href} data-cta className={buttonClass("secondary", "whitespace-nowrap", surface)}>
+      <a href={phone.href} data-cta className={buttonClass("secondary", "w-full whitespace-nowrap sm:w-auto", surface)}>
         <PhoneIcon />
         Call {phone.display}
       </a>
