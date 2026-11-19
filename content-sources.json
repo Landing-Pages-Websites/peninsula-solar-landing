@@ -87,13 +87,6 @@
       "verified": true
     },
     {
-      "claim": "A FranklinWH project near Marquette: our aPower S installation pairs battery backup with rooftop solar. (three project photos and captions)",
-      "sections": ["marquette-project"],
-      "sources": ["Current task content_requests: \"The three attached photos are from Peninsula Solar's own aPower S install near Marquette - use them.\"", "Task attachments Arnold_IMG_6898.jpg, Arnold_IMG_9068.jpg, Arnold_IMG_0800.jpg (hashes in docs/franklinwh/image-ledger.json)"],
-      "verified": true,
-      "note": "Captions describe only what each photo shows."
-    },
-    {
       "claim": "Hero photograph: FranklinWH aPower S installation",
       "sections": ["hero"],
       "sources": ["FranklinWH US Brand Assets, 08 Installation Photos/aPower S/aPower S (1).jpg (marketing.franklinwh.com brand portal)"],
@@ -158,6 +151,17 @@
       "sources": ["Written for this task: https://peninsula-solar.com/privacy-policy/ returned 404 (content_source_ledger.json policy_gap). Lists exactly the six form fields; contact sales@peninsula-solar.com from the task."],
       "verified": true,
       "note": "Customer review of the policy requested in docs/franklinwh/HANDOFF.md."
+    }
+  ],
+  "withdrawnClaims": [
+    {
+      "claim": "A FranklinWH project near Marquette: our aPower S installation pairs battery backup with rooftop solar. (three project photos and captions)",
+      "sections": ["marquette-project"],
+      "sources": ["Current task content_requests: \"The three attached photos are from Peninsula Solar's own aPower S install near Marquette - use them.\"", "Task attachments Arnold_IMG_6898.jpg, Arnold_IMG_9068.jpg, Arnold_IMG_0800.jpg (hashes in docs/franklinwh/image-ledger.json)"],
+      "verified": false,
+      "note": "Captions described only what each photo showed.",
+      "status": "WITHDRAWN 2026-11-19: section, photos, captions and claim removed from both routes; rendered nowhere.",
+      "withdrawnBy": "Atlas comment a32ba639-6d55-47a2-a595-160fb4c32e5c (2026-11-19T19:46:45.590Z), relaying client direction from Rachel Raak with Ian Olmsted, email of 2026-11-19 ~19:45 UTC on Peninsula Solar case b8ffdb51-f7a1-4d18-a032-cc6987193fdf, inbound msg_3a6vgmqm: \"Please don't use the Arnold install photos I sent earlier.\" \"All ads should be FranklinWH-focused.\" \"Please take them off both regional pages (Upper and northern Lower Peninsula) and use FranklinWH product imagery until the client's replacement photos arrive.\" Ian Olmsted had also said at 17:56 UTC not to use their solar panel photos. Retained in task-evidence/6175fe7a-peninsula-intake/comments-pre-final-handoff.json."
     }
   ],
   "excluded": [

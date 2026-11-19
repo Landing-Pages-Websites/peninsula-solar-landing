@@ -15,6 +15,61 @@ Both campaign routes render the same `FranklinPage` component and differ only in
 (page, layout and globals.css are the only relocations) so the new route group has its own root layout,
 CSS, font and tracking and nothing leaks into `/`.
 
+## Client photo withdrawal (2026-11-19): governs the active build
+
+**Authority.** Atlas comment `a32ba639-6d55-47a2-a595-160fb4c32e5c` (2026-11-19T19:46:45.590Z), relaying an
+email from Rachel Raak with Ian Olmsted (Nov 19, ~19:45 UTC, Peninsula Solar case
+`b8ffdb51-f7a1-4d18-a032-cc6987193fdf`, inbound `msg_3a6vgmqm`): "Please don't use the Arnold install photos I sent
+earlier." "All ads should be FranklinWH-focused." "Please take them off both regional pages (Upper and northern Lower
+Peninsula) and use FranklinWH product imagery until the client's replacement photos arrive." Ian had also said at
+17:56 UTC not to use their solar panel photos. The comment is retained in
+`task-evidence/6175fe7a-peninsula-intake/comments-pre-final-handoff.json`.
+
+**Superseded.** The original content request ("The three attached photos are from Peninsula Solar's own aPower S
+install near Marquette - use them") and the Stage 0 research and attached archive that carry
+`Arnold_IMG_6898.jpg`, `Arnold_IMG_9068.jpg` and `Arnold_IMG_0800.jpg` are historical pre-withdrawal input only. They
+are not current image permission. Anything below in this file about the Marquette project section, the landscape or
+racking photos, or the "racking cap" is history from rounds 1-3 and no longer describes the build.
+
+**Removed from both routes** (`/franklinwh`, `/franklinwh-lower-peninsula`, one shared `FranklinPage`):
+
+- Section `#marquette-project` (`components/sections/MarquetteProject.tsx`): heading "A FranklinWH project near
+  Marquette", its paragraph, the three figures and captions, and its CTA pair.
+- `IMAGES.marquetteEquipment`, `marquetteArray`, `marquetteRacking` and their 15 task-derived WebPs in
+  `public/franklinwh/` (`marquette-{franklinwh-equipment,rooftop-array,racking-detail}-*.webp`). Their hashes were
+  re-verified against `image-ledger.json` before deletion. The files stay in git history (no rewrite). The originals
+  are untouched in `website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809/client-assets/`.
+- The gallery-specific tests: the three images' delivery sweeps and desktop-slot pins, and the racking-frame contract.
+
+**Unchanged.** The other seven sections in their order (`hero`, `backup-benefits`, `product-family`,
+`in-house-process`, `customer-proof`, `faq`, `final-quote`) and every remaining CTA pair. The three FranklinWH
+manufacturer images (hero `apower-s-installation`, backup-benefits `agate`, product-family `apower-2-and-agate`) keep
+their files, crops, captions, `sizes`, band delivery and layout. The repo never had a fourth product image, so none
+was added. Forms, events, tracking, `fields.ts`, `attribution.ts`, phones, brand and all other copy are unchanged,
+and so is the protected root `/`. Its own solar imagery is outside this task. No placeholder, "photos coming soon"
+copy, stock or new photo was added.
+
+**Contract.** `task-spec.json` (`sections_in_dom_order`, `imagery.clientWithdrawal`), `content-sources.json`
+(`withdrawnClaims`) and `image-ledger.json` (`withdrawn_client_photos`) record the withdrawal.
+`tests/franklinwh/page.test.ts` asserts, on both routes, the seven section ids in order, no Arnold, Marquette-project,
+rooftop, array, racking or solar-panel reference anywhere in the markup, and that the only photos are the three
+product images, each in its own section. `imageDelivery.test.ts` still sweeps 320-1728 for those three.
+
+**Verification (this change).** Tests 158/158: 173 before, minus 19 gallery-specific cases (three images x five
+delivery cases, three desktop-slot pins, the racking-frame contract), plus 4 new withdrawal cases (two per route). The
+new cases fail on `origin/main` (6 failures with the section-order case) and pass here. `npx tsc --noEmit
+--incremental false` and `next build` pass. The rendered markup of both routes on `origin/main`, with only the
+`#marquette-project` section cut out, is byte-identical to this branch. The canonical LP lint is unchanged from the
+pre-withdrawal controller log: 12 errors and 3 warnings, all inherited protected-root or fixed-path debt, so it is not
+clean. `npx eslint` has no repo `eslint.config.*` and was not run. The 47/47 protected hashes match. Form, event,
+tracking, `fields.ts`, `attribution.ts` and their tests are byte-identical to `origin/main`. simplify removed an unused
+test import and derives the test's image bases from `IMAGES`. code-review: `VERDICT: PASS`, and its two stale
+racking-frame requests in this file are now labeled historical.
+
+**Pending, not blocking.** Client replacement photos (Leda's new photos and another FranklinWH photo) are expected
+later. Adding them is a separate change. The customer approves both pages before ads launch, and that approval is
+not the merge gate. Native visual and layout evidence for this change is DEFERRED to the controller (no local browser).
+
 ## Structure
 
 - `src/app/(franklinwh)/layout.tsx`: independent root layout with Inter, the MegaTag bootstrap
@@ -76,6 +131,8 @@ visual claim. simplify: one redundant assertion removed. code-review: `VERDICT: 
 DEFERRED (copy spacing only, no local browser).
 
 ## Round 3 corrections (native r2 image receipts)
+
+_Historical. The Marquette photos and racking cap below were removed by the 2026-11-19 client withdrawal (see top)._
 
 The controller's r2 matrix (`task-evidence/6175fe7a-peninsula-intake/{a,b}-{320..1728}-r2-images.json`, decoded
 `currentSrc`, DPR 1, target 2) failed at narrow and tablet widths. At DPR 1 a browser picks the smallest srcset file
@@ -236,6 +293,11 @@ This is not a repo-wide lint pass. Protected root debt remains and is reported, 
 
 ## Deferred to the parent (no local browser in this session)
 
+Client photo withdrawal (2026-11-19): no browser was launched and no server was started (`next build` only). Native
+capture of both routes at 320/360/390/768/1024/1440/1728 is DEFERRED to the controller: the seven sections and their
+rhythm without `#marquette-project`, the three product images' `currentSrc`, overflow, and the remaining CTA pairs.
+The Round 3 items below about the racking frame and portrait cap no longer apply; that section was removed.
+
 Round 3: no browser was launched and no server was started (`next build` only). The per-band picks, the
 `<picture class="contents">` wrapper's layout neutrality, the 750px racking frame and the 320 heading
 line are source contracts and calculations awaiting the controller's native capture on both routes at
@@ -279,7 +341,8 @@ flagged here rather than posted on the task (the contract bars this session from
   not applied: the overlapping desktop test (kept, above) and band merging mutating a fresh local object (never shared).
 - design-review: `VERDICT: DEFERRED (visual gate deferred to post-deploy, no local browser)`. It found no layout-shift
   or aspect risk (all variants within 0.0003 of the source aspect), on-brand files with no upscale, and desktop unchanged.
-  Not applied, for the controller's native judgement:
+  Not applied, for the controller's native judgement (historical: the racking photo and its cap were removed by the
+  2026-11-19 client withdrawal, so the first two items no longer apply):
   - A tighter portrait cap (~480-520px) or a left-aligned 750px frame on 640-1023 tablets. The 750px figure is
     ~1000px tall there. The controller specified the centered 750px cap as the narrowly permitted constraint, so this
     round does not change layout further. Please judge 768/1023 on real pixels.

@@ -11,7 +11,7 @@ import { FieldShell } from "../../src/franklinwh/components/FieldShell";
 import { SiteHeader } from "../../src/franklinwh/components/SiteHeader";
 import { LOWER_PENINSULA, UPPER_PENINSULA } from "../../src/franklinwh/config";
 import { deliveryBands, IMAGES, srcSet, TARGET_DENSITY } from "../../src/franklinwh/images";
-import { anchors, attr, classes, elements, readSource, renderPage, sectionHtml, tags } from "./html";
+import { anchors, attr, classes, readSource, renderPage, sectionHtml, tags } from "./html";
 
 const SRC = new URL("../../src/franklinwh/", import.meta.url);
 const PAGE_A = renderPage(UPPER_PENINSULA);
@@ -132,7 +132,7 @@ describe("section CTA pair (finding 2)", () => {
   it("is used by every content section, forward-only, and never by the floating CTA", () => {
     const html = PAGE_A;
     assert.equal(tags(sectionHtml(html, "hero"), "div").filter((t) => t.includes("data-cta-pair")).length, 1);
-    for (const id of ["backup-benefits", "product-family", "marquette-project", "in-house-process", "customer-proof", "faq"]) {
+    for (const id of ["backup-benefits", "product-family", "in-house-process", "customer-proof", "faq"]) {
       assert.equal(tags(sectionHtml(html, id), "div").filter((t) => t.includes("data-cta-pair")).length, 1, id);
     }
     const floating = html.slice(html.indexOf("data-floating-cta-lane"));
@@ -179,9 +179,6 @@ describe("delivered image density (finding 6)", () => {
     heroInstallation: [640, 400],
     aGate: [440, 383],
     aPower2AndAGate: [640, 484],
-    marquetteEquipment: [432, 324],
-    marquetteArray: [432, 324],
-    marquetteRacking: [243, 324],
   } as const;
 
   for (const [key, [cssW, cssH]] of Object.entries(DESKTOP_SLOTS)) {
@@ -203,18 +200,7 @@ describe("delivered image density (finding 6)", () => {
   });
 });
 
-describe("round 3: portrait frame and 320 heading binding", () => {
-  const figures = elements(sectionHtml(PAGE_A, "marquette-project"), "figure");
-
-  it("caps only the portrait racking figure at 750px below lg, centered, and keeps every lg flex share", () => {
-    const shares = ["lg:flex-[4_1_0%]", "lg:flex-[4_1_0%]", "lg:flex-[2.25_1_0%]"];
-    figures.forEach((figure, i) => assert.ok(classes(tags(figure, "figure")[0]).includes(shares[i]), shares[i]));
-    const racking = classes(tags(figures[2], "figure")[0]);
-    for (const cls of ["max-lg:mx-auto", "max-lg:w-full", "max-lg:max-w-[750px]"]) assert.ok(racking.includes(cls), cls);
-    assert.ok(figures[2].includes("marquette-racking-detail"));
-    assert.equal(figures.slice(0, 2).some((figure) => figure.includes("max-lg:")), false);
-  });
-
+describe("round 3: 320 heading binding", () => {
   it("binds `a standby` in the backup-benefits heading without changing its words", () => {
     assert.ok(readSource("components/sections/BackupBenefits.tsx").includes(">A modern alternative to a&nbsp;standby generator</h2>"));
   });

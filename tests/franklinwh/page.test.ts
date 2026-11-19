@@ -2,13 +2,23 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { LOWER_PENINSULA, UPPER_PENINSULA } from "../../src/franklinwh/config";
 import { TESTIMONIALS } from "../../src/franklinwh/content";
+import { IMAGES } from "../../src/franklinwh/images";
 import { anchors, attr, elements, renderPage, sectionHtml, stripTags, tags, visibleText } from "./html";
 
 const PAGES = [
   { variant: UPPER_PENINSULA, own: ["(906) 235-0340", "tel:+19062350340"], other: ["231", "590-7305"] },
   { variant: LOWER_PENINSULA, own: ["(231) 590-7305", "tel:+12315907305"], other: ["906", "235-0340"] },
 ];
-const SECTION_ORDER = ["hero", "backup-benefits", "product-family", "marquette-project", "in-house-process", "customer-proof", "faq", "final-quote"];
+const SECTION_ORDER = ["hero", "backup-benefits", "product-family", "in-house-process", "customer-proof", "faq", "final-quote"];
+/** The only photos left after the client withdrew the Arnold install photos (Nov 19, 2026): FranklinWH product imagery. */
+const PRODUCT_IMAGES = { hero: IMAGES.heroInstallation.base, "backup-benefits": IMAGES.aGate.base, "product-family": IMAGES.aPower2AndAGate.base };
+/** Word-bounded so "tracking" never reads as "racking". The route office line "Marquette office" stays. */
+const WITHDRAWN = /\b(arnold|img_\d|marquette-|near marquette|marquette project|rooftop|solar array|racking|solar panels?|ballast)/i;
+
+/** Every /franklinwh/*.webp base a chunk references in any src or srcset. */
+function photoBases(chunk: string): string[] {
+  return [...new Set([...chunk.matchAll(/\/franklinwh\/([a-z0-9-]+?)-\d+\.webp/g)].map((m) => m[1]))];
+}
 
 for (const { variant, own, other } of PAGES) {
   describe(`${variant.path}`, () => {
@@ -26,6 +36,15 @@ for (const { variant, own, other } of PAGES) {
       const ids = tags(html, "section").map((tag) => attr(tag, "id"));
       assert.deepEqual(ids, SECTION_ORDER);
       for (const id of ids) assert.match(id ?? "", /^[a-z]+(-[a-z]+)*$/);
+    });
+
+    it("carries none of the withdrawn Arnold install photos, captions or project claim", () => {
+      assert.equal(html.match(WITHDRAWN)?.[0], undefined);
+    });
+
+    it("shows only the three FranklinWH product images, each in its own section", () => {
+      assert.deepEqual(photoBases(html).sort(), Object.values(PRODUCT_IMAGES).sort());
+      for (const [id, base] of Object.entries(PRODUCT_IMAGES)) assert.deepEqual(photoBases(sectionHtml(html, id)), [base], id);
     });
 
     it("has one h1 with the exact category headline", () => {

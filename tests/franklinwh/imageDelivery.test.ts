@@ -26,25 +26,17 @@ function sevenTwelfths(v: number, xlGap: number): number {
   return ((content(v) - (v >= 1280 ? xlGap : 40)) * 7) / 12;
 }
 
-/** One flex share of the Marquette photo row (grows 4 + 4 + 2.25, two 16px gaps). */
-function rowShare(v: number, grow: number): number {
-  return ((content(v) - 32) * grow) / 10.25;
-}
-
 interface SlotModel {
   slot: (v: number) => number;
   /** Displayed width/height when it differs from the file's (the hero's 16:10 cover crop). */
   aspect?: number;
 }
 
-/** Rendered CSS width per viewport. a-768: hero 713 at client 753; a-1024: 527.9, 344.5, 356.3, 200.4 at client 1009. */
+/** Rendered CSS width per viewport. a-768: hero 713 at client 753; a-1024: 527.9 (hero, aPower 2) and 344.5 (aGate) at client 1009. */
 const MODELS: Record<ImageKey, SlotModel> = {
   heroInstallation: { slot: (v) => (v < LG ? content(v) : sevenTwelfths(v, 56)), aspect: 16 / 10 },
   aGate: { slot: (v) => Math.min(440, v < LG ? content(v) - 64 : (content(v) - 64) / 2 - 96) },
   aPower2AndAGate: { slot: (v) => (v < LG ? content(v) : sevenTwelfths(v, 64)) },
-  marquetteEquipment: { slot: (v) => (v < LG ? content(v) : rowShare(v, 4)) },
-  marquetteArray: { slot: (v) => (v < LG ? content(v) : rowShare(v, 4)) },
-  marquetteRacking: { slot: (v) => (v < LG ? Math.min(750, content(v)) : rowShare(v, 2.25)) },
 };
 
 /** Every integer viewport plus the last fractional pixel below each band edge. */
