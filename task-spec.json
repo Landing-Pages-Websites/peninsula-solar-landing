@@ -92,7 +92,17 @@
     "typeface": "Inter (FranklinWH corporate typeface, Visual Identity p. 16), loaded with next/font/google",
     "logos": ["Peninsula Solar installer mark", "FranklinWH official color mark"]
   },
-  "sections_in_dom_order": ["hero", "backup-benefits", "product-family", "marquette-project", "in-house-process", "customer-proof", "faq", "final-quote"],
+  "sections_in_dom_order": ["hero", "backup-benefits", "product-family", "in-house-process", "customer-proof", "faq", "final-quote"],
+  "imagery": {
+    "current": "FranklinWH manufacturer product imagery only: hero apower-s-installation, backup-benefits agate, product-family apower-2-and-agate (src/franklinwh/images.ts). No client or Arnold install photos and no solar array or panel photos on either route.",
+    "clientWithdrawal": {
+      "date": "2026-11-19",
+      "authority": "Atlas comment a32ba639-6d55-47a2-a595-160fb4c32e5c (2026-11-19T19:46:45.590Z), relaying client direction from Rachel Raak with Ian Olmsted, email of 2026-11-19 ~19:45 UTC on Peninsula Solar case b8ffdb51-f7a1-4d18-a032-cc6987193fdf, inbound msg_3a6vgmqm: \"Please don't use the Arnold install photos I sent earlier.\" \"All ads should be FranklinWH-focused.\" \"Please take them off both regional pages (Upper and northern Lower Peninsula) and use FranklinWH product imagery until the client's replacement photos arrive.\" Ian Olmsted had also said at 17:56 UTC not to use their solar panel photos. Retained in task-evidence/6175fe7a-peninsula-intake/comments-pre-final-handoff.json.",
+      "supersedes": "The original content request to use the three attached Arnold install photos (Arnold_IMG_6898.jpg, Arnold_IMG_9068.jpg, Arnold_IMG_0800.jpg) in a Marquette project section, and the Stage 0 research and attached archive that carried them. Those are historical pre-withdrawal input only and no longer grant image permission.",
+      "removed": "Section #marquette-project (heading, paragraph, three figures and captions, CTA pair) and its three images from both routes; the 15 task-derived WebP copies were deleted from public/franklinwh (originals untouched in research; hashes in docs/franklinwh/image-ledger.json withdrawn_client_photos).",
+      "pending": "Client replacement photos (Leda's new photos and another FranklinWH photo) are expected later; adding them is a separate change. The customer approves both pages before ads launch."
+    }
+  },
   "privacy": "No customer policy existed (/privacy-policy returned 404), so a business-specific policy was written at /privacy listing exactly the six form fields; no SMS section.",
   "ccp": {
     "creative.doNotUse": "Google call forwarding numbers replacing on-site phone numbers: the page source authors only the two real route numbers.",

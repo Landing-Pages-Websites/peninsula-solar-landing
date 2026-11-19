@@ -95,32 +95,4 @@ export const IMAGES = {
     height: 1511,
     alt: "FranklinWH aPower 2 battery beside the smaller aGate controller",
   },
-  marquetteEquipment: {
-    base: "marquette-franklinwh-equipment",
-    // 4 of 10.25 flex shares in the photo row from lg, at most 432px.
-    widths: [900, 1200, 1400, 1500, 2000],
-    slots: { 1024: 432, ...FULL_COLUMN },
-    width: 2000,
-    height: 1500,
-    alt: "FranklinWH equipment mounted on an interior wall next to the main electrical panel at the Marquette project",
-  },
-  marquetteArray: {
-    base: "marquette-rooftop-array",
-    // 4 of 10.25 flex shares in the photo row from lg, at most 432px.
-    widths: [900, 1200, 1400, 1500, 2000],
-    slots: { 1024: 432, ...FULL_COLUMN },
-    width: 2000,
-    height: 1500,
-    alt: "Rows of solar panels on the low-slope roof of the Marquette project, with autumn trees behind",
-  },
-  marquetteRacking: {
-    base: "marquette-racking-detail",
-    // 2.25 of 10.25 flex shares from lg (at most 243px); below lg the figure is capped at 750px,
-    // the widest slot the 1500px original covers at 2x.
-    widths: [600, 900, 1000, 1200, 1500],
-    slots: { 1024: 243, ...FULL_COLUMN, 768: 750 },
-    width: 1500,
-    height: 2000,
-    alt: "Close view of a panel clamp, mounting foot and concrete ballast blocks on the Marquette roof",
-  },
 } as const satisfies Record<string, ResponsiveSource>;
