@@ -106,6 +106,13 @@ describe("request outcome alerts", () => {
       assert.ok(announced.includes(`href="${variant.phone.href}"`) && text.includes(variant.phone.display));
     });
 
+    it(`${variant.path}: the unknown alert keeps a normal space between the route phone and "and"`, () => {
+      const markup = renderToStaticMarkup(createElement(FormUnknownAlert, { phone: variant.phone, announce: true }));
+      const text = stripTags(markup);
+      const lastDigits = variant.phone.display.slice(-4);
+      assert.ok(text.includes(`${lastDigits} and`) && !text.includes(`${lastDigits}and`), text);
+    });
+
     it(`${variant.path}: a definite rejection still invites a retry with the route phone`, () => {
       const markup = renderToStaticMarkup(createElement(FormErrorAlert, { phone: variant.phone }));
       assert.match(markup, /role="alert"/);

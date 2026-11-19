@@ -63,6 +63,18 @@ CSS, font and tracking and nothing leaks into `/`.
   invalid field gets focus. A failed send shows `role="alert"` with the route phone and keeps the draft.
   Form ids are `hero-lead-form` and `final-lead-form`; the card anchors are `#hero-form` and `#form`.
 
+## Unknown alert whitespace fix (after round 3)
+
+The controller's native r2 UNKNOWN captures (`task-evidence/6175fe7a-peninsula-intake/unknown-*-r2.{json,png}`)
+showed `(906) 235-0340and` / `(231) 590-7305and` in the alert's `innerText`. The JSX space after the
+`PhoneNumber` link was dropped by the compiler. `FormUnknownAlert.tsx` now has an explicit `{" "}` after the
+link. Wording, phone link, role gating and every form mechanic are unchanged. `tests/franklinwh/forms.test.ts`
+asserts that the static markup text contains `0340 and` / `7305 and` and never `0340and` / `7305and` on both
+routes. Tests 173/173, tsc and scoped ESLint clean, 47/47 protected hashes, package files untouched.
+No browser was used. Native capture of the corrected alert is DEFERRED to the controller. This fix makes no
+visual claim. simplify: one redundant assertion removed. code-review: `VERDICT: PASS`. design-review: visual
+DEFERRED (copy spacing only, no local browser).
+
 ## Round 3 corrections (native r2 image receipts)
 
 The controller's r2 matrix (`task-evidence/6175fe7a-peninsula-intake/{a,b}-{320..1728}-r2-images.json`, decoded
