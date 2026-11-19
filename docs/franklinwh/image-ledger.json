@@ -1,5 +1,5 @@
 {
- "note": "Round 2. \"planned_*\" entries are calculations from the CSS and srcset, not measurements. \"controller_receipt_r1\" entries are the controller's native measurements of the round-1 production build. No delivered-byte measurement was made in this session (no local browser); native proof of round 2 is DEFERRED to the controller. Gate: max(cssW/fileW, cssH/fileH) x max(2, DPR) <= 1. Policy: each srcset starts at a file holding 2x the largest desktop slot.",
+ "note": "Round 3. Delivery policy: each image declares its largest CSS slot per viewport band (320-479, 480-639, 640-767, 768-1023, 1024+; max slot taken at the band's widest viewport with no scrollbar). Each band is a <source media=\"(min-width: N)\"> (the narrowest is the <img>) whose srcset lists only real files >= 2x that slot, so the file a DPR 1 browser picks (the smallest one) holds 2x; neighbouring bands with the same list merge. `sizes` states the true slot. \"planned_*\" and \"delivery_r3\" entries are calculations from the CSS model, not measurements; \"controller_receipt_*\" entries are the controller's native measurements. tests/franklinwh/imageDelivery.test.ts sweeps every viewport 320-1728 plus each band edge - 0.01px on both routes. Gate: max(cssW/fileW, cssH/fileH) x max(2, DPR) <= 1. Native proof of round 3 is DEFERRED to the controller.",
  "target_density": 2,
  "images": {
   "apower-s-installation": {
@@ -14,185 +14,41 @@
     3024
    ],
    "variants": {
+    "apower-s-installation-900.webp": {
+     "w": 900,
+     "h": 675,
+     "bytes": 91728,
+     "sha256": "209c481ad0ca72c1eeec23bb6ce725bfe327bf70af8d92e6c33465600e5cf696"
+    },
     "apower-s-installation-1300.webp": {
      "w": 1300,
      "h": 975,
      "bytes": 173584,
      "sha256": "921e56f590a4904f1c02fe1f6b68fb37a33aa2b8ce491c545b6954bb5fcebfa7"
     },
+    "apower-s-installation-1500.webp": {
+     "w": 1500,
+     "h": 1125,
+     "bytes": 221966,
+     "sha256": "cde103b8f0b28c5c2c8ba61149e31028858c26a52c08022fcdf4404f334579f1"
+    },
     "apower-s-installation-1800.webp": {
      "w": 1800,
      "h": 1350,
      "bytes": 292836,
      "sha256": "1635321170e1801d0214fc2cf5eaf1ecf4d0ec708737fec21a22763c7725b733"
+    },
+    "apower-s-installation-2000.webp": {
+     "w": 2000,
+     "h": 1500,
+     "bytes": 349346,
+     "sha256": "d0c537d275691227d975b768acf5225f0d7d347b12ab45ae3ba759c3740f29a6"
     }
    },
    "section": "hero",
    "fit": "cover 16:10 crop, object-position 50% 62%",
    "retired_variants": {
     "apower-s-installation-800.webp": "Removed in round 2. At DPR 1 the browser chose this 1x file for the desktop slot (controller receipt below); no srcset now offers it."
-   },
-   "srcset_widths": [
-    1300,
-    1800
-   ],
-   "planned_r2": {
-    "1440@1x": {
-     "css": [
-      630,
-      393.75
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 2,
-     "ratio": 0.969,
-     "pass": true
-    },
-    "1440@2x": {
-     "css": [
-      630,
-      393.75
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 2,
-     "ratio": 0.969,
-     "pass": true
-    },
-    "1440@3x": {
-     "css": [
-      630,
-      393.75
-     ],
-     "expected_pick": [
-      1800,
-      1350
-     ],
-     "target": 3,
-     "ratio": 1.05,
-     "pass": false
-    },
-    "1024@1x": {
-     "css": [
-      527.9,
-      329.9
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 2,
-     "ratio": 0.812,
-     "pass": true
-    },
-    "1024@2x": {
-     "css": [
-      527.9,
-      329.9
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 2,
-     "ratio": 0.812,
-     "pass": true
-    },
-    "1024@3x": {
-     "css": [
-      527.9,
-      329.9
-     ],
-     "expected_pick": [
-      1800,
-      1350
-     ],
-     "target": 3,
-     "ratio": 0.88,
-     "pass": true
-    },
-    "390@1x": {
-     "css": [
-      335,
-      209.4
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 2,
-     "ratio": 0.515,
-     "pass": true
-    },
-    "390@2x": {
-     "css": [
-      335,
-      209.4
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 2,
-     "ratio": 0.515,
-     "pass": true
-    },
-    "390@3x": {
-     "css": [
-      335,
-      209.4
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 3,
-     "ratio": 0.773,
-     "pass": true
-    },
-    "320@1x": {
-     "css": [
-      265,
-      165.6
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 2,
-     "ratio": 0.408,
-     "pass": true
-    },
-    "320@2x": {
-     "css": [
-      265,
-      165.6
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 2,
-     "ratio": 0.408,
-     "pass": true
-    },
-    "320@3x": {
-     "css": [
-      265,
-      165.6
-     ],
-     "expected_pick": [
-      1300,
-      975
-     ],
-     "target": 3,
-     "ratio": 0.612,
-     "pass": true
-    }
    },
    "controller_receipt_r1": {
     "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
@@ -208,7 +64,489 @@
     "ratio": 1.575,
     "pass": false
    },
-   "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
+   "added_r3": [
+    "apower-s-installation-900.webp",
+    "apower-s-installation-1500.webp",
+    "apower-s-installation-2000.webp"
+   ],
+   "srcset_widths": [
+    900,
+    1300,
+    1500,
+    1800,
+    2000
+   ],
+   "controller_receipt_r2": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/{a,b}-{320,360,390,768,1024,1440,1728}-r2-images.json (decoded currentSrc, DPR 1, target 2; routes a and b identical)",
+    "by_viewport": {
+     "320": {
+      "css": [
+       272.3,
+       170.2
+      ],
+      "delivered": [
+       1300,
+       975
+      ],
+      "ratio": 0.419,
+      "pass": true
+     },
+     "360": {
+      "css": [
+       305,
+       190.6
+      ],
+      "delivered": [
+       1300,
+       975
+      ],
+      "ratio": 0.469,
+      "pass": true
+     },
+     "390": {
+      "css": [
+       335,
+       209.4
+      ],
+      "delivered": [
+       1300,
+       975
+      ],
+      "ratio": 0.515,
+      "pass": true
+     },
+     "768": {
+      "css": [
+       713,
+       445.6
+      ],
+      "delivered": [
+       1300,
+       975
+      ],
+      "ratio": 1.097,
+      "pass": false
+     },
+     "1024": {
+      "css": [
+       527.9,
+       329.9
+      ],
+      "delivered": [
+       1300,
+       975
+      ],
+      "ratio": 0.812,
+      "pass": true
+     },
+     "1440": {
+      "css": [
+       630,
+       393.8
+      ],
+      "delivered": [
+       1300,
+       975
+      ],
+      "ratio": 0.969,
+      "pass": true
+     },
+     "1728": {
+      "css": [
+       630,
+       393.8
+      ],
+      "delivered": [
+       1300,
+       975
+      ],
+      "ratio": 0.969,
+      "pass": true
+     }
+    },
+    "routes_identical": true,
+    "failed": [
+     "768"
+    ]
+   },
+   "delivery_r3": [
+    {
+     "media": "(min-width: 1024px)",
+     "viewports": "1024-1728px",
+     "srcset_widths": [
+      1300,
+      1500,
+      1800,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 639.3,
+     "dpr1_pick": "apower-s-installation-1300.webp",
+     "dpr1_pick_px": [
+      1300,
+      975
+     ],
+     "dpr1_pick_bytes": 173584,
+     "ratio_at_2x": 0.984,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.959
+    },
+    {
+     "media": "(min-width: 768px)",
+     "viewports": "768-1023px",
+     "srcset_widths": [
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 984,
+     "dpr1_pick": "apower-s-installation-2000.webp",
+     "dpr1_pick_px": [
+      2000,
+      1500
+     ],
+     "dpr1_pick_bytes": 349346,
+     "ratio_at_2x": 0.984,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.476
+    },
+    {
+     "media": "(min-width: 640px)",
+     "viewports": "640-767px",
+     "srcset_widths": [
+      1500,
+      1800,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 728,
+     "dpr1_pick": "apower-s-installation-1500.webp",
+     "dpr1_pick_px": [
+      1500,
+      1125
+     ],
+     "dpr1_pick_bytes": 221966,
+     "ratio_at_2x": 0.971,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.092
+    },
+    {
+     "media": "(min-width: 480px)",
+     "viewports": "480-639px",
+     "srcset_widths": [
+      1300,
+      1500,
+      1800,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 600,
+     "dpr1_pick": "apower-s-installation-1300.webp",
+     "dpr1_pick_px": [
+      1300,
+      975
+     ],
+     "dpr1_pick_bytes": 173584,
+     "ratio_at_2x": 0.923,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.9
+    },
+    {
+     "media": "<img> (no media)",
+     "viewports": "320-479px",
+     "srcset_widths": [
+      900,
+      1300,
+      1500,
+      1800,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 440,
+     "dpr1_pick": "apower-s-installation-900.webp",
+     "dpr1_pick_px": [
+      900,
+      675
+     ],
+     "dpr1_pick_bytes": 91728,
+     "ratio_at_2x": 0.978,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.66
+    }
+   ],
+   "planned_r3_nominal": {
+    "note": "Calculation, not a measurement: band chosen by viewport, slot from clientWidth = viewport - 15 (scrollbar), DPR 1 picks the smallest file in the band, target 2.",
+    "320@1x (client 305)": {
+     "css": [
+      265,
+      165.6
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.589
+    },
+    "360@1x (client 345)": {
+     "css": [
+      305,
+      190.6
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.678
+    },
+    "390@1x (client 375)": {
+     "css": [
+      335,
+      209.4
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.744
+    },
+    "640@1x (client 625)": {
+     "css": [
+      585,
+      365.6
+     ],
+     "expected_pick": [
+      1500,
+      1125
+     ],
+     "ratio": 0.78
+    },
+    "641@1x (client 626)": {
+     "css": [
+      586,
+      366.3
+     ],
+     "expected_pick": [
+      1500,
+      1125
+     ],
+     "ratio": 0.781
+    },
+    "768@1x (client 753)": {
+     "css": [
+      713,
+      445.6
+     ],
+     "expected_pick": [
+      2000,
+      1500
+     ],
+     "ratio": 0.713
+    },
+    "1023@1x (client 1008)": {
+     "css": [
+      968,
+      605
+     ],
+     "expected_pick": [
+      2000,
+      1500
+     ],
+     "ratio": 0.968
+    },
+    "1024@1x (client 1009)": {
+     "css": [
+      527.9,
+      329.9
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "ratio": 0.812
+    },
+    "1440@1x (client 1425)": {
+     "css": [
+      630,
+      393.8
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "ratio": 0.969
+    },
+    "1728@1x (client 1713)": {
+     "css": [
+      630,
+      393.8
+     ],
+     "expected_pick": [
+      1300,
+      975
+     ],
+     "ratio": 0.969
+    }
+   },
+   "native_r3": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build.",
+   "superseded_r2_plan": {
+    "srcset_widths": [
+     1300,
+     1800
+    ],
+    "planned_r2": {
+     "1440@1x": {
+      "css": [
+       630,
+       393.75
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 2,
+      "ratio": 0.969,
+      "pass": true
+     },
+     "1440@2x": {
+      "css": [
+       630,
+       393.75
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 2,
+      "ratio": 0.969,
+      "pass": true
+     },
+     "1440@3x": {
+      "css": [
+       630,
+       393.75
+      ],
+      "expected_pick": [
+       1800,
+       1350
+      ],
+      "target": 3,
+      "ratio": 1.05,
+      "pass": false
+     },
+     "1024@1x": {
+      "css": [
+       527.9,
+       329.9
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 2,
+      "ratio": 0.812,
+      "pass": true
+     },
+     "1024@2x": {
+      "css": [
+       527.9,
+       329.9
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 2,
+      "ratio": 0.812,
+      "pass": true
+     },
+     "1024@3x": {
+      "css": [
+       527.9,
+       329.9
+      ],
+      "expected_pick": [
+       1800,
+       1350
+      ],
+      "target": 3,
+      "ratio": 0.88,
+      "pass": true
+     },
+     "390@1x": {
+      "css": [
+       335,
+       209.4
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 2,
+      "ratio": 0.515,
+      "pass": true
+     },
+     "390@2x": {
+      "css": [
+       335,
+       209.4
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 2,
+      "ratio": 0.515,
+      "pass": true
+     },
+     "390@3x": {
+      "css": [
+       335,
+       209.4
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 3,
+      "ratio": 0.773,
+      "pass": true
+     },
+     "320@1x": {
+      "css": [
+       265,
+       165.6
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 2,
+      "ratio": 0.408,
+      "pass": true
+     },
+     "320@2x": {
+      "css": [
+       265,
+       165.6
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 2,
+      "ratio": 0.408,
+      "pass": true
+     },
+     "320@3x": {
+      "css": [
+       265,
+       165.6
+      ],
+      "expected_pick": [
+       1300,
+       975
+      ],
+      "target": 3,
+      "ratio": 0.612,
+      "pass": true
+     }
+    },
+    "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
+   }
   },
   "agate": {
    "source": "manufacturer-assets/agate-product-original.png",
@@ -234,167 +572,6 @@
    "retired_variants": {
     "agate-700.webp": "Removed in round 2. At DPR 1 the browser chose this 1x file for the desktop slot (controller receipt below); no srcset now offers it."
    },
-   "srcset_widths": [
-    1200
-   ],
-   "planned_r2": {
-    "1440@1x": {
-     "css": [
-      440,
-      382.2
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 2,
-     "ratio": 0.734,
-     "pass": true
-    },
-    "1440@2x": {
-     "css": [
-      440,
-      382.2
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 2,
-     "ratio": 0.734,
-     "pass": true
-    },
-    "1440@3x": {
-     "css": [
-      440,
-      382.2
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 3,
-     "ratio": 1.1,
-     "pass": false
-    },
-    "1024@1x": {
-     "css": [
-      344.5,
-      299.2
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 2,
-     "ratio": 0.574,
-     "pass": true
-    },
-    "1024@2x": {
-     "css": [
-      344.5,
-      299.2
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 2,
-     "ratio": 0.574,
-     "pass": true
-    },
-    "1024@3x": {
-     "css": [
-      344.5,
-      299.2
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 3,
-     "ratio": 0.861,
-     "pass": true
-    },
-    "390@1x": {
-     "css": [
-      271,
-      235.3
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 2,
-     "ratio": 0.452,
-     "pass": true
-    },
-    "390@2x": {
-     "css": [
-      271,
-      235.3
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 2,
-     "ratio": 0.452,
-     "pass": true
-    },
-    "390@3x": {
-     "css": [
-      271,
-      235.3
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 3,
-     "ratio": 0.677,
-     "pass": true
-    },
-    "320@1x": {
-     "css": [
-      201,
-      174.5
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 2,
-     "ratio": 0.335,
-     "pass": true
-    },
-    "320@2x": {
-     "css": [
-      201,
-      174.5
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 2,
-     "ratio": 0.335,
-     "pass": true
-    },
-    "320@3x": {
-     "css": [
-      201,
-      174.5
-     ],
-     "expected_pick": [
-      1200,
-      1042
-     ],
-     "target": 3,
-     "ratio": 0.503,
-     "pass": true
-    }
-   },
    "controller_receipt_r1": {
     "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
     "viewport": "1440 (clientWidth 1425), DPR 1",
@@ -409,7 +586,399 @@
     "ratio": 1.257,
     "pass": false
    },
-   "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
+   "added_r3": [],
+   "srcset_widths": [
+    1200
+   ],
+   "controller_receipt_r2": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/{a,b}-{320,360,390,768,1024,1440,1728}-r2-images.json (decoded currentSrc, DPR 1, target 2; routes a and b identical)",
+    "by_viewport": {
+     "320": {
+      "css": [
+       201,
+       174.5
+      ],
+      "delivered": [
+       1200,
+       1042
+      ],
+      "ratio": 0.335,
+      "pass": true
+     },
+     "360": {
+      "css": [
+       241,
+       209.3
+      ],
+      "delivered": [
+       1200,
+       1042
+      ],
+      "ratio": 0.402,
+      "pass": true
+     },
+     "390": {
+      "css": [
+       271,
+       235.3
+      ],
+      "delivered": [
+       1200,
+       1042
+      ],
+      "ratio": 0.452,
+      "pass": true
+     },
+     "768": {
+      "css": [
+       440,
+       382.1
+      ],
+      "delivered": [
+       1200,
+       1042
+      ],
+      "ratio": 0.733,
+      "pass": true
+     },
+     "1024": {
+      "css": [
+       344.5,
+       299.1
+      ],
+      "delivered": [
+       1200,
+       1042
+      ],
+      "ratio": 0.574,
+      "pass": true
+     },
+     "1440": {
+      "css": [
+       440,
+       382.1
+      ],
+      "delivered": [
+       1200,
+       1042
+      ],
+      "ratio": 0.733,
+      "pass": true
+     },
+     "1728": {
+      "css": [
+       440,
+       382.1
+      ],
+      "delivered": [
+       1200,
+       1042
+      ],
+      "ratio": 0.733,
+      "pass": true
+     }
+    },
+    "routes_identical": true,
+    "failed": []
+   },
+   "delivery_r3": [
+    {
+     "media": "<img> (no media)",
+     "viewports": "320-1728px",
+     "srcset_widths": [
+      1200
+     ],
+     "max_slot_css_no_scrollbar": 440,
+     "dpr1_pick": "agate-1200.webp",
+     "dpr1_pick_px": [
+      1200,
+      1042
+     ],
+     "dpr1_pick_bytes": 159924,
+     "ratio_at_2x": 0.733,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.1
+    }
+   ],
+   "planned_r3_nominal": {
+    "note": "Calculation, not a measurement: band chosen by viewport, slot from clientWidth = viewport - 15 (scrollbar), DPR 1 picks the smallest file in the band, target 2.",
+    "320@1x (client 305)": {
+     "css": [
+      201,
+      174.5
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.335
+    },
+    "360@1x (client 345)": {
+     "css": [
+      241,
+      209.3
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.402
+    },
+    "390@1x (client 375)": {
+     "css": [
+      271,
+      235.3
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.452
+    },
+    "640@1x (client 625)": {
+     "css": [
+      440,
+      382.1
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.733
+    },
+    "641@1x (client 626)": {
+     "css": [
+      440,
+      382.1
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.733
+    },
+    "768@1x (client 753)": {
+     "css": [
+      440,
+      382.1
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.733
+    },
+    "1023@1x (client 1008)": {
+     "css": [
+      440,
+      382.1
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.733
+    },
+    "1024@1x (client 1009)": {
+     "css": [
+      344.5,
+      299.1
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.574
+    },
+    "1440@1x (client 1425)": {
+     "css": [
+      440,
+      382.1
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.733
+    },
+    "1728@1x (client 1713)": {
+     "css": [
+      440,
+      382.1
+     ],
+     "expected_pick": [
+      1200,
+      1042
+     ],
+     "ratio": 0.733
+    }
+   },
+   "native_r3": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build.",
+   "superseded_r2_plan": {
+    "srcset_widths": [
+     1200
+    ],
+    "planned_r2": {
+     "1440@1x": {
+      "css": [
+       440,
+       382.2
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 2,
+      "ratio": 0.734,
+      "pass": true
+     },
+     "1440@2x": {
+      "css": [
+       440,
+       382.2
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 2,
+      "ratio": 0.734,
+      "pass": true
+     },
+     "1440@3x": {
+      "css": [
+       440,
+       382.2
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 3,
+      "ratio": 1.1,
+      "pass": false
+     },
+     "1024@1x": {
+      "css": [
+       344.5,
+       299.2
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 2,
+      "ratio": 0.574,
+      "pass": true
+     },
+     "1024@2x": {
+      "css": [
+       344.5,
+       299.2
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 2,
+      "ratio": 0.574,
+      "pass": true
+     },
+     "1024@3x": {
+      "css": [
+       344.5,
+       299.2
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 3,
+      "ratio": 0.861,
+      "pass": true
+     },
+     "390@1x": {
+      "css": [
+       271,
+       235.3
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 2,
+      "ratio": 0.452,
+      "pass": true
+     },
+     "390@2x": {
+      "css": [
+       271,
+       235.3
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 2,
+      "ratio": 0.452,
+      "pass": true
+     },
+     "390@3x": {
+      "css": [
+       271,
+       235.3
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 3,
+      "ratio": 0.677,
+      "pass": true
+     },
+     "320@1x": {
+      "css": [
+       201,
+       174.5
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 2,
+      "ratio": 0.335,
+      "pass": true
+     },
+     "320@2x": {
+      "css": [
+       201,
+       174.5
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 2,
+      "ratio": 0.335,
+      "pass": true
+     },
+     "320@3x": {
+      "css": [
+       201,
+       174.5
+      ],
+      "expected_pick": [
+       1200,
+       1042
+      ],
+      "target": 3,
+      "ratio": 0.503,
+      "pass": true
+     }
+    },
+    "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
+   },
+   "r3_check": "No change needed: max-width 440px caps the slot at every viewport, so the existing 1200x1042 file is >= 2x everywhere (worst 0.733 at 440 CSS px). sizes now states the 440px cap from 544px instead of calc(100vw - 104px)."
   },
   "apower-2-and-agate": {
    "source": "manufacturer-assets/apower-2-and-agate-original.png",
@@ -423,204 +992,35 @@
     3115
    ],
    "variants": {
+    "apower-2-and-agate-900.webp": {
+     "w": 900,
+     "h": 680,
+     "bytes": 39654,
+     "sha256": "43ef0ae1875c71630f4eb9313fac4180ab9a93610f47acccad7d7db527ebc3b9"
+    },
     "apower-2-and-agate-1300.webp": {
      "w": 1300,
      "h": 982,
      "bytes": 70894,
      "sha256": "195aa8ea1d1abe0b2263a84b1a059d045821f81566cac7a9b6aab6c2376e360d"
+    },
+    "apower-2-and-agate-1500.webp": {
+     "w": 1500,
+     "h": 1133,
+     "bytes": 105462,
+     "sha256": "39f20e81e00c82f0b551284e0e6e43fc2bb9c347d911a3bd8835b06d2aaa9165"
+    },
+    "apower-2-and-agate-2000.webp": {
+     "w": 2000,
+     "h": 1511,
+     "bytes": 193882,
+     "sha256": "61fec17a41fa0784df68faf4195ba13267591e060b85c30ec7ca19e77d75a000"
     }
    },
    "section": "product-family",
    "fit": "contain (transparent render)",
    "retired_variants": {
     "apower-2-and-agate-800.webp": "Removed in round 2. At DPR 1 the browser chose this 1x file for the desktop slot (controller receipt below); no srcset now offers it."
-   },
-   "srcset_widths": [
-    1300
-   ],
-   "planned_r2": {
-    "1440@1x": {
-     "css": [
-      625.3,
-      472.1
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.962,
-     "pass": true
-    },
-    "1440@2x": {
-     "css": [
-      625.3,
-      472.1
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.962,
-     "pass": true
-    },
-    "1440@3x": {
-     "css": [
-      625.3,
-      472.1
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 3,
-     "ratio": 1.443,
-     "pass": false
-    },
-    "1024@1x": {
-     "css": [
-      527.9,
-      398.8
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.812,
-     "pass": true
-    },
-    "1024@2x": {
-     "css": [
-      527.9,
-      398.8
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.812,
-     "pass": true
-    },
-    "1024@3x": {
-     "css": [
-      527.9,
-      398.8
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 3,
-     "ratio": 1.218,
-     "pass": false
-    },
-    "390@1x": {
-     "css": [
-      335,
-      253.1
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.515,
-     "pass": true
-    },
-    "390@2x": {
-     "css": [
-      335,
-      253.1
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.515,
-     "pass": true
-    },
-    "390@3x": {
-     "css": [
-      335,
-      253.1
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 3,
-     "ratio": 0.773,
-     "pass": true
-    },
-    "320@1x": {
-     "css": [
-      265,
-      200.2
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.408,
-     "pass": true
-    },
-    "320@2x": {
-     "css": [
-      265,
-      200.2
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.408,
-     "pass": true
-    },
-    "320@3x": {
-     "css": [
-      265,
-      200.2
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 3,
-     "ratio": 0.612,
-     "pass": true
-    },
-    "1264@1x": {
-     "css": [
-      639,
-      482.7
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.983,
-     "pass": true
-    },
-    "1264@2x": {
-     "css": [
-      639,
-      482.7
-     ],
-     "expected_pick": [
-      1300,
-      982
-     ],
-     "target": 2,
-     "ratio": 0.983,
-     "pass": true
-    }
    },
    "controller_receipt_r1": {
     "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
@@ -636,7 +1036,509 @@
     "ratio": 1.563,
     "pass": false
    },
-   "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
+   "added_r3": [
+    "apower-2-and-agate-900.webp",
+    "apower-2-and-agate-1500.webp",
+    "apower-2-and-agate-2000.webp"
+   ],
+   "srcset_widths": [
+    900,
+    1300,
+    1500,
+    2000
+   ],
+   "controller_receipt_r2": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/{a,b}-{320,360,390,768,1024,1440,1728}-r2-images.json (decoded currentSrc, DPR 1, target 2; routes a and b identical)",
+    "by_viewport": {
+     "320": {
+      "css": [
+       265,
+       200.2
+      ],
+      "delivered": [
+       1300,
+       982
+      ],
+      "ratio": 0.408,
+      "pass": true
+     },
+     "360": {
+      "css": [
+       305,
+       230.4
+      ],
+      "delivered": [
+       1300,
+       982
+      ],
+      "ratio": 0.469,
+      "pass": true
+     },
+     "390": {
+      "css": [
+       335,
+       253.0
+      ],
+      "delivered": [
+       1300,
+       982
+      ],
+      "ratio": 0.515,
+      "pass": true
+     },
+     "768": {
+      "css": [
+       713,
+       538.6
+      ],
+      "delivered": [
+       1300,
+       982
+      ],
+      "ratio": 1.097,
+      "pass": false
+     },
+     "1024": {
+      "css": [
+       527.9,
+       398.8
+      ],
+      "delivered": [
+       1300,
+       982
+      ],
+      "ratio": 0.812,
+      "pass": true
+     },
+     "1440": {
+      "css": [
+       625.3,
+       472.4
+      ],
+      "delivered": [
+       1300,
+       982
+      ],
+      "ratio": 0.962,
+      "pass": true
+     },
+     "1728": {
+      "css": [
+       625.3,
+       472.4
+      ],
+      "delivered": [
+       1300,
+       982
+      ],
+      "ratio": 0.962,
+      "pass": true
+     }
+    },
+    "routes_identical": true,
+    "failed": [
+     "768"
+    ]
+   },
+   "delivery_r3": [
+    {
+     "media": "(min-width: 1024px)",
+     "viewports": "1024-1728px",
+     "srcset_widths": [
+      1300,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 639.3,
+     "dpr1_pick": "apower-2-and-agate-1300.webp",
+     "dpr1_pick_px": [
+      1300,
+      982
+     ],
+     "dpr1_pick_bytes": 70894,
+     "ratio_at_2x": 0.984,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.959
+    },
+    {
+     "media": "(min-width: 768px)",
+     "viewports": "768-1023px",
+     "srcset_widths": [
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 984,
+     "dpr1_pick": "apower-2-and-agate-2000.webp",
+     "dpr1_pick_px": [
+      2000,
+      1511
+     ],
+     "dpr1_pick_bytes": 193882,
+     "ratio_at_2x": 0.984,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.476
+    },
+    {
+     "media": "(min-width: 640px)",
+     "viewports": "640-767px",
+     "srcset_widths": [
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 728,
+     "dpr1_pick": "apower-2-and-agate-1500.webp",
+     "dpr1_pick_px": [
+      1500,
+      1133
+     ],
+     "dpr1_pick_bytes": 105462,
+     "ratio_at_2x": 0.971,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.092
+    },
+    {
+     "media": "(min-width: 480px)",
+     "viewports": "480-639px",
+     "srcset_widths": [
+      1300,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 600,
+     "dpr1_pick": "apower-2-and-agate-1300.webp",
+     "dpr1_pick_px": [
+      1300,
+      982
+     ],
+     "dpr1_pick_bytes": 70894,
+     "ratio_at_2x": 0.923,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.9
+    },
+    {
+     "media": "<img> (no media)",
+     "viewports": "320-479px",
+     "srcset_widths": [
+      900,
+      1300,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 440,
+     "dpr1_pick": "apower-2-and-agate-900.webp",
+     "dpr1_pick_px": [
+      900,
+      680
+     ],
+     "dpr1_pick_bytes": 39654,
+     "ratio_at_2x": 0.978,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.66
+    }
+   ],
+   "planned_r3_nominal": {
+    "note": "Calculation, not a measurement: band chosen by viewport, slot from clientWidth = viewport - 15 (scrollbar), DPR 1 picks the smallest file in the band, target 2.",
+    "320@1x (client 305)": {
+     "css": [
+      265,
+      200.2
+     ],
+     "expected_pick": [
+      900,
+      680
+     ],
+     "ratio": 0.589
+    },
+    "360@1x (client 345)": {
+     "css": [
+      305,
+      230.4
+     ],
+     "expected_pick": [
+      900,
+      680
+     ],
+     "ratio": 0.678
+    },
+    "390@1x (client 375)": {
+     "css": [
+      335,
+      253.1
+     ],
+     "expected_pick": [
+      900,
+      680
+     ],
+     "ratio": 0.744
+    },
+    "640@1x (client 625)": {
+     "css": [
+      585,
+      442
+     ],
+     "expected_pick": [
+      1500,
+      1133
+     ],
+     "ratio": 0.78
+    },
+    "641@1x (client 626)": {
+     "css": [
+      586,
+      442.7
+     ],
+     "expected_pick": [
+      1500,
+      1133
+     ],
+     "ratio": 0.782
+    },
+    "768@1x (client 753)": {
+     "css": [
+      713,
+      538.7
+     ],
+     "expected_pick": [
+      2000,
+      1511
+     ],
+     "ratio": 0.713
+    },
+    "1023@1x (client 1008)": {
+     "css": [
+      968,
+      731.3
+     ],
+     "expected_pick": [
+      2000,
+      1511
+     ],
+     "ratio": 0.968
+    },
+    "1024@1x (client 1009)": {
+     "css": [
+      527.9,
+      398.9
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "ratio": 0.812
+    },
+    "1440@1x (client 1425)": {
+     "css": [
+      625.3,
+      472.5
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "ratio": 0.962
+    },
+    "1728@1x (client 1713)": {
+     "css": [
+      625.3,
+      472.5
+     ],
+     "expected_pick": [
+      1300,
+      982
+     ],
+     "ratio": 0.962
+    }
+   },
+   "native_r3": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build.",
+   "superseded_r2_plan": {
+    "srcset_widths": [
+     1300
+    ],
+    "planned_r2": {
+     "1440@1x": {
+      "css": [
+       625.3,
+       472.1
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.962,
+      "pass": true
+     },
+     "1440@2x": {
+      "css": [
+       625.3,
+       472.1
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.962,
+      "pass": true
+     },
+     "1440@3x": {
+      "css": [
+       625.3,
+       472.1
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 3,
+      "ratio": 1.443,
+      "pass": false
+     },
+     "1024@1x": {
+      "css": [
+       527.9,
+       398.8
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.812,
+      "pass": true
+     },
+     "1024@2x": {
+      "css": [
+       527.9,
+       398.8
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.812,
+      "pass": true
+     },
+     "1024@3x": {
+      "css": [
+       527.9,
+       398.8
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 3,
+      "ratio": 1.218,
+      "pass": false
+     },
+     "390@1x": {
+      "css": [
+       335,
+       253.1
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.515,
+      "pass": true
+     },
+     "390@2x": {
+      "css": [
+       335,
+       253.1
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.515,
+      "pass": true
+     },
+     "390@3x": {
+      "css": [
+       335,
+       253.1
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 3,
+      "ratio": 0.773,
+      "pass": true
+     },
+     "320@1x": {
+      "css": [
+       265,
+       200.2
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.408,
+      "pass": true
+     },
+     "320@2x": {
+      "css": [
+       265,
+       200.2
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.408,
+      "pass": true
+     },
+     "320@3x": {
+      "css": [
+       265,
+       200.2
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 3,
+      "ratio": 0.612,
+      "pass": true
+     },
+     "1264@1x": {
+      "css": [
+       639,
+       482.7
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.983,
+      "pass": true
+     },
+     "1264@2x": {
+      "css": [
+       639,
+       482.7
+      ],
+      "expected_pick": [
+       1300,
+       982
+      ],
+      "target": 2,
+      "ratio": 0.983,
+      "pass": true
+     }
+    },
+    "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
+   }
   },
   "marquette-franklinwh-equipment": {
    "source": "client-assets/Arnold_IMG_6898.jpg",
@@ -667,66 +1569,22 @@
      "h": 1050,
      "bytes": 89584,
      "sha256": "8198ccfe10fa19b1fcb018c2e9b80933c8f79ea0d300f56a0ecbcfaeb4d634b2"
+    },
+    "marquette-franklinwh-equipment-1500.webp": {
+     "w": 1500,
+     "h": 1125,
+     "bytes": 99640,
+     "sha256": "90b568a9c894dc20bce7b896cfea9ab048ac7ca53cb57323434f58d9487facb5"
+    },
+    "marquette-franklinwh-equipment-2000.webp": {
+     "w": 2000,
+     "h": 1500,
+     "bytes": 158164,
+     "sha256": "75d80701e312c70ff241558e54a030ec3ad7984fe00ac0d0bf00e34a05cfa92f"
     }
    },
    "section": "marquette-project",
    "fit": "uncropped 4:3",
-   "desktop_css": [
-    432,
-    324
-   ],
-   "mobile_css": [
-    350,
-    263
-   ],
-   "desktop_gate_2x": {
-    "needs_px": [
-     864,
-     648
-    ],
-    "srcset_pick": [
-     900,
-     675
-    ],
-    "ratio": 0.96,
-    "pass": true
-   },
-   "desktop_gate_3x": {
-    "needs_px": [
-     1296,
-     972
-    ],
-    "srcset_pick": [
-     1400,
-     1050
-    ],
-    "ratio": 0.926,
-    "pass": true
-   },
-   "mobile_gate_2x": {
-    "needs_px": [
-     700,
-     526
-    ],
-    "srcset_pick": [
-     900,
-     675
-    ],
-    "ratio": 0.779,
-    "pass": true
-   },
-   "mobile_gate_3x": {
-    "needs_px": [
-     1050,
-     789
-    ],
-    "srcset_pick": [
-     1200,
-     900
-    ],
-    "ratio": 0.877,
-    "pass": true
-   },
    "controller_receipt_r1": {
     "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
     "viewport": "1440 (clientWidth 1425), DPR 1",
@@ -740,6 +1598,381 @@
     ],
     "ratio": 0.957,
     "pass": true
+   },
+   "added_r3": [
+    "marquette-franklinwh-equipment-1500.webp",
+    "marquette-franklinwh-equipment-2000.webp"
+   ],
+   "srcset_widths": [
+    900,
+    1200,
+    1400,
+    1500,
+    2000
+   ],
+   "controller_receipt_r2": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/{a,b}-{320,360,390,768,1024,1440,1728}-r2-images.json (decoded currentSrc, DPR 1, target 2; routes a and b identical)",
+    "by_viewport": {
+     "320": {
+      "css": [
+       265,
+       198.8
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.589,
+      "pass": true
+     },
+     "360": {
+      "css": [
+       305,
+       228.8
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.678,
+      "pass": true
+     },
+     "390": {
+      "css": [
+       335,
+       251.2
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.744,
+      "pass": true
+     },
+     "768": {
+      "css": [
+       713,
+       534.8
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 1.584,
+      "pass": false
+     },
+     "1024": {
+      "css": [
+       356.3,
+       267.2
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.792,
+      "pass": true
+     },
+     "1440": {
+      "css": [
+       430.8,
+       323.1
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.957,
+      "pass": true
+     },
+     "1728": {
+      "css": [
+       430.8,
+       323.1
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.957,
+      "pass": true
+     }
+    },
+    "routes_identical": true,
+    "failed": [
+     "768"
+    ]
+   },
+   "delivery_r3": [
+    {
+     "media": "(min-width: 1024px)",
+     "viewports": "1024-1728px",
+     "srcset_widths": [
+      900,
+      1200,
+      1400,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 430.8,
+     "dpr1_pick": "marquette-franklinwh-equipment-900.webp",
+     "dpr1_pick_px": [
+      900,
+      675
+     ],
+     "dpr1_pick_bytes": 45646,
+     "ratio_at_2x": 0.957,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.646
+    },
+    {
+     "media": "(min-width: 768px)",
+     "viewports": "768-1023px",
+     "srcset_widths": [
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 984,
+     "dpr1_pick": "marquette-franklinwh-equipment-2000.webp",
+     "dpr1_pick_px": [
+      2000,
+      1500
+     ],
+     "dpr1_pick_bytes": 158164,
+     "ratio_at_2x": 0.984,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.476
+    },
+    {
+     "media": "(min-width: 640px)",
+     "viewports": "640-767px",
+     "srcset_widths": [
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 728,
+     "dpr1_pick": "marquette-franklinwh-equipment-1500.webp",
+     "dpr1_pick_px": [
+      1500,
+      1125
+     ],
+     "dpr1_pick_bytes": 99640,
+     "ratio_at_2x": 0.971,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.092
+    },
+    {
+     "media": "(min-width: 480px)",
+     "viewports": "480-639px",
+     "srcset_widths": [
+      1200,
+      1400,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 600,
+     "dpr1_pick": "marquette-franklinwh-equipment-1200.webp",
+     "dpr1_pick_px": [
+      1200,
+      900
+     ],
+     "dpr1_pick_bytes": 71732,
+     "ratio_at_2x": 1,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.9
+    },
+    {
+     "media": "<img> (no media)",
+     "viewports": "320-479px",
+     "srcset_widths": [
+      900,
+      1200,
+      1400,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 440,
+     "dpr1_pick": "marquette-franklinwh-equipment-900.webp",
+     "dpr1_pick_px": [
+      900,
+      675
+     ],
+     "dpr1_pick_bytes": 45646,
+     "ratio_at_2x": 0.978,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.66
+    }
+   ],
+   "planned_r3_nominal": {
+    "note": "Calculation, not a measurement: band chosen by viewport, slot from clientWidth = viewport - 15 (scrollbar), DPR 1 picks the smallest file in the band, target 2.",
+    "320@1x (client 305)": {
+     "css": [
+      265,
+      198.8
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.589
+    },
+    "360@1x (client 345)": {
+     "css": [
+      305,
+      228.8
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.678
+    },
+    "390@1x (client 375)": {
+     "css": [
+      335,
+      251.3
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.744
+    },
+    "640@1x (client 625)": {
+     "css": [
+      585,
+      438.8
+     ],
+     "expected_pick": [
+      1500,
+      1125
+     ],
+     "ratio": 0.78
+    },
+    "641@1x (client 626)": {
+     "css": [
+      586,
+      439.5
+     ],
+     "expected_pick": [
+      1500,
+      1125
+     ],
+     "ratio": 0.781
+    },
+    "768@1x (client 753)": {
+     "css": [
+      713,
+      534.8
+     ],
+     "expected_pick": [
+      2000,
+      1500
+     ],
+     "ratio": 0.713
+    },
+    "1023@1x (client 1008)": {
+     "css": [
+      968,
+      726
+     ],
+     "expected_pick": [
+      2000,
+      1500
+     ],
+     "ratio": 0.968
+    },
+    "1024@1x (client 1009)": {
+     "css": [
+      356.3,
+      267.2
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.792
+    },
+    "1440@1x (client 1425)": {
+     "css": [
+      430.8,
+      323.1
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.957
+    },
+    "1728@1x (client 1713)": {
+     "css": [
+      430.8,
+      323.1
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.957
+    }
+   },
+   "native_r3": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build.",
+   "superseded_r2_plan": {
+    "desktop_css": [
+     432,
+     324
+    ],
+    "mobile_css": [
+     350,
+     263
+    ],
+    "desktop_gate_2x": {
+     "needs_px": [
+      864,
+      648
+     ],
+     "srcset_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.96,
+     "pass": true
+    },
+    "desktop_gate_3x": {
+     "needs_px": [
+      1296,
+      972
+     ],
+     "srcset_pick": [
+      1400,
+      1050
+     ],
+     "ratio": 0.926,
+     "pass": true
+    },
+    "mobile_gate_2x": {
+     "needs_px": [
+      700,
+      526
+     ],
+     "srcset_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.779,
+     "pass": true
+    },
+    "mobile_gate_3x": {
+     "needs_px": [
+      1050,
+      789
+     ],
+     "srcset_pick": [
+      1200,
+      900
+     ],
+     "ratio": 0.877,
+     "pass": true
+    }
    }
   },
   "marquette-rooftop-array": {
@@ -771,66 +2004,22 @@
      "h": 1050,
      "bytes": 280388,
      "sha256": "81450bd8e37b45afce2ddedaf21656b22722bbbc9f52c66937a924222407b619"
+    },
+    "marquette-rooftop-array-1500.webp": {
+     "w": 1500,
+     "h": 1125,
+     "bytes": 311554,
+     "sha256": "068c6962814fba5559c616eb04ab6f0dbe5aab60ded3a3af2316e4247263023b"
+    },
+    "marquette-rooftop-array-2000.webp": {
+     "w": 2000,
+     "h": 1500,
+     "bytes": 499444,
+     "sha256": "2e7ade7ee69906b89d5b56e7cf14265c40978541fadfd44658a74d5b15a3789e"
     }
    },
    "section": "marquette-project",
    "fit": "uncropped 4:3",
-   "desktop_css": [
-    432,
-    324
-   ],
-   "mobile_css": [
-    350,
-    263
-   ],
-   "desktop_gate_2x": {
-    "needs_px": [
-     864,
-     648
-    ],
-    "srcset_pick": [
-     900,
-     675
-    ],
-    "ratio": 0.96,
-    "pass": true
-   },
-   "desktop_gate_3x": {
-    "needs_px": [
-     1296,
-     972
-    ],
-    "srcset_pick": [
-     1400,
-     1050
-    ],
-    "ratio": 0.926,
-    "pass": true
-   },
-   "mobile_gate_2x": {
-    "needs_px": [
-     700,
-     526
-    ],
-    "srcset_pick": [
-     900,
-     675
-    ],
-    "ratio": 0.779,
-    "pass": true
-   },
-   "mobile_gate_3x": {
-    "needs_px": [
-     1050,
-     789
-    ],
-    "srcset_pick": [
-     1200,
-     900
-    ],
-    "ratio": 0.877,
-    "pass": true
-   },
    "controller_receipt_r1": {
     "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
     "viewport": "1440 (clientWidth 1425), DPR 1",
@@ -844,6 +2033,381 @@
     ],
     "ratio": 0.957,
     "pass": true
+   },
+   "added_r3": [
+    "marquette-rooftop-array-1500.webp",
+    "marquette-rooftop-array-2000.webp"
+   ],
+   "srcset_widths": [
+    900,
+    1200,
+    1400,
+    1500,
+    2000
+   ],
+   "controller_receipt_r2": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/{a,b}-{320,360,390,768,1024,1440,1728}-r2-images.json (decoded currentSrc, DPR 1, target 2; routes a and b identical)",
+    "by_viewport": {
+     "320": {
+      "css": [
+       265,
+       198.8
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.589,
+      "pass": true
+     },
+     "360": {
+      "css": [
+       305,
+       228.8
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.678,
+      "pass": true
+     },
+     "390": {
+      "css": [
+       335,
+       251.2
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.744,
+      "pass": true
+     },
+     "768": {
+      "css": [
+       713,
+       534.8
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 1.584,
+      "pass": false
+     },
+     "1024": {
+      "css": [
+       356.3,
+       267.2
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.792,
+      "pass": true
+     },
+     "1440": {
+      "css": [
+       430.8,
+       323.1
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.957,
+      "pass": true
+     },
+     "1728": {
+      "css": [
+       430.8,
+       323.1
+      ],
+      "delivered": [
+       900,
+       675
+      ],
+      "ratio": 0.957,
+      "pass": true
+     }
+    },
+    "routes_identical": true,
+    "failed": [
+     "768"
+    ]
+   },
+   "delivery_r3": [
+    {
+     "media": "(min-width: 1024px)",
+     "viewports": "1024-1728px",
+     "srcset_widths": [
+      900,
+      1200,
+      1400,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 430.8,
+     "dpr1_pick": "marquette-rooftop-array-900.webp",
+     "dpr1_pick_px": [
+      900,
+      675
+     ],
+     "dpr1_pick_bytes": 130638,
+     "ratio_at_2x": 0.957,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.646
+    },
+    {
+     "media": "(min-width: 768px)",
+     "viewports": "768-1023px",
+     "srcset_widths": [
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 984,
+     "dpr1_pick": "marquette-rooftop-array-2000.webp",
+     "dpr1_pick_px": [
+      2000,
+      1500
+     ],
+     "dpr1_pick_bytes": 499444,
+     "ratio_at_2x": 0.984,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.476
+    },
+    {
+     "media": "(min-width: 640px)",
+     "viewports": "640-767px",
+     "srcset_widths": [
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 728,
+     "dpr1_pick": "marquette-rooftop-array-1500.webp",
+     "dpr1_pick_px": [
+      1500,
+      1125
+     ],
+     "dpr1_pick_bytes": 311554,
+     "ratio_at_2x": 0.971,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.092
+    },
+    {
+     "media": "(min-width: 480px)",
+     "viewports": "480-639px",
+     "srcset_widths": [
+      1200,
+      1400,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 600,
+     "dpr1_pick": "marquette-rooftop-array-1200.webp",
+     "dpr1_pick_px": [
+      1200,
+      900
+     ],
+     "dpr1_pick_bytes": 216130,
+     "ratio_at_2x": 1,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.9
+    },
+    {
+     "media": "<img> (no media)",
+     "viewports": "320-479px",
+     "srcset_widths": [
+      900,
+      1200,
+      1400,
+      1500,
+      2000
+     ],
+     "max_slot_css_no_scrollbar": 440,
+     "dpr1_pick": "marquette-rooftop-array-900.webp",
+     "dpr1_pick_px": [
+      900,
+      675
+     ],
+     "dpr1_pick_bytes": 130638,
+     "ratio_at_2x": 0.978,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.66
+    }
+   ],
+   "planned_r3_nominal": {
+    "note": "Calculation, not a measurement: band chosen by viewport, slot from clientWidth = viewport - 15 (scrollbar), DPR 1 picks the smallest file in the band, target 2.",
+    "320@1x (client 305)": {
+     "css": [
+      265,
+      198.8
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.589
+    },
+    "360@1x (client 345)": {
+     "css": [
+      305,
+      228.8
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.678
+    },
+    "390@1x (client 375)": {
+     "css": [
+      335,
+      251.3
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.744
+    },
+    "640@1x (client 625)": {
+     "css": [
+      585,
+      438.8
+     ],
+     "expected_pick": [
+      1500,
+      1125
+     ],
+     "ratio": 0.78
+    },
+    "641@1x (client 626)": {
+     "css": [
+      586,
+      439.5
+     ],
+     "expected_pick": [
+      1500,
+      1125
+     ],
+     "ratio": 0.781
+    },
+    "768@1x (client 753)": {
+     "css": [
+      713,
+      534.8
+     ],
+     "expected_pick": [
+      2000,
+      1500
+     ],
+     "ratio": 0.713
+    },
+    "1023@1x (client 1008)": {
+     "css": [
+      968,
+      726
+     ],
+     "expected_pick": [
+      2000,
+      1500
+     ],
+     "ratio": 0.968
+    },
+    "1024@1x (client 1009)": {
+     "css": [
+      356.3,
+      267.2
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.792
+    },
+    "1440@1x (client 1425)": {
+     "css": [
+      430.8,
+      323.1
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.957
+    },
+    "1728@1x (client 1713)": {
+     "css": [
+      430.8,
+      323.1
+     ],
+     "expected_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.957
+    }
+   },
+   "native_r3": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build.",
+   "superseded_r2_plan": {
+    "desktop_css": [
+     432,
+     324
+    ],
+    "mobile_css": [
+     350,
+     263
+    ],
+    "desktop_gate_2x": {
+     "needs_px": [
+      864,
+      648
+     ],
+     "srcset_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.96,
+     "pass": true
+    },
+    "desktop_gate_3x": {
+     "needs_px": [
+      1296,
+      972
+     ],
+     "srcset_pick": [
+      1400,
+      1050
+     ],
+     "ratio": 0.926,
+     "pass": true
+    },
+    "mobile_gate_2x": {
+     "needs_px": [
+      700,
+      526
+     ],
+     "srcset_pick": [
+      900,
+      675
+     ],
+     "ratio": 0.779,
+     "pass": true
+    },
+    "mobile_gate_3x": {
+     "needs_px": [
+      1050,
+      789
+     ],
+     "srcset_pick": [
+      1200,
+      900
+     ],
+     "ratio": 0.877,
+     "pass": true
+    }
    }
   },
   "marquette-racking-detail": {
@@ -864,6 +2428,12 @@
      "bytes": 75302,
      "sha256": "9f008e255db85eb40688e4599845691785c007800d128bc8de3c53657b8ac27d"
     },
+    "marquette-racking-detail-900.webp": {
+     "w": 900,
+     "h": 1200,
+     "bytes": 159582,
+     "sha256": "6addfdf8379e6a0928917d5f0df92221d52dad067004c8eee8ac54f5c1e96486"
+    },
     "marquette-racking-detail-1000.webp": {
      "w": 1000,
      "h": 1333,
@@ -875,66 +2445,16 @@
      "h": 1600,
      "bytes": 266794,
      "sha256": "ea9609aebb1dfc707923422d24294fc8478abf4f9ae9a084d32c1d15e15b2e60"
+    },
+    "marquette-racking-detail-1500.webp": {
+     "w": 1500,
+     "h": 2000,
+     "bytes": 406910,
+     "sha256": "0336feaf3dc3beefc320fbe5abed0074b974042a76d445ece2348c35fc6b42ce"
     }
    },
    "section": "marquette-project",
    "fit": "uncropped 3:4",
-   "desktop_css": [
-    243,
-    324
-   ],
-   "mobile_css": [
-    350,
-    467
-   ],
-   "desktop_gate_2x": {
-    "needs_px": [
-     486,
-     648
-    ],
-    "srcset_pick": [
-     600,
-     800
-    ],
-    "ratio": 0.81,
-    "pass": true
-   },
-   "desktop_gate_3x": {
-    "needs_px": [
-     729,
-     972
-    ],
-    "srcset_pick": [
-     1000,
-     1333
-    ],
-    "ratio": 0.729,
-    "pass": true
-   },
-   "mobile_gate_2x": {
-    "needs_px": [
-     700,
-     934
-    ],
-    "srcset_pick": [
-     1000,
-     1333
-    ],
-    "ratio": 0.701,
-    "pass": true
-   },
-   "mobile_gate_3x": {
-    "needs_px": [
-     1050,
-     1401
-    ],
-    "srcset_pick": [
-     1200,
-     1600
-    ],
-    "ratio": 0.876,
-    "pass": true
-   },
    "controller_receipt_r1": {
     "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
     "viewport": "1440 (clientWidth 1425), DPR 1",
@@ -948,7 +2468,364 @@
     ],
     "ratio": 0.808,
     "pass": true
-   }
+   },
+   "added_r3": [
+    "marquette-racking-detail-900.webp",
+    "marquette-racking-detail-1500.webp"
+   ],
+   "srcset_widths": [
+    600,
+    900,
+    1000,
+    1200,
+    1500
+   ],
+   "controller_receipt_r2": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/{a,b}-{320,360,390,768,1024,1440,1728}-r2-images.json (decoded currentSrc, DPR 1, target 2; routes a and b identical)",
+    "by_viewport": {
+     "320": {
+      "css": [
+       265,
+       353.3
+      ],
+      "delivered": [
+       600,
+       800
+      ],
+      "ratio": 0.883,
+      "pass": true
+     },
+     "360": {
+      "css": [
+       305,
+       406.7
+      ],
+      "delivered": [
+       600,
+       800
+      ],
+      "ratio": 1.017,
+      "pass": false
+     },
+     "390": {
+      "css": [
+       335,
+       446.7
+      ],
+      "delivered": [
+       600,
+       800
+      ],
+      "ratio": 1.117,
+      "pass": false
+     },
+     "768": {
+      "css": [
+       713,
+       950.4
+      ],
+      "delivered": [
+       1000,
+       1333
+      ],
+      "ratio": 1.426,
+      "pass": false
+     },
+     "1024": {
+      "css": [
+       200.4,
+       267.2
+      ],
+      "delivered": [
+       600,
+       800
+      ],
+      "ratio": 0.668,
+      "pass": true
+     },
+     "1440": {
+      "css": [
+       242.3,
+       323.1
+      ],
+      "delivered": [
+       600,
+       800
+      ],
+      "ratio": 0.808,
+      "pass": true
+     },
+     "1728": {
+      "css": [
+       242.3,
+       323.1
+      ],
+      "delivered": [
+       600,
+       800
+      ],
+      "ratio": 0.808,
+      "pass": true
+     }
+    },
+    "routes_identical": true,
+    "failed": [
+     "360",
+     "390",
+     "768"
+    ]
+   },
+   "delivery_r3": [
+    {
+     "media": "(min-width: 1024px)",
+     "viewports": "1024-1728px",
+     "srcset_widths": [
+      600,
+      900,
+      1000,
+      1200,
+      1500
+     ],
+     "max_slot_css_no_scrollbar": 242.3,
+     "dpr1_pick": "marquette-racking-detail-600.webp",
+     "dpr1_pick_px": [
+      600,
+      800
+     ],
+     "dpr1_pick_bytes": 75302,
+     "ratio_at_2x": 0.808,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.485
+    },
+    {
+     "media": "(min-width: 640px)",
+     "viewports": "640-1023px",
+     "srcset_widths": [
+      1500
+     ],
+     "max_slot_css_no_scrollbar": 750,
+     "dpr1_pick": "marquette-racking-detail-1500.webp",
+     "dpr1_pick_px": [
+      1500,
+      2000
+     ],
+     "dpr1_pick_bytes": 406910,
+     "ratio_at_2x": 1,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.5
+    },
+    {
+     "media": "(min-width: 480px)",
+     "viewports": "480-639px",
+     "srcset_widths": [
+      1200,
+      1500
+     ],
+     "max_slot_css_no_scrollbar": 600,
+     "dpr1_pick": "marquette-racking-detail-1200.webp",
+     "dpr1_pick_px": [
+      1200,
+      1600
+     ],
+     "dpr1_pick_bytes": 266794,
+     "ratio_at_2x": 1,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 1.2
+    },
+    {
+     "media": "<img> (no media)",
+     "viewports": "320-479px",
+     "srcset_widths": [
+      900,
+      1000,
+      1200,
+      1500
+     ],
+     "max_slot_css_no_scrollbar": 440,
+     "dpr1_pick": "marquette-racking-detail-900.webp",
+     "dpr1_pick_px": [
+      900,
+      1200
+     ],
+     "dpr1_pick_bytes": 159582,
+     "ratio_at_2x": 0.978,
+     "pass_2x": true,
+     "largest_offered_ratio_at_3x": 0.88
+    }
+   ],
+   "planned_r3_nominal": {
+    "note": "Calculation, not a measurement: band chosen by viewport, slot from clientWidth = viewport - 15 (scrollbar), DPR 1 picks the smallest file in the band, target 2.",
+    "320@1x (client 305)": {
+     "css": [
+      265,
+      353.3
+     ],
+     "expected_pick": [
+      900,
+      1200
+     ],
+     "ratio": 0.589
+    },
+    "360@1x (client 345)": {
+     "css": [
+      305,
+      406.7
+     ],
+     "expected_pick": [
+      900,
+      1200
+     ],
+     "ratio": 0.678
+    },
+    "390@1x (client 375)": {
+     "css": [
+      335,
+      446.7
+     ],
+     "expected_pick": [
+      900,
+      1200
+     ],
+     "ratio": 0.744
+    },
+    "640@1x (client 625)": {
+     "css": [
+      585,
+      780
+     ],
+     "expected_pick": [
+      1500,
+      2000
+     ],
+     "ratio": 0.78
+    },
+    "641@1x (client 626)": {
+     "css": [
+      586,
+      781.3
+     ],
+     "expected_pick": [
+      1500,
+      2000
+     ],
+     "ratio": 0.781
+    },
+    "768@1x (client 753)": {
+     "css": [
+      713,
+      950.7
+     ],
+     "expected_pick": [
+      1500,
+      2000
+     ],
+     "ratio": 0.951
+    },
+    "1023@1x (client 1008)": {
+     "css": [
+      750,
+      1000
+     ],
+     "expected_pick": [
+      1500,
+      2000
+     ],
+     "ratio": 1
+    },
+    "1024@1x (client 1009)": {
+     "css": [
+      200.4,
+      267.2
+     ],
+     "expected_pick": [
+      600,
+      800
+     ],
+     "ratio": 0.668
+    },
+    "1440@1x (client 1425)": {
+     "css": [
+      242.3,
+      323.1
+     ],
+     "expected_pick": [
+      600,
+      800
+     ],
+     "ratio": 0.808
+    },
+    "1728@1x (client 1713)": {
+     "css": [
+      242.3,
+      323.1
+     ],
+     "expected_pick": [
+      600,
+      800
+     ],
+     "ratio": 0.808
+    }
+   },
+   "native_r3": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build.",
+   "superseded_r2_plan": {
+    "desktop_css": [
+     243,
+     324
+    ],
+    "mobile_css": [
+     350,
+     467
+    ],
+    "desktop_gate_2x": {
+     "needs_px": [
+      486,
+      648
+     ],
+     "srcset_pick": [
+      600,
+      800
+     ],
+     "ratio": 0.81,
+     "pass": true
+    },
+    "desktop_gate_3x": {
+     "needs_px": [
+      729,
+      972
+     ],
+     "srcset_pick": [
+      1000,
+      1333
+     ],
+     "ratio": 0.729,
+     "pass": true
+    },
+    "mobile_gate_2x": {
+     "needs_px": [
+      700,
+      934
+     ],
+     "srcset_pick": [
+      1000,
+      1333
+     ],
+     "ratio": 0.701,
+     "pass": true
+    },
+    "mobile_gate_3x": {
+     "needs_px": [
+      1050,
+      1401
+     ],
+     "srcset_pick": [
+      1200,
+      1600
+     ],
+     "ratio": 0.876,
+     "pass": true
+    }
+   },
+   "slot_constraint_r3": "Below lg the figure is centered with max-width 750px (max-lg:mx-auto max-lg:w-full max-lg:max-w-[750px]); 750 CSS px is the widest slot the 1500x2000 original covers at 2x. Crop, order, caption and the lg flex share are unchanged; the cap first binds at viewport 790px (no scrollbar)."
   },
   "peninsula-solar-logo": {
    "source": "website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809/sources/peninsula-solar-logo.png",
@@ -1069,8 +2946,19 @@
    }
   }
  },
- "known_gaps": [
-  "Planned 3x desktop fails: 1440@3x for all three manufacturer images and 1024@3x for the aPower 2 render. No variant holds 3x of those slots. These are not native gate widths or DPRs in this round; covering them would need new variants made from the 4032/3940/4123px originals.",
-  "Tablet single-column widths 641-1023px at DPR 1 (outside the native gate widths): the hero slot can reach ~960px, above what the 1800px file covers at 2x."
+ "superseded_known_gaps_r2": [
+  {
+   "gap": "Planned 3x desktop fails: 1440@3x for all three manufacturer images and 1024@3x for the aPower 2 render. No variant holds 3x of those slots. These are not native gate widths or DPRs in this round; covering them would need new variants made from the 4032/3940/4123px originals.",
+   "r3": "Partly addressed: desktop bands now also offer 1500/1800/2000 (hero), 1500/2000 (aPower 2) and 1400-2000 (landscapes), real source pixels. 3x stays best effort, see remaining_limits_r3."
+  },
+  {
+   "gap": "Tablet single-column widths 641-1023px at DPR 1 (outside the native gate widths): the hero slot can reach ~960px, above what the 1800px file covers at 2x.",
+   "r3": "Addressed by the 768-1023 band: hero, aPower 2 and both landscapes get 2000px files (>= 2x of 984 CSS px), racking is capped at 750 CSS px and gets the full 1500px original."
+  }
+ ],
+ "remaining_limits_r3": [
+  "2x is the guaranteed floor at DPR 1 and DPR 2. At DPR 3, Chromium may pick a candidate below 3x when DPR is under the geometric mean of the two neighbouring candidates' densities; the largest offered file also falls short of 3x in the 768-1023 band for all four single-column photos (max ratio 1.476), at 640-767 (1.092) and at 480-639 for the racking photo (1.2). aGate reaches 1.1 at 3x on its 440px slot. Those slots exceed what the 2000px customer originals can hold at 3x, or would need 2400-3000px manufacturer files.",
+  "Tablet bytes: at 768-1023 a DPR 1 visitor loads the 2000px hero (349 KB), aPower 2 (194 KB), equipment (158 KB), array (499 KB) and the 1500px racking original (407 KB). Phones 320-479 load 900px files (92/40/46/131/160 KB) instead of the r2 1300/900/600 mix.",
+  "No local browser in round 3: the band media, picture wrapper (display: contents) and selected bytes are source contracts until the controller's native capture."
  ]
 }

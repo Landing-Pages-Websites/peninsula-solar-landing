@@ -10,8 +10,8 @@ import { CtaPair } from "../../src/franklinwh/components/CtaPair";
 import { FieldShell } from "../../src/franklinwh/components/FieldShell";
 import { SiteHeader } from "../../src/franklinwh/components/SiteHeader";
 import { LOWER_PENINSULA, UPPER_PENINSULA } from "../../src/franklinwh/config";
-import { IMAGES, srcSet } from "../../src/franklinwh/images";
-import { anchors, attr, classes, readSource, renderPage, sectionHtml, tags } from "./html";
+import { deliveryBands, IMAGES, srcSet, TARGET_DENSITY } from "../../src/franklinwh/images";
+import { anchors, attr, classes, elements, readSource, renderPage, sectionHtml, tags } from "./html";
 
 const SRC = new URL("../../src/franklinwh/", import.meta.url);
 const PAGE_A = renderPage(UPPER_PENINSULA);
@@ -174,7 +174,7 @@ describe("paired form fields (finding 4)", () => {
 });
 
 describe("delivered image density (finding 6)", () => {
-  /** Largest desktop CSS slot per image (controller receipt b-1440-r1-images-native.json, rounded up; aPower 2 at 1200-1279px). */
+  /** Pin on the round-2 desktop receipts (b-1440-r1-images-native.json, rounded up; aPower 2 at 1200-1279px). imageDelivery.test.ts sweeps every width. */
   const DESKTOP_SLOTS = {
     heroInstallation: [640, 400],
     aGate: [440, 383],
@@ -183,12 +183,11 @@ describe("delivered image density (finding 6)", () => {
     marquetteArray: [432, 324],
     marquetteRacking: [243, 324],
   } as const;
-  const TARGET_DENSITY = 2;
 
   for (const [key, [cssW, cssH]] of Object.entries(DESKTOP_SLOTS)) {
-    it(`${key}: even the smallest srcset candidate holds 2x its desktop slot`, () => {
+    it(`${key}: even the smallest desktop srcset candidate holds 2x its desktop slot`, () => {
       const image = IMAGES[key as keyof typeof DESKTOP_SLOTS];
-      const fileW = Math.min(...image.widths);
+      const fileW = deliveryBands(image)[0].widths[0];
       const fileH = (fileW * image.height) / image.width;
       assert.ok(Math.max(cssW / fileW, cssH / fileH) * TARGET_DENSITY <= 1, `${fileW}x${fileH.toFixed(0)}`);
     });
@@ -196,10 +195,27 @@ describe("delivered image density (finding 6)", () => {
 
   it("lists only srcset files that exist in public", () => {
     for (const image of Object.values(IMAGES)) {
-      for (const candidate of srcSet(image).split(", ")) {
+      for (const candidate of deliveryBands(image).flatMap((band) => srcSet(image, band.widths).split(", "))) {
         const file = candidate.split(" ")[0];
         assert.ok(existsSync(new URL(`../../public${file}`, import.meta.url)), file);
       }
     }
+  });
+});
+
+describe("round 3: portrait frame and 320 heading binding", () => {
+  const figures = elements(sectionHtml(PAGE_A, "marquette-project"), "figure");
+
+  it("caps only the portrait racking figure at 750px below lg, centered, and keeps every lg flex share", () => {
+    const shares = ["lg:flex-[4_1_0%]", "lg:flex-[4_1_0%]", "lg:flex-[2.25_1_0%]"];
+    figures.forEach((figure, i) => assert.ok(classes(tags(figure, "figure")[0]).includes(shares[i]), shares[i]));
+    const racking = classes(tags(figures[2], "figure")[0]);
+    for (const cls of ["max-lg:mx-auto", "max-lg:w-full", "max-lg:max-w-[750px]"]) assert.ok(racking.includes(cls), cls);
+    assert.ok(figures[2].includes("marquette-racking-detail"));
+    assert.equal(figures.slice(0, 2).some((figure) => figure.includes("max-lg:")), false);
+  });
+
+  it("binds `a standby` in the backup-benefits heading without changing its words", () => {
+    assert.ok(readSource("components/sections/BackupBenefits.tsx").includes(">A modern alternative to a&nbsp;standby generator</h2>"));
   });
 });

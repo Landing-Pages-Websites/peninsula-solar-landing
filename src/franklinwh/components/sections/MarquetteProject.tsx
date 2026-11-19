@@ -10,8 +10,8 @@ const LANDSCAPE_SIZES = "(min-width: 1200px) 432px, (min-width: 1024px) 37vw, ca
 interface ProjectPhoto {
   image: ResponsiveSource;
   caption: string;
-  /** Flex grow equal to the photo's aspect ratio x3, so all three share one height uncropped. */
-  grow: string;
+  /** Flex grow from lg equal to the photo's aspect ratio x3, so all three share one height uncropped, plus any narrow-width frame. */
+  layout: string;
   sizes: string;
 }
 
@@ -19,20 +19,22 @@ const PHOTOS: readonly ProjectPhoto[] = [
   {
     image: IMAGES.marquetteEquipment,
     caption: "FranklinWH equipment beside the main electrical panel",
-    grow: "lg:flex-[4_1_0%]",
+    layout: "lg:flex-[4_1_0%]",
     sizes: LANDSCAPE_SIZES,
   },
   {
     image: IMAGES.marquetteArray,
     caption: "The rooftop solar array",
-    grow: "lg:flex-[4_1_0%]",
+    layout: "lg:flex-[4_1_0%]",
     sizes: LANDSCAPE_SIZES,
   },
   {
     image: IMAGES.marquetteRacking,
     caption: "Ballasted racking under the panels",
-    grow: "lg:flex-[2.25_1_0%]",
-    sizes: "(min-width: 1200px) 243px, (min-width: 1024px) 21vw, calc(100vw - 40px)",
+    // Below lg the portrait is centered at no more than 750px, the widest slot its 1500px original
+    // covers at 2x without upscaling.
+    layout: "lg:flex-[2.25_1_0%] max-lg:mx-auto max-lg:w-full max-lg:max-w-[750px]",
+    sizes: "(min-width: 1200px) 243px, (min-width: 1024px) 21vw, (min-width: 790px) 750px, calc(100vw - 40px)",
   },
 ];
 
@@ -46,7 +48,7 @@ export function MarquetteProject({ phone }: { phone: RoutePhone }): ReactElement
       </div>
       <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-4">
         {PHOTOS.map((photo) => (
-          <figure key={photo.image.base} className={`flex flex-col gap-3 ${photo.grow}`}>
+          <figure key={photo.image.base} className={`flex flex-col gap-3 ${photo.layout}`}>
             <ResponsiveImage image={photo.image} sizes={photo.sizes} className="h-auto w-full rounded-panel bg-hairline" />
             <figcaption className="text-small text-muted">{photo.caption}</figcaption>
           </figure>
