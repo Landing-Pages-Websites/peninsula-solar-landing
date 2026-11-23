@@ -46,7 +46,7 @@
     }
    },
    "section": "hero",
-   "fit": "cover 16:10 crop, object-position 50% 62%",
+   "fit": "whole 4:3 frame, no crop; the hero h1 is overlaid on its upper left (task 45272822 round 2; was a cover 16:10 crop at object-position 50% 62%)",
    "retired_variants": {
     "apower-s-installation-800.webp": "Removed in round 2. At DPR 1 the browser chose this 1x file for the desktop slot (controller receipt below); no srcset now offers it."
    },
@@ -1566,7 +1566,7 @@
     }
    },
    "usage": {
-    "own-your-energy-badge-192.png": "header, 64 CSS px (<1024) and 88 CSS px (>=1024) tall (3.0x / 2.2x)",
+    "own-your-energy-badge-192.png": "header, 64 CSS px (<640), 72 CSS px (640-1023) and 88 CSS px (>=1024) tall (3.0x / 2.7x / 2.2x; round 3 sizes)",
     "own-your-energy-badge-320.png": "footer, 96 CSS px tall (3.3x)"
    },
    "processing": "Lanczos downscale of the transparent original, then a 256-colour palette (flat artwork)."

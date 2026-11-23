@@ -26,17 +26,11 @@ function sevenTwelfths(v: number, xlGap: number): number {
   return ((content(v) - (v >= 1280 ? xlGap : 40)) * 7) / 12;
 }
 
-interface SlotModel {
-  slot: (v: number) => number;
-  /** Displayed width/height when it differs from the file's (the hero's 16:10 cover crop). */
-  aspect?: number;
-}
-
-/** Rendered CSS width per viewport. a-768: hero 713 at client 753; a-1024: 527.9 (hero, aPower 2) and 344.5 (aGate) at client 1009. */
-const MODELS: Record<ImageKey, SlotModel> = {
-  heroInstallation: { slot: (v) => (v < LG ? content(v) : sevenTwelfths(v, 56)), aspect: 16 / 10 },
-  aGate: { slot: (v) => Math.min(440, v < LG ? content(v) - 64 : (content(v) - 64) / 2 - 96) },
-  aPower2AndAGate: { slot: (v) => (v < LG ? content(v) : sevenTwelfths(v, 64)) },
+/** Rendered CSS width per viewport, at the file's own ratio (the hero shows its whole 4:3 frame since 45272822 r2). a-768: hero 713 at client 753; a-1024: 527.9 (hero, aPower 2) and 344.5 (aGate) at client 1009. */
+const MODELS: Record<ImageKey, (v: number) => number> = {
+  heroInstallation: (v) => (v < LG ? content(v) : sevenTwelfths(v, 56)),
+  aGate: (v) => Math.min(440, v < LG ? content(v) - 64 : (content(v) - 64) / 2 - 96),
+  aPower2AndAGate: (v) => (v < LG ? content(v) : sevenTwelfths(v, 64)),
 };
 
 /** Every integer viewport plus the last fractional pixel below each band edge. */
@@ -138,13 +132,13 @@ const ROUTES = [
 
 describe("image delivery across every viewport 320-1728", () => {
   for (const [key, image] of Object.entries(IMAGES) as [ImageKey, ResponsiveSource][]) {
-    const model = MODELS[key];
-    const aspect = model.aspect ?? image.width / image.height;
+    const slotAt = MODELS[key];
+    const aspect = image.width / image.height;
 
     it(`${key}: each declared band slot covers every modelled slot in that band`, () => {
       for (const v of VIEWPORTS) {
         const band = VIEWPORT_BANDS.find((edge) => v >= edge) ?? 0;
-        const slot = model.slot(v);
+        const slot = slotAt(v);
         if (slot > image.slots[band]) assert.fail(`${v}px: ${slot.toFixed(1)} > ${image.slots[band]}`);
       }
     });
@@ -155,7 +149,7 @@ describe("image delivery across every viewport 320-1728", () => {
         for (const v of VIEWPORTS) {
           const pick = picks.find((p) => v >= p.minViewport);
           if (!pick) assert.fail(`${v}px: no set applies`);
-          const r = ratio(pick.file, model.slot(v), aspect);
+          const r = ratio(pick.file, slotAt(v), aspect);
           if (r > 1) assert.fail(`${v}px: ratio ${r.toFixed(3)} from ${pick.file}`);
         }
       });
@@ -165,7 +159,7 @@ describe("image delivery across every viewport 320-1728", () => {
       const sets = renderedSets(ROUTES[0][1], image);
       for (const v of VIEWPORTS) {
         const stated = evalSizes(sets[0].sizes, v);
-        const slot = model.slot(v);
+        const slot = slotAt(v);
         if (stated < slot - 0.5 || stated > slot * 1.12) assert.fail(`${v}px: sizes ${stated.toFixed(1)} vs slot ${slot.toFixed(1)}`);
       }
       assert.ok(sets.every((s) => s.sizes === sets[0].sizes), "every <source> repeats the <img> sizes");

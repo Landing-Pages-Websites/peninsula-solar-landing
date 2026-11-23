@@ -16,7 +16,7 @@ export function PartnerLockup(): ReactElement {
         width={192}
         height={191}
         alt="Peninsula Solar"
-        className="h-[72px] w-auto shrink-0 lg:h-[88px]"
+        className="h-16 w-auto shrink-0 sm:h-[72px] lg:h-[88px]"
       />
       <span aria-hidden="true" className="hidden h-10 w-px shrink-0 bg-gold/50 sm:block" />
       <img

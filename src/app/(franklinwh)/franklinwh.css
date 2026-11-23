@@ -80,7 +80,7 @@
   background: linear-gradient(180deg, var(--color-dusk), var(--color-night) 85%);
 }
 
-/* The hero's evening sky: lighter navy high behind the headline, settling into night. */
+/* The hero's evening sky: lighter navy high around the photo-backed headline, settling into night. */
 @utility bg-evening {
   background:
     radial-gradient(ellipse 60% 70% at 25% 0%, color-mix(in srgb, var(--color-sky) 70%, transparent), transparent 70%),
@@ -147,30 +147,71 @@
 
   /*
    * Hero photo at dusk: the manufacturer's daylight installation is cooled with a light grade and a
-   * navy multiply that is heavy at the sky and edges but light over the batteries and controller, so
-   * the white units stay near-white. The top edge is masked into whatever sky is behind it.
+   * navy multiply that is heavy at the edges but light over the batteries and wall unit, so the white
+   * units stay near-white. A navy scrim settles over the upper left, where the headline sits, and
+   * clears before the battery tops and the wall unit's lettering.
    */
   .evening-photo {
     position: relative;
     isolation: isolate;
-    mask-image: linear-gradient(180deg, transparent, #000 14%);
+    overflow: hidden;
+    container-type: inline-size;
   }
 
   .evening-photo img {
     filter: saturate(0.8) brightness(0.92);
   }
 
+  .evening-photo::before,
   .evening-photo::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
+  }
+
+  .evening-photo::after {
     background: radial-gradient(
-      ellipse 65% 75% at 55% 60%,
+      ellipse 65% 75% at 45% 70%,
       color-mix(in srgb, var(--color-dusk) 10%, transparent),
       color-mix(in srgb, var(--color-dusk) 50%, transparent)
     );
     mix-blend-mode: multiply;
+  }
+
+  .evening-photo::before {
+    --scrim-reach: 85% 62%;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse var(--scrim-reach) at 0% 0%, color-mix(in srgb, var(--color-night) 82%, transparent) 35%, transparent),
+      linear-gradient(180deg, color-mix(in srgb, var(--color-night) 55%, transparent), transparent 42%);
+
+    /*
+     * Below sm the FranklinWH mark sits above the headline, so the headline's second line reaches ~46%
+     * down the frame and its end meets the wall unit's edge: the scrim reaches further down and right to
+     * keep that line at 3:1 or better against the brightest photo pixels behind it.
+     */
+    @media (width < 40rem) {
+      --scrim-reach: 105% 80%;
+    }
+  }
+
+  /*
+   * The headline over the photo scales with the frame (`cqi`, so only inside this container), not the
+   * viewport: the glyphs of "FranklinWH home" end within ~72% of the frame width (measured 320-1728px),
+   * left of the wall unit's lettering at ~74%. Below lg the full-width frame could hold the whole
+   * headline on one line (from ~860px), so a 7em measure keeps the break after "home"; from lg the
+   * column frame (at most 640px) is always too narrow for one line.
+   */
+  .evening-photo h1 {
+    font-size: clamp(1.75rem, 10.4cqi - 0.25rem, 3.625rem);
+    line-height: var(--text-h1--line-height);
+    letter-spacing: var(--text-h1--letter-spacing);
+    text-shadow: 0 1px 12px rgb(8 12 22 / 0.6);
+
+    @media (width < 64rem) {
+      max-width: 7em;
+    }
   }
 
   /*

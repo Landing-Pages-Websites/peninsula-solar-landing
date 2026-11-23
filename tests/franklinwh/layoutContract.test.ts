@@ -88,7 +88,8 @@ describe("header (finding 1)", () => {
     assert.equal(attr(installer, "src"), "/franklinwh/own-your-energy-badge-192.png");
     assert.equal(attr(installer, "width"), "192");
     assert.equal(attr(installer, "height"), "191");
-    assert.ok(classes(installer).includes("h-[72px]"), "72px square at 320: fits the 280px column with the 48px phone");
+    // 45272822 r3: 64px in the 80px bar below 640px (the 320x568 first screen), 72px from 640px as before.
+    assert.ok(classes(installer).includes("h-16") && classes(installer).includes("sm:h-[72px]"), "64px square at 320: fits the 280px column with the 48px phone");
   });
 
   it("keeps a 48px styled phone control with the route number as its name", () => {
@@ -178,7 +179,9 @@ describe("paired form fields (finding 4)", () => {
 describe("delivered image density (finding 6)", () => {
   /** Pin on the round-2 desktop receipts (b-1440-r1-images-native.json, rounded up; aPower 2 at 1200-1279px). imageDelivery.test.ts sweeps every width. */
   const DESKTOP_SLOTS = {
-    heroInstallation: [640, 400],
+    // Not a receipt: the 640px column at the file's 4:3 since the headline moved over the uncropped photo
+    // (45272822 r2; native 1440 measure 630x472.5). Was a 640x400 16:10 crop.
+    heroInstallation: [640, 480],
     aGate: [440, 383],
     aPower2AndAGate: [640, 484],
   } as const;
@@ -205,5 +208,29 @@ describe("delivered image density (finding 6)", () => {
 describe("round 3: 320 heading binding", () => {
   it("binds `a standby` in the backup-benefits heading without changing its words", () => {
     assert.ok(readSource("components/sections/BackupBenefits.tsx").includes(">A modern alternative to a&nbsp;standby generator</h2>"));
+  });
+});
+
+describe("photo-backed hero headline (restyle 45272822 r2)", () => {
+  for (const [variant, html] of [[UPPER_PENINSULA, PAGE_A], [LOWER_PENINSULA, renderPage(LOWER_PENINSULA)]] as const) {
+    it(`${variant.path}: the h1 is overlaid inside the one hero photo frame, which shows uncropped`, () => {
+      const hero = sectionHtml(html, "hero");
+      const frame = hero.slice(hero.indexOf('class="evening-photo'), hero.indexOf("</picture>"));
+      // r3: the h1 sits in an absolute overlay with the mobile-only FranklinWH mark above it (was: absolute h1).
+      assert.match(frame, /^class="evening-photo[^"]*"><div class="absolute [^"]*">(<img [^>]*franklinwh-logo-reversed[^>]*sm:hidden"\/>)?<h1 class="[^"]*">FranklinWH home battery backup<\/h1><\/div><picture/);
+      assert.ok(frame.includes(`/franklinwh/${IMAGES.heroInstallation.base}-`), "photo in the h1's frame");
+      assert.equal(tags(hero, "img").filter((t) => t.includes(IMAGES.heroInstallation.base)).length, 1);
+      const photo = tags(frame, "img").find((t) => t.includes(IMAGES.heroInstallation.base));
+      assert.ok(photo && !classes(photo).some((c) => c.startsWith("aspect-") || c.startsWith("object-")));
+    });
+  }
+
+  it("keeps the overlaid h1 to two lines (a 7em measure below lg), sized by the frame", () => {
+    const css = readFileSync(new URL("../../src/app/(franklinwh)/franklinwh.css", import.meta.url), "utf8");
+    const start = css.indexOf(".evening-photo h1 {");
+    const rule = css.slice(start, css.indexOf("\n  }", start));
+    assert.ok(rule.includes("cqi"));
+    assert.match(rule, /@media \(width < 64rem\) \{\s*max-width: 7em;\s*\}/);
+    assert.match(css, /\.evening-photo \{[^}]*container-type: inline-size;/);
   });
 });

@@ -10,7 +10,7 @@ import { sectionHtml } from "./html";
 const EXPECTED: [section: string, markup: string][] = [
   ["hero", 'Serving Northern Michigan homes, <span class="whitespace-nowrap">cabins and camps</span> since\u00a02011.'],
   ["customer-proof", "They have to be the best in the business in Northern Michigan and the U.P. … I am very happy with their performance and the end\u00a0result!"],
-  ["product-family", ">The FranklinWH lineup</h2>"],
+  ["product-family", '>The <span class="whitespace-nowrap">FranklinWH lineup</span></h2>'],
   ["customer-proof", "Customer reviews"],
   ["final-quote", 'Let’s plan <span class="whitespace-nowrap">your backup power</span></h2>'],
   ["faq", "Will the batteries work through a Northern Michigan\u00a0winter?"],
