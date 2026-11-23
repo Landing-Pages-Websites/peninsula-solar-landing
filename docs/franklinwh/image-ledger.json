@@ -46,7 +46,7 @@
     }
    },
    "section": "hero",
-   "fit": "cover 16:10 crop, object-position 50% 62%",
+   "fit": "whole 4:3 frame, no crop; the hero h1 is overlaid on its upper left (task 45272822 round 2; was a cover 16:10 crop at object-position 50% 62%)",
    "retired_variants": {
     "apower-s-installation-800.webp": "Removed in round 2. At DPR 1 the browser chose this 1x file for the desktop slot (controller receipt below); no srcset now offers it."
    },
@@ -1540,123 +1540,67 @@
     "native_r2": "DEFERRED: the controller measures currentSrc and decoded delivered pixels on the deployed build."
    }
   },
-  "peninsula-solar-logo": {
-   "source": "website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809/sources/peninsula-solar-logo.png",
-   "source_sha256": "cc902fc3c26c54da51904e517cfe63bc3d37bb2cfef7f9c41f47ac3a365a6929",
+  "own-your-energy-badge": {
+   "source": "task-evidence/45272822-peninsula-restyle/assets/Own Your Energy (1).png (client attachment, task 45272822)",
+   "source_sha256": "3cfa633d52ef1f505b2ae82d20dc76ca41e47eb1968f518b64b060c9c4714120",
    "source_dims": [
     2048,
-    316
+    2037
    ],
    "crop_dims": [
-    2025,
-    240
+    2048,
+    2037
    ],
    "variants": {
-    "peninsula-solar-logo-480.png": {
-     "w": 480,
-     "h": 57,
-     "bytes": 19451,
-     "sha256": "c1a381635892a6207f047f679116c8df3d18d62b2e6e17a267527a9ebf525e04"
+    "own-your-energy-badge-192.png": {
+     "w": 192,
+     "h": 191,
+     "bytes": 12678,
+     "sha256": "de943389b498433e8e9f2b0223a6199276e515a8f3d6992efdc6354766ce225a"
+    },
+    "own-your-energy-badge-320.png": {
+     "w": 320,
+     "h": 318,
+     "bytes": 23166,
+     "sha256": "41b7cbae30fced37228e3f65a2c7684bd52cddc3fca1633fdcddf9b1eb3091ea"
     }
    },
    "usage": {
-    "peninsula-solar-logo-480.png": "header, 202-236 CSS px wide (2x = 472)"
+    "own-your-energy-badge-192.png": "header, 64 CSS px (<640), 72 CSS px (640-1023) and 88 CSS px (>=1024) tall (3.0x / 2.7x / 2.2x; round 3 sizes)",
+    "own-your-energy-badge-320.png": "footer, 96 CSS px tall (3.3x)"
    },
-   "controller_receipt_r1": {
-    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
-    "viewport": "1440 (clientWidth 1425), DPR 1",
-    "css": [
-     235.78125,
-     28
-    ],
-    "delivered": [
-     480,
-     57
-    ],
-    "ratio": 0.982,
-    "pass": true
-   }
+   "processing": "Lanczos downscale of the transparent original, then a 256-colour palette (flat artwork)."
   },
-  "peninsula-solar-logo-white": {
-   "source": "public/images/logo-white.png",
-   "source_sha256": "288fd1187736ada143bf999362c559b2c07ac716195d3ed2d341dea41805a7f6",
+  "franklinwh-logo-reversed": {
+   "source": "public/franklinwh/franklinwh-logo-720.png (official color mark, ledger entry superseded_logos_45272822.franklinwh-logo)",
+   "source_sha256": "fe62dec8f5074f53eda14fad3664850e5e24d4362a81a7b9b43133835c1c1434",
    "source_dims": [
-    1024,
-    323
+    720,
+    51
    ],
    "crop_dims": [
-    914,
-    109
+    720,
+    51
    ],
    "variants": {
-    "peninsula-solar-logo-white-480.png": {
-     "w": 480,
-     "h": 57,
-     "bytes": 21078,
-     "sha256": "e9db94ae15bb7227bd67f6ae6c1bdda8b4f38cfc97e1b336e26505c109d72baf"
-    }
-   },
-   "usage": {
-    "peninsula-solar-logo-white-480.png": "footer on charcoal, 235 CSS px wide (2x = 470)"
-   },
-   "controller_receipt_r1": {
-    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
-    "viewport": "1440 (clientWidth 1425), DPR 1",
-    "css": [
-     235.78125,
-     28
-    ],
-    "delivered": [
-     480,
-     57
-    ],
-    "ratio": 0.982,
-    "pass": true
-   }
-  },
-  "franklinwh-logo": {
-   "source": "website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809/manufacturer-assets/franklinwh-logo-color-2000.png",
-   "source_sha256": "be5971e8d4dbf6d92f783bb60914709e4d0203c6248d2a135d02aac7e056b50b",
-   "source_dims": [
-    2194,
-    155
-   ],
-   "crop_dims": [
-    2194,
-    155
-   ],
-   "variants": {
-    "franklinwh-logo-480.png": {
+    "franklinwh-logo-reversed-480.png": {
      "w": 480,
      "h": 34,
-     "bytes": 12640,
-     "sha256": "50c1743d44799710a4acdadca04073ba0855f9f0d22c0227342ee47a44a44a50"
+     "bytes": 14138,
+     "sha256": "3510913a0edaf3dd71ca937d4253cb7fe2a4098b989693ba79e9f1ea1da0fa95"
     },
-    "franklinwh-logo-720.png": {
+    "franklinwh-logo-reversed-720.png": {
      "w": 720,
      "h": 51,
-     "bytes": 18475,
-     "sha256": "fe62dec8f5074f53eda14fad3664850e5e24d4362a81a7b9b43133835c1c1434"
+     "bytes": 14557,
+     "sha256": "e67f26dc3ee906aaae64b0b76ebcb7bce62c4e28f475b0f4c9e29721a022e59a"
     }
    },
    "usage": {
-    "franklinwh-logo-480.png": "header lockup >=640px, 184-212 CSS px wide (2x = 424)",
-    "franklinwh-logo-720.png": "hero mark <640px, 184 CSS px wide (3x = 552)"
+    "franklinwh-logo-reversed-480.png": "header lockup >=640px, 184-212 CSS px wide (2.3x)",
+    "franklinwh-logo-reversed-720.png": "hero mark <640px, 184 CSS px wide (3.9x)"
    },
-   "controller_receipt_r1": {
-    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
-    "viewport": "1440 (clientWidth 1425), DPR 1",
-    "css": [
-     211.75,
-     15
-    ],
-    "delivered": [
-     480,
-     34
-    ],
-    "ratio": 0.882,
-    "pass": true
-   }
+   "processing": "Neutral-grey FRANKLIN letter pixels set to cream #E8E0D8 with alpha kept; the orange WH unchanged. Reversed mark for the navy ground, as on the client's flyer panel 4."
   }
  },
  "withdrawn_client_photos": {
@@ -2969,5 +2913,126 @@
   "2x is the guaranteed floor at DPR 1 and DPR 2. At DPR 3, Chromium may pick a candidate below 3x when DPR is under the geometric mean of the two neighbouring candidates' densities; the largest offered file also falls short of 3x in the 768-1023 band for all four single-column photos (max ratio 1.476), at 640-767 (1.092) and at 480-639 for the racking photo (1.2). aGate reaches 1.1 at 3x on its 440px slot. Those slots exceed what the 2000px customer originals can hold at 3x, or would need 2400-3000px manufacturer files.",
   "Tablet bytes: at 768-1023 a DPR 1 visitor loads the 2000px hero (349 KB), aPower 2 (194 KB), equipment (158 KB), array (499 KB) and the 1500px racking original (407 KB). Phones 320-479 load 900px files (92/40/46/131/160 KB) instead of the r2 1300/900/600 mix.",
   "No local browser in round 3: the band media, picture wrapper (display: contents) and selected bytes are source contracts until the controller's native capture."
- ]
+ ],
+ "superseded_logos_45272822": {
+  "note": "Flyer restyle (task 45272822) replaced these marks on both routes and /privacy. The files stay in public/franklinwh, unreferenced.",
+  "peninsula-solar-logo": {
+   "source": "website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809/sources/peninsula-solar-logo.png",
+   "source_sha256": "cc902fc3c26c54da51904e517cfe63bc3d37bb2cfef7f9c41f47ac3a365a6929",
+   "source_dims": [
+    2048,
+    316
+   ],
+   "crop_dims": [
+    2025,
+    240
+   ],
+   "variants": {
+    "peninsula-solar-logo-480.png": {
+     "w": 480,
+     "h": 57,
+     "bytes": 19451,
+     "sha256": "c1a381635892a6207f047f679116c8df3d18d62b2e6e17a267527a9ebf525e04"
+    }
+   },
+   "usage": {
+    "peninsula-solar-logo-480.png": "header, 202-236 CSS px wide (2x = 472)"
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     235.78125,
+     28
+    ],
+    "delivered": [
+     480,
+     57
+    ],
+    "ratio": 0.982,
+    "pass": true
+   }
+  },
+  "peninsula-solar-logo-white": {
+   "source": "public/images/logo-white.png",
+   "source_sha256": "288fd1187736ada143bf999362c559b2c07ac716195d3ed2d341dea41805a7f6",
+   "source_dims": [
+    1024,
+    323
+   ],
+   "crop_dims": [
+    914,
+    109
+   ],
+   "variants": {
+    "peninsula-solar-logo-white-480.png": {
+     "w": 480,
+     "h": 57,
+     "bytes": 21078,
+     "sha256": "e9db94ae15bb7227bd67f6ae6c1bdda8b4f38cfc97e1b336e26505c109d72baf"
+    }
+   },
+   "usage": {
+    "peninsula-solar-logo-white-480.png": "footer on charcoal, 235 CSS px wide (2x = 470)"
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     235.78125,
+     28
+    ],
+    "delivered": [
+     480,
+     57
+    ],
+    "ratio": 0.982,
+    "pass": true
+   }
+  },
+  "franklinwh-logo": {
+   "source": "website-lp-build-research-data/8bbf1dbc-49fb-44b5-8c82-e1235149e809/manufacturer-assets/franklinwh-logo-color-2000.png",
+   "source_sha256": "be5971e8d4dbf6d92f783bb60914709e4d0203c6248d2a135d02aac7e056b50b",
+   "source_dims": [
+    2194,
+    155
+   ],
+   "crop_dims": [
+    2194,
+    155
+   ],
+   "variants": {
+    "franklinwh-logo-480.png": {
+     "w": 480,
+     "h": 34,
+     "bytes": 12640,
+     "sha256": "50c1743d44799710a4acdadca04073ba0855f9f0d22c0227342ee47a44a44a50"
+    },
+    "franklinwh-logo-720.png": {
+     "w": 720,
+     "h": 51,
+     "bytes": 18475,
+     "sha256": "fe62dec8f5074f53eda14fad3664850e5e24d4362a81a7b9b43133835c1c1434"
+    }
+   },
+   "usage": {
+    "franklinwh-logo-480.png": "header lockup >=640px, 184-212 CSS px wide (2x = 424)",
+    "franklinwh-logo-720.png": "hero mark <640px, 184 CSS px wide (3x = 552)"
+   },
+   "controller_receipt_r1": {
+    "source": "task-evidence/6175fe7a-peninsula-intake/b-1440-r1-images-native.json",
+    "viewport": "1440 (clientWidth 1425), DPR 1",
+    "css": [
+     211.75,
+     15
+    ],
+    "delivered": [
+     480,
+     34
+    ],
+    "ratio": 0.882,
+    "pass": true
+   }
+  }
+ }
 }

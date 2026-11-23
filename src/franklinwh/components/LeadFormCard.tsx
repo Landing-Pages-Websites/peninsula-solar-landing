@@ -19,7 +19,7 @@ export function LeadFormCard({ anchorId, formId, heading, intro, messageRows, cl
   const { status, activeFormId } = useLeadForm();
   const succeeded = status === "success";
   return (
-    <div id={anchorId} data-lead-form-card className={`scroll-mt-24 ${className}`}>
+    <div id={anchorId} data-lead-form-card className={`scroll-mt-4 ${className}`}>
       <div className="mb-6 flex flex-col gap-2">
         {heading}
         {!succeeded && intro}
