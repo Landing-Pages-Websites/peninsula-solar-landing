@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import Script from "next/script";
 import type { ReactElement, ReactNode } from "react";
 import { QueryParamPersistence } from "@/franklinwh/components/QueryParamPersistence";
@@ -10,6 +10,8 @@ import "./franklinwh.css";
 
 // FranklinWH's brand manual (p.16) specifies Inter as the corporate typeface.
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+// Display serif from the client's direct-mail flyer (task 45272822): upright and italic headings.
+const cormorant = Cormorant_Garamond({ variable: "--font-cormorant", subsets: ["latin"], weight: "variable", style: ["normal", "italic"], display: "swap" });
 
 // MegaTag loads GTM from this config; never add a manual GTM tag. These literals must
 // equal src/franklinwh/config.ts (tests/franklinwh/layoutConfig.test.ts enforces it).
@@ -29,12 +31,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f213d",
+  themeColor: "#172238",
 };
 
 export default function FranklinLayout({ children }: Readonly<{ children: ReactNode }>): ReactElement {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: JS_FLAG }} />
         <script dangerouslySetInnerHTML={{ __html: MEGA_TAG_BOOTSTRAP }} />

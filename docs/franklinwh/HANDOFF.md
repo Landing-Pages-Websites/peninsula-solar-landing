@@ -15,6 +15,12 @@ Both campaign routes render the same `FranklinPage` component and differ only in
 (page, layout and globals.css are the only relocations) so the new route group has its own root layout,
 CSS, font and tracking and nothing leaks into `/`.
 
+## Flyer restyle (2026-11-23, task 45272822)
+
+Both campaign routes and the shared `/privacy` chrome now follow the client's navy / cream / gold flyer.
+Visual only: copy, forms, phones, tracking and imagery permissions are unchanged. Details, tokens, assets
+and the tests that changed are in `docs/franklinwh/RESTYLE_45272822.md`.
+
 ## Human QA send-back copy edits (2026-11-19, task 3d9afce8)
 
 **Authority.** Human send-back: https://admin.gomega.ai/tasks/3d9afce8-8a12-45f2-b220-0f7eb7d004e8 comment

@@ -6,21 +6,15 @@ export type ButtonSize = "regular" | "pair" | "icon";
 // `extra` may never repeat them: two unprefixed utilities for one property resolve by Tailwind's
 // stylesheet order, not class order (that is how `hidden` once lost to `inline-flex`).
 const BASE = [
-  "inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control border-2 py-3",
+  "inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control border py-3",
   "font-semibold transition-colors duration-200 ease-brand",
-  "focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-navy focus-visible:ring-offset-3 focus-visible:ring-offset-paper",
-  "disabled:cursor-not-allowed disabled:border-hairline disabled:bg-hairline disabled:text-ink",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-3 focus-visible:ring-offset-transparent",
+  "disabled:cursor-not-allowed disabled:border-dusk disabled:bg-dusk disabled:text-mist",
 ].join(" ");
 
-const VARIANTS: Record<ButtonVariant, Record<ButtonSurface, string>> = {
-  primary: {
-    light: "border-orange bg-orange text-ink hover:border-navy hover:bg-navy hover:text-paper active:border-ink active:bg-ink active:text-paper",
-    dark: "border-orange bg-orange text-ink hover:border-paper hover:bg-navy hover:text-paper active:border-ink active:bg-ink active:text-paper",
-  },
-  secondary: {
-    light: "border-ink bg-transparent text-ink hover:border-navy hover:bg-navy hover:text-paper active:border-ink active:bg-ink active:text-paper",
-    dark: "border-paper bg-transparent text-paper hover:bg-paper hover:text-navy active:border-ink active:bg-ink active:text-paper",
-  },
+const VARIANTS: Record<ButtonVariant, string> = {
+  primary: "border-gold bg-gold text-night hover:border-gold-light hover:bg-gold-light active:border-cream active:bg-cream",
+  secondary: "border-gold bg-transparent text-cream hover:bg-gold/15 active:bg-gold/25",
 };
 
 const SIZES: Record<ButtonSize, string> = {
@@ -32,20 +26,24 @@ const SIZES: Record<ButtonSize, string> = {
 };
 
 interface ButtonOptions {
+  /** Accepted for existing callers; since the flyer restyle every surface is navy, so it no longer changes the look. */
   surface?: ButtonSurface;
   size?: ButtonSize;
   /** Width, flex and shadow only; never display, gap, padding or type size. */
   extra?: string;
 }
 
-/** One button system: orange fill for the quote action, outlined for the phone. */
-export function buttonClass(variant: ButtonVariant, { surface = "light", size = "regular", extra = "" }: ButtonOptions = {}): string {
-  return `${BASE} ${SIZES[size]} ${VARIANTS[variant][surface]} ${extra}`.trim();
+/** One button system: gold fill with navy text for the quote action, gold outline for the phone. */
+export function buttonClass(variant: ButtonVariant, { size = "regular", extra = "" }: ButtonOptions = {}): string {
+  return `${BASE} ${SIZES[size]} ${VARIANTS[variant]} ${extra}`.trim();
 }
 
 /** Page width and gutters shared by the header, every section and the footer. */
 export const CONTAINER = "mx-auto max-w-[1200px] px-5 lg:px-8";
 
-/** Inline text link on light surfaces: underlined, navy on hover, navy focus outline. */
+/** A list ruled above, below and between its items by gold hairlines, as on the flyer. */
+export const RULED = "divide-y divide-gold/25 border-y border-gold/25";
+
+/** Inline text link: cream with a gold underline, gold on hover, gold focus outline. */
 export const INLINE_LINK =
-  "font-semibold text-ink underline underline-offset-2 hover:text-navy focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-navy";
+  "font-semibold text-cream underline decoration-gold underline-offset-2 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";

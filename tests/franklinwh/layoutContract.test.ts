@@ -84,9 +84,11 @@ describe("header (finding 1)", () => {
       assert.ok(list.some((cls) => /^h-/.test(cls)), img);
     }
     const [installer] = tags(header, "img");
-    assert.equal(attr(installer, "width"), "480");
-    assert.equal(attr(installer, "height"), "57");
-    assert.ok(classes(installer).includes("h-[22px]"), "185px wide at 22px: fits the 265px column at 320 with the 48px phone");
+    // Flyer restyle (task 45272822): the installer mark is now the square "Own Your Energy" badge.
+    assert.equal(attr(installer, "src"), "/franklinwh/own-your-energy-badge-192.png");
+    assert.equal(attr(installer, "width"), "192");
+    assert.equal(attr(installer, "height"), "191");
+    assert.ok(classes(installer).includes("h-[72px]"), "72px square at 320: fits the 280px column with the 48px phone");
   });
 
   it("keeps a 48px styled phone control with the route number as its name", () => {

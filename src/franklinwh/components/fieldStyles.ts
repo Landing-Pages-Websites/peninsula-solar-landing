@@ -1,15 +1,15 @@
-/** The boxed form alert (rejected or unconfirmed request): black border and warm fill, never color-only. */
-export const ALERT_CLASS = "rounded-control border-2 border-ink bg-sand px-4 py-3 text-label text-ink";
+/** The boxed form alert (rejected or unconfirmed request): gold border and raised fill, never color-only. */
+export const ALERT_CLASS = "rounded-control border-2 border-gold bg-dusk px-4 py-3 text-label text-cream";
 
-/** Shared input look: 2px border, 48px tap height, navy focus ring, error border kept non-color-only by the message. */
+/** Shared input look: 48px tap height on the night ground, gold hover and focus, error kept non-color-only by the message. */
 export function inputClass(hasError: boolean): string {
-  // Error: the token error color (black) plus a warm fill, so the state reads at a glance without relying on color alone.
-  const border = hasError ? "border-ink bg-sand" : "border-line bg-paper";
+  // Error: a coral border and ring that hover and focus keep (the gold outline still marks focus), with the message carrying the meaning.
+  const border = hasError ? "border-error ring-1 ring-error" : "border-line hover:border-gold focus-visible:border-gold";
   return [
-    "w-full min-h-12 resize-y rounded-control border-2 px-4 py-3 text-body text-ink",
-    "placeholder:text-muted transition-colors duration-200 ease-brand",
-    "hover:border-navy focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-navy focus-visible:border-navy",
-    "disabled:cursor-not-allowed disabled:bg-surface disabled:text-muted",
+    "w-full min-h-12 resize-y rounded-control border-2 bg-night px-4 py-3 text-body text-cream",
+    "placeholder:text-mist transition-colors duration-200 ease-brand",
+    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
+    "disabled:cursor-not-allowed disabled:bg-harbor disabled:text-mist",
     border,
   ].join(" ");
 }

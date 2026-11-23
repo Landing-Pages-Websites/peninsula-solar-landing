@@ -5,64 +5,113 @@
 
 @theme {
   --font-sans: var(--font-inter), "Inter", ui-sans-serif, sans-serif;
+  --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
 
-  /* FranklinWH brand palette (manual p.11/16) and Peninsula supporting navy. */
-  --color-orange: #d38a3d;
-  --color-charcoal: #3c3c3c;
-  --color-navy: #0f213d;
-  --color-ink: #000000;
-  --color-paper: #ffffff;
-  --color-surface: #f5f7f5;
-  --color-sand: #faf6ef;
-  --color-muted: #58595b;
-  --color-line: #7e7e7e;
-  --color-hairline: #cccccc;
+  /* Palette sampled from Peninsula Solar's six-panel direct-mail flyer (task 45272822). */
+  --color-night: #172238;
+  --color-harbor: #1f2c47;
+  --color-dusk: #2e3d58;
+  --color-cream: #e8e0d8;
+  --color-mist: #d0d0d8;
+  --color-gold: #d0a870;
+  --color-gold-light: #ddbb88;
+  /* Form control borders: 3:1 or better on night and harbor. */
+  --color-line: #8a93a8;
+  /* Invalid fields: coral, distinct in hue from the gold hover and focus. */
+  --color-error: #ef8f7a;
+  /* Lighter navies used only as the soft glow behind headline areas. */
+  --color-glow: #3a4b68;
+  --color-sky: #344462;
 
-  /* Type scale: h1 56, h2 38, h3 24, h4 21, h5 18, body 18, label 16, small 14. */
-  --text-h1: clamp(2.25rem, 1.55rem + 2.4vw, 3.5rem);
-  --text-h1--line-height: 1.06;
-  --text-h1--letter-spacing: -0.02em;
-  --text-h2: clamp(1.75rem, 1.4rem + 1.2vw, 2.375rem);
-  --text-h2--line-height: 1.15;
-  --text-h2--letter-spacing: -0.02em;
-  --text-h3: clamp(1.3125rem, 1.2rem + 0.4vw, 1.5rem);
-  --text-h3--line-height: 1.3;
-  --text-h3--letter-spacing: -0.01em;
-  --text-h4: 1.3125rem;
-  --text-h4--line-height: 1.35;
+  /*
+   * Role aliases. The form field, checkbox, success panel and privacy components (outside the
+   * restyle's file scope) style themselves with these role names: page ground, raised ground,
+   * primary and secondary text, and `navy`, the interactive accent (focus, hover, checked).
+   * New code uses the flyer names above, never these aliases.
+   */
+  --color-paper: var(--color-night);
+  --color-surface: var(--color-harbor);
+  --color-ink: var(--color-cream);
+  --color-muted: var(--color-mist);
+  --color-navy: var(--color-gold);
+
+  /* Serif display scale (Cormorant's small x-height reads a step smaller than Inter at one size). */
+  --text-h1: clamp(2.5rem, 1.75rem + 3.4vw, 4.5rem);
+  --text-h1--line-height: 1.04;
+  --text-h1--letter-spacing: -0.01em;
+  --text-h2: clamp(2.125rem, 1.8rem + 1.3vw, 3rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.005em;
+  --text-h3: clamp(1.5rem, 1.4rem + 0.4vw, 1.75rem);
+  --text-h3--line-height: 1.2;
+  --text-h4: 1.5rem;
+  --text-h4--line-height: 1.3;
+  --text-lede: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-lede--line-height: 1.4;
   --text-body: clamp(1.0625rem, 1.03rem + 0.1vw, 1.125rem);
-  --text-body--line-height: 1.5;
+  --text-body--line-height: 1.6;
   --text-button: 1.0625rem;
   --text-button--line-height: 1.25;
   --text-label: 1rem;
-  --text-label--line-height: 1.45;
+  --text-label--line-height: 1.5;
   --text-small: 0.875rem;
-  --text-small--line-height: 1.5;
+  --text-small--line-height: 1.55;
 
-  --radius-control: 6px;
-  --radius-panel: 12px;
+  --radius-control: 4px;
+  --radius-panel: 8px;
 
-  --shadow-card: 0 1px 2px rgb(15 33 61 / 0.06), 0 16px 40px -20px rgb(15 33 61 / 0.28);
-  --shadow-float: 0 2px 6px rgb(0 0 0 / 0.12), 0 18px 36px -12px rgb(15 33 61 / 0.4);
+  /* Quiet depth only: the flyer has no heavy shadows. */
+  --shadow-card: 0 24px 48px -32px rgb(8 12 22 / 0.7);
+  --shadow-float: 0 12px 32px -12px rgb(8 12 22 / 0.8);
 
   --ease-brand: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
+/* Section grounds: night with the flyer's soft lighter-navy glow behind the headline area. */
+@utility bg-glow {
+  background: radial-gradient(ellipse 70% 24rem at 50% 0%, color-mix(in srgb, var(--color-dusk) 85%, transparent), transparent 75%), var(--color-night);
+}
+
+@utility bg-glow-raised {
+  background: radial-gradient(ellipse 70% 24rem at 50% 0%, color-mix(in srgb, var(--color-glow) 60%, transparent), transparent 75%), var(--color-harbor);
+}
+
+@utility bg-dusk-fade {
+  background: linear-gradient(180deg, var(--color-dusk), var(--color-night) 85%);
+}
+
+/* The hero's evening sky: lighter navy high behind the headline, settling into night. */
+@utility bg-evening {
+  background:
+    radial-gradient(ellipse 60% 70% at 25% 0%, color-mix(in srgb, var(--color-sky) 70%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--color-dusk), var(--color-night) 90%);
+}
+
 @layer base {
   html {
+    color-scheme: dark;
     scroll-behavior: smooth;
-    scroll-padding-top: 88px;
+    scroll-padding-top: 120px;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background: var(--color-paper);
-    color: var(--color-ink);
+    background: var(--color-night);
+    color: var(--color-cream);
     font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: 1.5;
+    line-height: 1.6;
     font-feature-settings: "cv11", "ss01";
+    /* Cormorant defaults to old-style figures, where "1" reads as "I". */
+    font-variant-numeric: lining-nums;
     -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
   }
 
   h1,
@@ -72,6 +121,65 @@
 
   p {
     text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-night);
+  }
+}
+
+/* Layered so a Tailwind utility on the same element still wins. */
+@layer components {
+  /* A centered section title closing on a short gold hairline, as the flyer's panels do. */
+  .title-rule {
+    text-align: center;
+  }
+
+  .title-rule::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1px;
+    margin: 1.5rem auto 0;
+    background: var(--color-gold);
+  }
+
+  /*
+   * Hero photo at dusk: the manufacturer's daylight installation is cooled with a light grade and a
+   * navy multiply that is heavy at the sky and edges but light over the batteries and controller, so
+   * the white units stay near-white. The top edge is masked into whatever sky is behind it.
+   */
+  .evening-photo {
+    position: relative;
+    isolation: isolate;
+    mask-image: linear-gradient(180deg, transparent, #000 14%);
+  }
+
+  .evening-photo img {
+    filter: saturate(0.8) brightness(0.92);
+  }
+
+  .evening-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 65% 75% at 55% 60%,
+      color-mix(in srgb, var(--color-dusk) 10%, transparent),
+      color-mix(in srgb, var(--color-dusk) 50%, transparent)
+    );
+    mix-blend-mode: multiply;
+  }
+
+  /*
+   * For the aGate and aPower 2 + aGate renders only: their soft floor shadow was drawn for white pages
+   * and its flat side edges show on navy, so the outer strips fade out. Both products sit inside the
+   * middle 84%; check the framing before using this on another render.
+   */
+  .render-fade {
+    mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
   }
 }
 

@@ -87,10 +87,11 @@
     "floating": "Form only, never a phone"
   },
   "brand": {
-    "colors": { "primary": "#D38A3D", "secondary": "#3C3C3C", "accent": "#0F213D", "text": "#000000", "background": "#FFFFFF", "surface": "#F5F7F5", "muted": "#58595B", "border": "#7E7E7E" },
-    "colorSource": "FranklinWH Visual Identity (pp. 11, 16) via marketing.franklinwh.com; black text on the orange fill",
-    "typeface": "Inter (FranklinWH corporate typeface, Visual Identity p. 16), loaded with next/font/google",
-    "logos": ["Peninsula Solar installer mark", "FranklinWH official color mark"]
+    "colors": { "primary": "#D0A870", "primaryHover": "#DDBB88", "background": "#172238", "surface": "#1F2C47", "gradient": "#2E3D58", "text": "#E8E0D8", "muted": "#D0D0D8", "border": "#8A93A8" },
+    "colorSource": "Peninsula Solar six-panel direct-mail flyer (Peninsula_Intro_1-6_of_6.png), client direction Rachel Raak, Nov 23 2026, task 45272822-6582-4ec7-9498-18bef55b6c58; navy text on the gold fill. Supersedes the FranklinWH light palette on both campaign routes and the shared /privacy chrome.",
+    "typeface": "Cormorant Garamond headings (upright and italic, the flyer's display serif) with Inter body, both loaded with next/font/google",
+    "logos": ["Peninsula Solar 'Own Your Energy' sunflower badge (client file Own Your Energy (1).png)", "FranklinWH mark, reversed (cream lettering) for the navy ground, as on flyer panel 4"],
+    "supersededColors": { "source": "FranklinWH Visual Identity (pp. 11, 16), task 6175fe7a", "colors": { "primary": "#D38A3D", "secondary": "#3C3C3C", "accent": "#0F213D", "text": "#000000", "background": "#FFFFFF", "surface": "#F5F7F5", "muted": "#58595B", "border": "#7E7E7E" } }
   },
   "sections_in_dom_order": ["hero", "backup-benefits", "product-family", "in-house-process", "customer-proof", "faq", "final-quote"],
   "imagery": {
