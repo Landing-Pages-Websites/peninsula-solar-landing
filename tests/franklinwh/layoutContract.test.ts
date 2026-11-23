@@ -150,8 +150,14 @@ describe("section CTA pair (finding 2)", () => {
 describe("product family at 1024 (finding 3)", () => {
   const source = readSource("components/sections/ProductFamily.tsx");
 
-  it("stacks name over role from lg and restores paired rows at xl", () => {
-    assert.match(source, /sm:grid-cols-\[7\.5rem_1fr\] sm:gap-6 lg:grid-cols-1 lg:gap-1 xl:grid-cols-\[7\.5rem_1fr\] xl:gap-6/);
+  it("stacks name over role from lg, at 16px rows until xl, and restores paired 20px rows at xl", () => {
+    assert.match(source, /py-5 sm:grid-cols-\[7\.5rem_1fr\] sm:gap-6 lg:grid-cols-1 lg:gap-1 lg:max-xl:py-4 xl:grid-cols-\[7\.5rem_1fr\] xl:gap-6/);
+  });
+
+  it("sets the heading on one line from lg: -0.02em, size capped to the text column until xl (r4, 1009px native)", () => {
+    assert.match(source, /lg:tracking-\[-0\.02em\] lg:max-xl:text-\[length:min\(var\(--text-h2\),10\.75cqi\)\]/);
+    assert.match(source, /<div data-reveal className="lg:max-xl:@container">/);
+    assert.equal(source.includes("xl:tracking-"), false, "tracking starts at lg, not xl");
   });
 
   it("keeps the 7/5 split with a 40px gap until xl, 64px from xl", () => {
